@@ -65,6 +65,8 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="437.0" layoutY="138.0" mnemonicParsing="false" text="Confirm" />
+      <Button layoutX="399.0" layoutY="176.0" mnemonicParsing="false" text="Confirm" />
+      <Button layoutX="261.0" layoutY="264.0" mnemonicParsing="false" text="Create user" />
+      <Text layoutX="190.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a user?" />
    </children>
 </Pane>
