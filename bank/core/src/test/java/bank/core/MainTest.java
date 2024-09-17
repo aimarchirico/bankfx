@@ -7,7 +7,8 @@ public class MainTest {
     
     @Test
     public void testAssertTrue() {
-        Assertions.assertTrue(true);
+        Main main = new Main();
+        Assertions.assertEquals(main.ex(), 3);
     }
 
 }
