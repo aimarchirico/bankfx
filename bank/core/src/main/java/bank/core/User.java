@@ -3,6 +3,7 @@ package bank.core;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class User {
@@ -93,5 +94,15 @@ public class User {
         if (!name.matches(NAME_REGEX)) {
             throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
         }
+    }
+
+    /*
+     * Compares ssn of two user objects
+     */
+    public boolean ssnEquals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getSsn(), user.getSsn());
     }
 }
