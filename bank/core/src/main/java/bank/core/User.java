@@ -49,7 +49,7 @@ public class User {
         if(password.length() < 6){
             throw new IllegalArgumentException("Password needs at least 6 charachters");
         }
-        final String PASSORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$";
+        final String PASSORD_REGEX = "^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\\d).+$";
         Pattern pattern = Pattern.compile(PASSORD_REGEX);
         if(!pattern.matcher(password).matches()){
             throw new IllegalArgumentException("Password needs at least 1 small letter, 1 capital letter and 1 number");
@@ -75,7 +75,7 @@ public class User {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
         try{
-            LocalDate date = LocalDate.parse(dateStr, formatter);
+            LocalDate.parse(dateStr, formatter);
         }
         catch(DateTimeParseException e){
             throw new IllegalStateException("The first 6 numbers needs to be a date");
@@ -90,15 +90,13 @@ public class User {
         if (name.length() < 2){
             throw new IllegalArgumentException("Name needs at least 2 characters");
         }
-        final String NAME_REGEX = "^[a-zA-Z\\s-]+$";
+        final String NAME_REGEX = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
         if (!name.matches(NAME_REGEX)) {
             throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
         }
     }
 
-    /*
-     * Compares ssn of two user objects
-     */
+    // compare ssn
     public boolean ssnEquals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

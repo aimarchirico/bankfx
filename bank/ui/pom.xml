@@ -24,6 +24,11 @@
           <artifactId>core</artifactId>
           <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+          <groupId>gr2422.bank</groupId>
+          <artifactId>persistence</artifactId>
+          <version>1.0-SNAPSHOT</version>
+        </dependency>
         
         <!-- javafx -->
         <dependency>
