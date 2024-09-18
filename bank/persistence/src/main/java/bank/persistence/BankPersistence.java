@@ -1,4 +1,4 @@
-package persistance.json;
+package bank.persistence;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,15 +9,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import bank.core.User;
-import persistance.json.internal.UserDeserializer;
-/*
- * Wrapper class for JSON serialization
- */
-public class BankPersistance {
+
+public class BankPersistence {
     
     private ObjectMapper om;
 
-    public BankPersistance() {
+    public BankPersistence() {
         om = new ObjectMapper();
         om.registerModule(new SimpleModule().addDeserializer(User.class, new UserDeserializer()));
     }

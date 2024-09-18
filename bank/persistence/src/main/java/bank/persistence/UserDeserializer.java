@@ -1,4 +1,4 @@
-package persistance.json.internal;
+package bank.persistence;
 
 import java.io.IOException;
 

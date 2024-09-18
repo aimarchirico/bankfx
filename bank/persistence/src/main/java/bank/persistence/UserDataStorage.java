@@ -1,4 +1,4 @@
-package persistance.json;
+package bank.persistence;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,24 +9,23 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import bank.core.User;
 
 public class UserDataStorage {
-    File file = new File("UserData");
-    BankPersistance bankPers = new BankPersistance();
+    File file = new File("../persistence/src/main/resources/bank/persistence/UserData.json");
+    BankPersistence bankPers = new BankPersistence();
     List<User> users = new ArrayList<>();
 
     public boolean userDataExists() {
         return file.exists();
     }
-    //Fetches user deata
+    
     public void fetchUserData() {
         if (userDataExists()) {
             users = bankPers.readUserData(file, new TypeReference<List<User>>() {});
-        } 
+        }
+        if (users == null) {
+            users = new ArrayList<>();
+        }
     }
-    /*
-     * Adds user to the existing user database
-     * Checks if user already is in the database
-     *
-     */
+   
     public void writeUserData(User user) {
         boolean exists = false;
         fetchUserData();
@@ -42,10 +41,7 @@ public class UserDataStorage {
         }
 
     }
-    /*
-     * Gets User data from database by ssn
-     * returns null if no user found
-     */
+   
     public User getUser(String ssn) {
         fetchUserData();
         for(User i : users) {
