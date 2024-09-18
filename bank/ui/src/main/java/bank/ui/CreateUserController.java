@@ -36,7 +36,7 @@ public class CreateUserController {
             OverviewController controller = newScene("Overview.fxml").getController();
             controller.setUser(user);
         }
-        catch (IllegalArgumentException e) {
+        catch (Exception e) {
             errorText.setText(e.getMessage());
         }
     }

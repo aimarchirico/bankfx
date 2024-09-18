@@ -75,7 +75,7 @@ public class User {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
         try{
-            LocalDate date = LocalDate.parse(dateStr, formatter);
+            LocalDate.parse(dateStr, formatter);
         }
         catch(DateTimeParseException e){
             throw new IllegalStateException("The first 6 numbers needs to be a date");
