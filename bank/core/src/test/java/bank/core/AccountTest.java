@@ -16,9 +16,11 @@ public class AccountTest {
 
     @Test
     public void testConstructor() {
-        assertThrows(IllegalArgumentException.class, () -> new Account(-1.0, "MinKonto", "Sparekonto")); //Illegal balance
-        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "MinAndreKonto", "Lån")); //Illegal accounttype
-        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "-*¨^", "Sparekonto")); //Illegal name
+        assertThrows(IllegalArgumentException.class, () -> new Account(-1.0, "MinKonto", "Sparekonto")); // Illegal
+                                                                                                         // balance
+        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "MinAndreKonto", "Lån")); // Illegal
+                                                                                                       // accounttype
+        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "-*¨^", "Sparekonto")); // Illegal name
     }
 
     @Test
@@ -33,6 +35,21 @@ public class AccountTest {
 
     @Test
     public void testNameChange() {
+        assertEquals("test", account1.getName());
+        account1.changeName("bob");
+        assertEquals("bob", account1.getName());
+        assertThrows(IllegalArgumentException.class, () -> account1.changeName("1234"));
+        assertThrows(IllegalArgumentException.class, () -> account1.changeName("p"));
         assertThrows(IllegalArgumentException.class, () -> account1.changeName(""));
+
+    }
+
+    @Test
+    public void testAccountTypeChange() {
+        assertEquals("Sparekonto", account1.getAccountType());
+        account1.changeAccountType("Brukskonto");
+        assertEquals("Brukskonto", account1.getAccountType());
+        assertThrows(IllegalArgumentException.class, () -> account1.changeAccountType("Ikke gyldig"));
+
     }
 }

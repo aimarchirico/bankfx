@@ -40,6 +40,14 @@ public class Account {
     }
 
     /**
+     * @return String account type
+     */
+
+     public String getAccountType() {
+        return this.accountType;
+    }
+
+    /**
      * Return the balance of the account
      * 
      * @return double
