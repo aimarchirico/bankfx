@@ -13,3 +13,19 @@ Brukeren er ikke en allerede eksisterende kunde av banken og ønsker derfor å r
 ### Viktig å kunne gjøre
 - registrere fødselsnummer og passord
 - logge inn på allerede eksisterende bruker
+
+
+## Ny brukskonto og sparekonto
+
+Jeg ønsker nå å kunne ha en måte å holde styr på pengene mine
+
+Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn og saldo, som brukeren enkelt kan finne fram til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene
+
+## Viktig å kunne se:
+- knapp for å lage ny spare-/brukskonto
+- oversikt over allerede eksisterende spare-/brukskontoer
+
+## Viktig å kunne gjøre:
+- registrere ny spare-/brukskonto
+- kunne trykke på en allerede eksisterende konto
+- kunne legge til eller ta ut penger fra en allerede eksisterende konto
