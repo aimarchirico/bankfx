@@ -32,6 +32,14 @@ public class Account {
     }
 
     /**
+     * @return String name of the user
+     */
+
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Return the balance of the account
      * 
      * @return double
