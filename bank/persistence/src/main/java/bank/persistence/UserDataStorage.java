@@ -9,9 +9,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import bank.core.User;
 
 public class UserDataStorage {
-    File file = new File("../persistence/src/main/resources/bank/persistence/UserData.json");
+    File file;
     BankPersistence bankPers = new BankPersistence();
     List<User> users = new ArrayList<>();
+
+    public UserDataStorage(String path) {
+      file = new File(path);
+    }
 
     public boolean userDataExists() {
         return file.exists();
