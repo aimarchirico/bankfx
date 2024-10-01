@@ -1,18 +1,16 @@
 package bank.persistence;
 
+import static org.junit.jupiter.api.Assertions.*;
 import bank.core.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 /**
- * Test class for UserDataStorage, verifying the functionality of user data management methods.
+ * Test class for {@link UserDataStorage}, verifying the functionality of user data management methods.
  */
 public class UserDataStorageTest {
   private UserDataStorage userDataStorage;
@@ -21,15 +19,15 @@ public class UserDataStorageTest {
   Path tempDir;
 
   /**
-   * Sets up the UserDataStorage instance before each test.
+   * Sets up the {@link UserDataStorage} instance before each test.
    */
   @BeforeEach
   void setup() {
-    userDataStorage = new UserDataStorage(TestUtils.path);
+    userDataStorage = new UserDataStorage(Utils.testPath);
   }
 
   /**
-   * Tests if writing and fetching user data works correctly. Verifies that the user list is not empty
+   * Tests if writing and fetching {@link User} data works correctly. Verifies that the {@link List} is not empty
    * and contains the correct number of users after fetching.
    */
   @Test
@@ -39,14 +37,25 @@ public class UserDataStorageTest {
     userDataStorage.writeUserData(user);
 
     userDataStorage.fetchUserData();
-    assertFalse(userDataStorage.users.isEmpty());
-    assertEquals(1, userDataStorage.users.size());
+    assertFalse(userDataStorage.getUsers().isEmpty());
+    assertEquals(2, userDataStorage.getUsers().size());
   }
 
+  /**
+   * Tests if deleting and fetching {@link User} data works correctly. Verifies that the {@link List} contains
+   * the correct number of users after fetching.
+   */
+  @Test
+  void fetchAndDeleteUserDataTest() {
+    User user = new User("01010000000", "admin", "A123456z");
+    userDataStorage.deleteUserData(user);
+    userDataStorage.fetchUserData();
+    assertTrue(userDataStorage.getUsers().isEmpty());
+  }
 
   /**
-   * Tests if getUser() returns the correct user when the user exists. Verifies that the fetched user
-   * is not null and that the name matches.
+   * Tests if {@link UserDataStorage#getUser(String)} returns the correct {@link User} when the user exists. Verifies that the
+   * fetched user is not <code>null</code> and that the name matches.
    */
   @Test
   void testGetUserReturnsCorrectUser() {
@@ -59,8 +68,8 @@ public class UserDataStorageTest {
   }
 
   /**
-   * Tests if getUser() returns null for a nonexistent user. Verifies that the fetched user is null
-   * when the user does not exist in the storage.
+   * Tests if {@link UserDataStorage#getUser(String)} returns <code>null</code> for a nonexistent {@link User}. Verifies that the fetched
+   * user is <code>null</code> when the user does not exist in the storage.
    */
 
   @Test
@@ -69,10 +78,12 @@ public class UserDataStorageTest {
     assertNull(fetchedUser, "Fetched user should be null for nonexistent user.");
   }
 
+  /**
+   * Resets test file.
+   */
   @AfterEach
-  void tearDown() throws Exception {
-    // Slett testfilen etter hver test
-    Files.deleteIfExists(Paths.get(TestUtils.path));
+  void reset() throws Exception {
+    userDataStorage.resetUserData();
   }
 
 }

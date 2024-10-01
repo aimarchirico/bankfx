@@ -1,5 +1,6 @@
 package bank.persistence;
 
+import static org.junit.jupiter.api.Assertions.*;
 import bank.core.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,8 +11,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BankPersistenceTest {
   private BankPersistence bankPersistence;
@@ -24,14 +23,12 @@ public class BankPersistenceTest {
     bankPersistence = new BankPersistence();
   }
 
-
-
   /**
-   * Tests that a list of User objects is written to a file using
+   * Tests that a {@link List} of {@link User} objects is written to a {@link File} using
    * {@link BankPersistence#writeToFile(File, List)}
    * <p>
    * Verifies that the file is created after writing.
-   * 
+   *
    * @throws IOException if the operation fails
    */
   @Test
@@ -44,9 +41,8 @@ public class BankPersistenceTest {
     assertTrue(file.exists());
   }
 
-
   /**
-   * Tests reading a list of User objects from a file using
+   * Tests reading a {@link List} of {@link User} objects from a {@link File} using
    * {@link BankPersistence#readUserData(File, TypeReference)}.
    * <p>
    * Verifies that the data is correctly read from the file and matches the expected values.
@@ -72,12 +68,11 @@ public class BankPersistenceTest {
     assertEquals("02020000000", readUsers.get(1).getSsn());
   }
 
-
   /**
-   * Tests reading from an invalid or non-existent file using
+   * Tests reading from an invalid or non-existent {@link File} using
    * {@link BankPersistence#readUserData(File, TypeReference)}.
    * <p>
-   * Verifies that the method returns null when attempting to read from an invalid file.
+   * Verifies that the method returns <code>null</code> when attempting to read from an invalid file.
    */
   @Test
   void readInvalidFileTest() {
@@ -85,6 +80,5 @@ public class BankPersistenceTest {
     List<User> users = bankPersistence.readUserData(invalidFile, new TypeReference<List<User>>() {});
     assertNull(users);
   }
-
 
 }
