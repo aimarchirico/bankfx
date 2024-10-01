@@ -1,6 +1,6 @@
 # Brukerhistorier
 
-## Ny kunde
+## Ny kunde (us-1)
 
 Som privatperson ønsker jeg å etablere et nytt kundeforhold med banken. 
 
@@ -15,17 +15,17 @@ Brukeren er ikke en allerede eksisterende kunde av banken og ønsker derfor å r
 - logge inn på allerede eksisterende bruker
 
 
-## Ny brukskonto og sparekonto
+## Ny brukskonto og sparekonto (us-2)
 
 Jeg ønsker nå å kunne ha en måte å holde styr på pengene mine
 
-Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn og saldo, som brukeren enkelt kan finne fram til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene
+Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn, som brukeren enkelt kan finne fram til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene.
 
-## Viktig å kunne se:
+### Viktig å kunne se:
 - knapp for å lage ny spare-/brukskonto
 - oversikt over allerede eksisterende spare-/brukskontoer
+- knapp for innskudd og uttak
 
-## Viktig å kunne gjøre:
+### Viktig å kunne gjøre:
 - registrere ny spare-/brukskonto
-- kunne trykke på en allerede eksisterende konto
-- kunne legge til eller ta ut penger fra en allerede eksisterende konto
+- kunne legge inn eller ta ut penger fra en allerede eksisterende konto

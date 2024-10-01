@@ -1,52 +1,68 @@
 package bank.ui;
 
-import java.io.IOException;
-
 import bank.core.User;
 import bank.persistence.UserDataStorage;
+import bank.persistence.Utils;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
+/**
+ * Controller class for <code>Login.fxml</code>.
+ */
 public class LoginController {
 
-    @FXML
-    private Button createUserButton,confirmButton;
-    @FXML
-    private TextField passwordField,ssnField;
-    @FXML
-    private Text errorText;
+  @FXML
+  private Button createUserButton;
+  @FXML
+  private Button loginButton;
+  @FXML
+  private PasswordField passwordField;
+  @FXML
+  private TextField ssnField;
+  @FXML
+  private Button errorButton;
 
-    @FXML
-    private void openCreateUser() throws IOException {
-        newScene("CreateUser.fxml");
-    }
 
-    @FXML
-    private void login() throws IOException {
-        UserDataStorage storage = new UserDataStorage();
-        User user = storage.getUser(ssnField.getText());
-        if (user == null || !user.getPassword().equals(passwordField.getText())) {
-            errorText.setText("Incorrect social security number or password");
-        }
-        else {
-            OverviewController controller = newScene("Overview.fxml").getController();
-            controller.setUser(user);
-        }
-    }
+  /**
+   * Open CreateUser scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openCreateUser() throws IOException {
+    UiUtils.newScene(this, createUserButton, "CreateUser.fxml");
+  }
 
-    private FXMLLoader newScene(String file) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(file));
-        Parent parent = fxmlLoader.load();
-        Stage stage = (Stage) createUserButton.getScene().getWindow();
-        stage.setScene(new Scene(parent));
-        stage.show();
-        return fxmlLoader;
+  /**
+   * Dismiss error message.
+   * Delegates to UiUtils.
+   */
+  @FXML
+  private void dismissError() {
+    UiUtils.dismissError(errorButton);
+  }
+
+  /**
+   * If valid, log in using submitted ssn and password.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void login() throws IOException {
+    UserDataStorage storage = new UserDataStorage(Utils.path);
+    User user = storage.getUser(ssnField.getText());
+    if (user == null || !user.getPassword().equals(passwordField.getText())) {
+      UiUtils.showError(errorButton, "Incorrect social security number or password");
+
+    } else {
+      FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
+      OverviewController controller = fxmlLoader.getController();
+      controller.setUser(user);
     }
+  }
 
 }
