@@ -1,0 +1,36 @@
+@startuml architecture
+
+component core {
+	package bank.core
+}
+
+component persistence {
+	package bank.persistence
+}
+
+component jackson {
+    package databind
+}
+
+bank.persistence ..> databind
+bank.persistence ..> bank.core
+
+component ui {
+	package bank.ui
+}
+
+component javafx {
+	package fxml
+    package controls
+}
+
+bank.ui ..> bank.core
+bank.ui ..> bank.persistence
+bank.ui ..> fxml
+bank.ui ..> controls
+
+component api {
+	package bank.api
+}
+
+@enduml
