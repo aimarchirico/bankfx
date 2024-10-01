@@ -1,43 +1,58 @@
 package bank.ui;
 
-import java.io.IOException;
-
 import bank.core.User;
+import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-
-
+/**
+ * Controller class for <code>Overview.fxml</code>.
+ */
 public class OverviewController {
 
-    @FXML
-    private Button returnButton;
-    @FXML
-    private Text welcomeText;
-    @SuppressWarnings("unused")
-    private User user;
+  @FXML
+  private ImageView logoutIcon;
+  @FXML
+  private ImageView paymentIcon;
+  @FXML
+  private ImageView transferIcon;
+  @FXML
+  private ImageView withdrawalIcon;
+  @FXML
+  private ImageView depositIcon;
+  @FXML
+  private Text paymentText;
+  @FXML
+  private Text transferText;
+  @FXML
+  private Text withdrawalText;
+  @FXML
+  private Text depositText;
+  @FXML
+  private Text welcomeText;
+  @FXML
+  private User user;
 
-    @FXML
-    private void OpenLogin() throws IOException {
-        newScene("Login.fxml");
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-        welcomeText.setText("Welcome, "+user.getName()+"!");
-    }
+  /**
+   * Open login scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openLogin() throws IOException {
+    UiUtils.newScene(this, logoutIcon, "Login.fxml");
+  }
 
-    private FXMLLoader newScene(String file) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(file));
-    Parent parent = fxmlLoader.load();
-    Stage stage = (Stage) returnButton.getScene().getWindow();
-    stage.setScene(new Scene(parent));
-    stage.show();
-    return fxmlLoader;
-    }
+
+  /**
+   * Set the current {@link User} and update welcome text.
+   *
+   * @param user the current user
+   */
+  public void setUser(User user) {
+    this.user = user;
+    welcomeText.setText("Welcome, " + this.user.getName() + "!");
+  }
 }

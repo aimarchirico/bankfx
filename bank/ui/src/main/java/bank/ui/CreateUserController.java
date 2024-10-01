@@ -1,55 +1,74 @@
 package bank.ui;
 
-import java.io.IOException;
-
 import bank.core.User;
 import bank.persistence.UserDataStorage;
+import bank.persistence.Utils;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
+/**
+ * Controller class for <code>CreateUser.fxml</code>.
+ */
 public class CreateUserController {
 
-    @FXML
-    private Button returnButton,confirmButton;
-    @FXML
-    private TextField nameField,passwordField,ssnField;
-    @FXML
-    private Text errorText;
+  @FXML
+  private ImageView backIcon;
+  @FXML
+  private Button registerButton;
+  @FXML
+  private TextField nameField;
+  @FXML
+  private TextField passwordField;
+  @FXML
+  private TextField ssnField;
+  @FXML
+  private Button errorButton;
 
-    @FXML
-    private void OpenLogin() throws IOException {
-        newScene("Login.fxml");
+
+  /**
+   * Open login scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openLogin() throws IOException {
+    UiUtils.newScene(this, backIcon, "Login.fxml");
+  }
+
+  /**
+   * Dismiss error message.
+   * Delegates to UiUtils.
+   */
+  @FXML
+  private void dismissError() {
+    UiUtils.dismissError(errorButton);
+  }
+
+  /**
+   * Create a new {@link User} from submitted SSN, name and password.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void createUser() throws IOException {
+    try {
+      UserDataStorage storage = new UserDataStorage(Utils.path);
+      if (storage.getUser(ssnField.getText()) != null) {
+        UiUtils.showError(errorButton, "User already registered");
+      } else {
+        User user = new User(ssnField.getText(), nameField.getText(), passwordField.getText());
+        storage.writeUserData(user);
+        FXMLLoader fxmlLoader = UiUtils.newScene(this, backIcon, "Overview.fxml");
+        OverviewController controller = fxmlLoader.getController();
+        controller.setUser(user);
+      }
+
+    } catch (Exception e) {
+      UiUtils.showError(errorButton, e.getMessage());
     }
-
-    @FXML
-    private void createUser() throws IOException {
-        try {
-            User user = new User(ssnField.getText(),nameField.getText(),passwordField.getText());
-            UserDataStorage storage = new UserDataStorage();
-            storage.writeUserData(user);
-            OverviewController controller = newScene("Overview.fxml").getController();
-            controller.setUser(user);
-        }
-        catch (Exception e) {
-            errorText.setText(e.getMessage());
-        }
-    }
-
-    private FXMLLoader newScene(String file) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(file));
-        Parent parent = fxmlLoader.load();
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        stage.setScene(new Scene(parent));
-        stage.show();
-        return fxmlLoader;
-    }
-
-
-
+  }
 }
