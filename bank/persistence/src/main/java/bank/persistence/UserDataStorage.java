@@ -1,24 +1,23 @@
 package bank.persistence;
 
+import bank.core.User;
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-
-import bank.core.User;
 
 /**
  * Class responsible for managing user data storage and retrieval. It interacts with the
- * BankPersistence class to read and write user data to a specified file.
+ * {@link BankPersistence} class to read and write user data to a specified {@link File}.
  */
 public class UserDataStorage {
-  File file;
-  BankPersistence bankPers = new BankPersistence();
-  List<User> users = new ArrayList<>();
+  private File file;
+  private BankPersistence bankPers = new BankPersistence();
+  private List<User> users = new ArrayList<>();
 
   /**
-   * Constructs a UserDataStorage instance with the specified file path.
+   * Constructs a {@link UserDataStorage} instance with the specified file path.
    *
    * @param path the path to the user data file
    */
@@ -27,16 +26,17 @@ public class UserDataStorage {
   }
 
   /**
-   * Checks if the user data file exists.
+   * Checks if the user data {@link File} exists.
    *
-   * @return true if the user data file exists, false otherwise
+   * @return <code>true</code> if the user data file exists, <code>false</code> otherwise
    */
   public boolean userDataExists() {
     return file.exists();
   }
 
   /**
-   * Fetches user data from the file if it exists and populates the users list. If the file does not
+   * Fetches user data from the {@link File} if it exists and 
+   * populates the users {@link List}. If the file does not
    * exist or cannot be read, an empty list is initialized.
    */
   public void fetchUserData() {
@@ -49,21 +49,13 @@ public class UserDataStorage {
   }
 
   /**
-   * Writes a user to the data file if the user does not already exist. It first fetches existing user
-   * data and checks for duplicates before writing.
+   * Writes a {@link User} to the data {@link File} if the user does not already exist.
    *
    * @param user the user to be added
    */
   public void writeUserData(User user) {
-    boolean exists = false;
     fetchUserData();
-    for (User i : users) {
-      if (i.ssnEquals(user)) {
-        exists = true;
-        break;
-      }
-    }
-    if (!exists) {
+    if (getUser(user.getSsn()) == null) {
       users.add(user);
       bankPers.writeToFile(file, users);
     }
@@ -71,10 +63,43 @@ public class UserDataStorage {
   }
 
   /**
-   * Retrieves a user by their social security number (SSN).
+   * Deletes a {@link User} from the data {@link File}.
+   *
+   * @param user the user to be removed
+   */
+  public void deleteUserData(User user) {
+    fetchUserData();
+    users.removeIf(u -> u.getSsn().equals(user.getSsn()));
+    bankPers.writeToFile(file, users);
+  }
+
+  /**
+   * Resets the data {@link File}.
+   */
+  public void resetUserData() {
+    fetchUserData();
+    users.clear();
+    users.add(new User("01010000000", "admin", "A123456z"));
+    bankPers.writeToFile(file, users);
+  }
+
+  /**
+   * Retrieve a {@link List} of {@link User}s.
+   *
+   * @return list of registered users
+   */
+  public List<User> getUsers() {
+    fetchUserData();
+    return Collections.unmodifiableList(users);
+  }
+
+
+
+  /**
+   * Retrieves a {@link User} by their social security number (SSN).
    *
    * @param ssn the social security number of the user to retrieve
-   * @return the User object if found, or null if not found
+   * @return the user if found, or <code>null</code> if not found
    */
   public User getUser(String ssn) {
     fetchUserData();
