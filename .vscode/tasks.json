@@ -1,0 +1,58 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "run",
+        "detail": "This will compile source code and launch app.",
+        "type": "shell",
+        "options": {
+                "cwd": "${workspaceFolder}/bank"
+            },
+        "command": "mvn clean compile; cd ui; mvn javafx:run",
+        "presentation": {
+            "reveal": "always"
+        }
+      },
+      {
+        "label": "run_all",
+        "detail": "This will check Maven and Java versions, run tests, install package and launch app.",
+        "type": "shell",
+        "options": {
+              "cwd": "${workspaceFolder}/bank"
+            },
+        "command": "mvn -version; mvn clean install; cd ui; mvn javafx:run",
+        "presentation": {
+            "reveal": "always"
+        }
+      },
+      {
+        "label": "compile",
+        "detail": "This is set to run before launching app from Run and Debug.",
+        "type": "shell",
+        "options": {
+                "cwd": "${workspaceFolder}/bank"
+            },
+        "command": "mvn clean compile",
+        "presentation": {
+            "reveal": "always"
+        }
+      },
+      {
+        "label": "compile_silent",
+        "detail": "This is set to automatically compile project when project folder is opened.",
+        "type": "shell",
+        "options": {
+                "cwd": "${workspaceFolder}/bank"
+            },
+        "command": "mvn clean compile",
+        "presentation": {
+            "reveal": "silent"
+        },
+        "runOptions": {
+                "runOn": "folderOpen",
+            }
+      }
+    ]
+  }

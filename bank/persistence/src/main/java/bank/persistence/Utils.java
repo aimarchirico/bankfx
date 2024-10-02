@@ -1,7 +1,8 @@
 package bank.persistence;
 
 /**
- * Class to store file paths used in persistence module.
+ * Class to store file paths used in persistence module. 
+ * File paths are relative to ui module. 
  */
 public class Utils {
 
