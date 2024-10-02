@@ -11,21 +11,20 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 
 /**
- * The JSON deserializer class for {@link User} objects.  
+ * The JSON deserializer class for {@link User} objects.
  */
 public class UserDeserializer extends JsonDeserializer<User> {
   @Override
-  public User deserialize(JsonParser parser, DeserializationContext ctxt) 
-      throws IOException, JsonProcessingException {
+  public User deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treeNode);
   }
 
   /**
- * Method for deserializing and returning a {@link User} instance. 
- *
- * @param treeNode the {@link JsonNode}
- */
+   * Method for deserializing and returning a {@link User} instance.
+   *
+   * @param treeNode the {@link JsonNode}
+   */
   User deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode objectNode) {
       JsonNode ssnNode = objectNode.get("ssn");
@@ -34,6 +33,11 @@ public class UserDeserializer extends JsonDeserializer<User> {
       String name = nameNode.asText();
       JsonNode passwordNode = objectNode.get("password");
       String password = passwordNode.asText();
+
+      if (ssn == null || name == null || password == null) {
+        throw new IllegalArgumentException("Missing required field");
+      }
+
       return new User(ssn, name, password);
     }
     return null;
