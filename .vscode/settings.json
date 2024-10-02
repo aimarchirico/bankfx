@@ -5,6 +5,5 @@
     "[java]": {
         "editor.tabSize": 2
     },
-    "editor.detectIndentation": false
-
+    "task.allowAutomaticTasks": "on",
 }    
