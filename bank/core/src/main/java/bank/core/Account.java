@@ -53,7 +53,7 @@ public class Account {
      * @return double
      */
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Account {
         if (amount < 0) {
             throw new IllegalArgumentException("Can't deposit negative amount, amount : " + amount);
         }
-        balance += amount;
+        this.balance += amount;
     }
 
     /**
