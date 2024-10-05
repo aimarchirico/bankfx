@@ -17,9 +17,9 @@ Brukeren er ikke en allerede eksisterende kunde av banken og ønsker derfor å r
 
 ## Ny brukskonto og sparekonto (us-2)
 
-Jeg ønsker nå å kunne ha en måte å holde styr på pengene mine
+som privatperson ønsker jeg å kunne ha en måte å holde styr på pengene mine. 
 
-Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn, som brukeren enkelt kan finne fram til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene.
+Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn, som brukeren enkelt kan finne frem til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene.
 
 ### Viktig å kunne se:
 - knapp for å lage ny spare-/brukskonto
