@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -16,6 +17,14 @@ import org.testfx.util.WaitForAsyncUtils;
  */
 public class OverviewControllerTest extends ApplicationTest {
 
+  /**
+   * Setup headless test support.
+   */
+  @BeforeAll
+  public static void setupHeadless() {
+    UiUtils.supportHeadless();
+  }
+  
   /**
    * Loads initial scene.
    *

@@ -7,22 +7,14 @@
         "label": "run",
         "detail": "This will compile source code and launch app.",
         "type": "shell",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
         "options": {
                 "cwd": "${workspaceFolder}/bank"
             },
         "command": "mvn clean compile; cd ui; mvn javafx:run",
-        "presentation": {
-            "reveal": "always"
-        }
-      },
-      {
-        "label": "run_all",
-        "detail": "This will check Maven and Java versions, run tests, install package and launch app.",
-        "type": "shell",
-        "options": {
-              "cwd": "${workspaceFolder}/bank"
-            },
-        "command": "mvn -version; mvn clean install; cd ui; mvn javafx:run",
         "presentation": {
             "reveal": "always"
         }
@@ -48,7 +40,8 @@
             },
         "command": "mvn clean compile",
         "presentation": {
-            "reveal": "silent"
+            "reveal": "silent",
+            "close": true
         },
         "runOptions": {
                 "runOn": "folderOpen",

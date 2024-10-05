@@ -4,5 +4,5 @@ module bank.ui {
   requires javafx.controls;
   requires javafx.fxml;
 
-  opens bank.ui to javafx.fxml, javafx.graphics;
+  opens bank.ui to javafx.graphics, javafx.fxml;
 }

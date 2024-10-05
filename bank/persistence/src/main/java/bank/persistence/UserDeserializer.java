@@ -15,7 +15,8 @@ import java.io.IOException;
  */
 public class UserDeserializer extends JsonDeserializer<User> {
   @Override
-  public User deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public User deserialize(JsonParser parser, DeserializationContext ctxt) 
+      throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treeNode);
   }
