@@ -14,9 +14,9 @@ import javafx.stage.Window;
  */
 public class UiUtils {
 
-    /**
-   * Helper method used by tests needing to run headless.
-   * Retrieved from (https://gitlab.stud.idi.ntnu.no/it1901/todo-list/-/blob/master/todolist/fxui/src/main/java/todolist/ui/TodoApp.java?ref_type=heads)
+  /**
+   * Helper method used by tests needing to run headless. Retrieved from
+   * (https://gitlab.stud.idi.ntnu.no/it1901/todo-list/-/blob/master/todolist/fxui/src/main/java/todolist/ui/TodoApp.java?ref_type=heads)
    */
   public static void supportHeadless() {
     if (Boolean.getBoolean("headless")) {
