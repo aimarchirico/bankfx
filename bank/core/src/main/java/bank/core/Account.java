@@ -12,13 +12,10 @@ public class Account {
     /**
      * Constructs a new `Account` object.
      *
-     * @param balance     The initial balance of the account. Must be greater than
-     *                    or equal to zero.
-     * @param name        The name of the account holder.
-     * @param accountType The type of account. Must be one of the allowed account
-     *                    types
-     * @throws IllegalArgumentException if the balance is negative or the account
-     *                                  type is invalid.
+     * @param balance The initial balance of the account. Must be greater than or equal to zero.
+     * @param name The name of the account holder.
+     * @param accountType The type of account. Must be one of the allowed account types
+     * @throws IllegalArgumentException if the balance is negative or the account type is invalid.
      */
     public Account(Double balance, String name, String accountType) {
         if (balance < 0) {
@@ -43,7 +40,7 @@ public class Account {
      * @return String account type
      */
 
-     public String getAccountType() {
+    public String getAccountType() {
         return this.accountType;
     }
 
@@ -64,7 +61,8 @@ public class Account {
      */
     public void deposit(Double amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Can't deposit negative amount, amount : " + amount);
+            throw new IllegalArgumentException(
+                    "Can't deposit negative amount, amount : " + amount + " Account: " + this.getName());
         }
         this.balance += amount;
     }
@@ -77,14 +75,50 @@ public class Account {
      */
     public void withDraw(Double amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Can't withdraw negative amount, amount : " + amount);
+            throw new IllegalArgumentException(
+                    "Can't withdraw negative amount, amount : " + amount + " Account: " + this.getName());
         }
         if (getBalance() - amount < 0) {
             throw new IllegalArgumentException(
                     "Can't withdraw an amount that makes the balance negative: balance after withdrawl: "
-                            + (getBalance() - amount));
+                            + (getBalance() - amount) + " Account: " + this.getName());
         }
         this.balance -= amount;
+    }
+
+
+
+    /**
+     * Transfers an amount from this account to a given account
+     * 
+     * @param amount amount to transfer
+     * @param account destination account
+     */
+    public void transferTo(Double amount, Account account) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(
+                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
+        }
+        if (this.equals(account)) {
+            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
+        }
+        this.withDraw(amount);
+        account.deposit(amount);
+    }
+
+    /**
+     * Transfers an amount from another account to this account
+     * 
+     * @param amount amount to transfer
+     * @param account account to withdraw from
+     */
+    public void transferFrom(Double amount, Account account) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(
+                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
+        }
+        account.withDraw(amount);
+        this.deposit(amount);
     }
 
     /**
@@ -130,8 +164,7 @@ public class Account {
      * </ul>
      *
      * @param name The name to be validated.
-     * @throws IllegalArgumentException if the name does not meet the validation
-     *                                  criteria.
+     * @throws IllegalArgumentException if the name does not meet the validation criteria.
      */
     private void nameCheck(String name) {
         if (name == null) {
@@ -145,4 +178,5 @@ public class Account {
             throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
         }
     }
+
 }
