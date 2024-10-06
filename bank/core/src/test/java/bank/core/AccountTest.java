@@ -17,10 +17,11 @@ public class AccountTest {
 
     @Test
     public void testConstructor() {
-        assertThrows(IllegalArgumentException.class, () -> new Account(-1.0, "MinKonto", "Sparekonto")); // Illegal
-                                                                                                         // balance
-        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "MinAndreKonto", "Lån")); // Illegal
-                                                                                                       // accounttype
+        // Illegal balance
+        assertThrows(IllegalArgumentException.class, () -> new Account(-1.0, "MinKonto", "Sparekonto"));
+        // Illegal account type
+        assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "MinAndreKonto", "Lån"));
+        // Illegal name
         assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "-*¨^", "Sparekonto")); // Illegal name
     }
 
