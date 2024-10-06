@@ -11,7 +11,7 @@ public class AccountTest {
 
     @BeforeEach
     public void setup() {
-        account1 = new Account(100.0, "sparekkonto", "Sparekonto");
+        account1 = new Account(100.0, "sparekonto", "Sparekonto");
         account2 = new Account(100.0, "brukskonto", "Brukskonto");
     }
 
@@ -36,7 +36,7 @@ public class AccountTest {
 
     @Test
     public void testNameChange() {
-        assertEquals("test", account1.getName());
+        assertEquals("sparekonto", account1.getName());
         account1.changeName("bob");
         assertEquals("bob", account1.getName());
         assertThrows(IllegalArgumentException.class, () -> account1.changeName("1234"));
