@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest {
     Account account1;
+    Account account2;
 
     @BeforeEach
     public void setup() {
-        account1 = new Account(100.0, "test", "Sparekonto");
+        account1 = new Account(100.0, "sparekkonto", "Sparekonto");
+        account2 = new Account(100.0, "brukskonto", "Brukskonto");
     }
 
     @Test
@@ -51,4 +53,17 @@ public class AccountTest {
         assertThrows(IllegalArgumentException.class, () -> account1.changeAccountType("Ikke gyldig"));
 
     }
+
+    @Test
+    public void testTransfer() {
+        assertThrows(IllegalArgumentException.class, () -> account1.transferTo(50.0, account1));
+        account1.transferTo(50.0, account2);
+        assertEquals(150.0, account2.getBalance());
+        assertEquals(50.0, account1.getBalance());
+        account1.transferFrom(50.0, account2);
+        assertEquals(100.0, account2.getBalance());
+        assertEquals(100.0, account1.getBalance());
+    }
+
+
 }
