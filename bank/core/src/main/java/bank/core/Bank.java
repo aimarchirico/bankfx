@@ -51,4 +51,8 @@ public class Bank {
     }
     return accounts.get(accountNumber);
   }
+
+  public boolean accountNumberInAccounts(long accountNumber){
+    return accounts.containsKey(accountNumber);
+  }
 }

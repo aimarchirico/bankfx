@@ -5,6 +5,7 @@
   "accounts" : [ {
     "balance" : 0.0,
     "name" : "admin",
-    "accountType" : "Brukskonto"
+    "accountType" : "Brukskonto",
+    "accountNumber" : 32836590145
   } ]
 } ]
