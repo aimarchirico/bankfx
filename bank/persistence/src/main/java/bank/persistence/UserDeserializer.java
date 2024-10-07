@@ -41,7 +41,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
       if (accountsNode != null && accountsNode.isArray()) {
         for (JsonNode accountNode : accountsNode) {
           String accountName = accountNode.get("name").asText(); // Get account name
-          String accountType = accountNode.get("type").asText(); // Get account type
+          String accountType = accountNode.get("accountType").asText(); // Get account type
           double balance = accountNode.get("balance").asDouble(); // Get balance field
 
           // Create an Account object and add to list

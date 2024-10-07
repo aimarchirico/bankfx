@@ -58,18 +58,5 @@ public class BankPersistence {
     }
   }
 
-  public static void main(String[] args) {
-    
-    Account account1 = new Account(30.0, "felix", "Sparekonto");
-    User felix = new User("28120300001", "Felix", "Banan123");
-    felix.addAccount(account1);
-    List<User> users = new ArrayList<>();
-    users.add(felix);
-    BankPersistence bp  = new BankPersistence();
-    bp.writeToFile(new File("max.json"), users);
-    UserDataStorage uds = new UserDataStorage("max.json");
-    System.out.println(uds.getUsers().get(0));
-    
-  }
 }
 

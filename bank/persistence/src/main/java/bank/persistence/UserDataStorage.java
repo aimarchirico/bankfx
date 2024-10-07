@@ -1,5 +1,6 @@
 package bank.persistence;
 
+import bank.core.Account;
 import bank.core.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
@@ -109,6 +110,11 @@ public class UserDataStorage {
       }
     }
     return null;
+  }
+
+  public List<Account> getUserAccounts (String ssn) {
+    User user = getUser(ssn);
+    return user.getAccounts();
   }
 
 }
