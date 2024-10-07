@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The Bank class represents a central entity managing accounts.
- * It uses the Singleton pattern to ensure only one instance exists.
+ * The Bank class represents a central entity managing accounts. It uses the Singleton pattern to
+ * ensure only one instance exists.
  */
 public class Bank {
   private static Bank instance;
@@ -35,16 +35,32 @@ public class Bank {
    * @param account the account to add.
    */
   public void addAccount(Account account) {
+    if (account == null){
+      throw new IllegalArgumentException("account can not be null");
+    }
     accounts.put(account.getAccountNumber(), account);
   }
 
   /**
- * Retrieves an account by its account number.
+ * Removes an account based on the account number.
  *
- * @param accountNumber The account number of the account to retrieve.
- * @return The account associated with the specified account number.
+ * @param accountNumber The account number of the account to be removed.
  * @throws IllegalArgumentException if the account number is not registered.
  */
+  public void removeAccount(long accountNumber) {
+    if(!accountNumberInAccounts(accountNumber)){
+      throw new IllegalArgumentException("The account is not registered");
+    }
+    accounts.remove(accountNumber);
+  }
+
+  /**
+   * Retrieves an account by its account number.
+   *
+   * @param accountNumber The account number of the account to retrieve.
+   * @return The account associated with the specified account number.
+   * @throws IllegalArgumentException if the account number is not registered.
+   */
   public Account getAccountByNumber(long accountNumber) {
     if (!accounts.containsKey(accountNumber)) {
       throw new IllegalArgumentException("The account number is not registered");
@@ -52,7 +68,7 @@ public class Bank {
     return accounts.get(accountNumber);
   }
 
-  public boolean accountNumberInAccounts(long accountNumber){
+  public boolean accountNumberInAccounts(long accountNumber) {
     return accounts.containsKey(accountNumber);
   }
 }
