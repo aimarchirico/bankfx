@@ -1,1 +1,10 @@
-[{"ssn":"01010000000","name":"admin","password":"A123456z"},{"ssn":"03110499999","name":"Aimar","password":"97282928AAAaa"},{"ssn":"03110477777","name":"Bob","password":"84732crbjkdsA"},{"ssn":"03030399999","name":"Kim","password":"jfjfjfjfjfjdA3"},{"ssn":"01020498765","name":"Kåre","password":"984832rcdsfdsjA"},{"ssn":"03010011111","name":"Jimmy","password":"390219nJAJJk"},{"ssn":"01010111111","name":"Max Felix","password":"Banan123"},{"ssn":"01010103831","name":"Paul","password":"asdjhsal19230A"},{"ssn":"18120073821","name":"Alida","password":"fsladjsalkda12A"},{"ssn":"01010100003","name":"Jim","password":"afijhsdjfhnj/A1Aa"}]
+[ {
+  "ssn" : "01010000000",
+  "name" : "admin",
+  "password" : "A123456z",
+  "accounts" : [ {
+    "balance" : 0.0,
+    "name" : "admin",
+    "accountType" : "Brukskonto"
+  } ]
+} ]

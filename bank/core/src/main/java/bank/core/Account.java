@@ -27,6 +27,7 @@ public class Account {
         this.name = name;
         this.accountType = accountType;
     }
+    
 
     /**
      * @return String name of the user
