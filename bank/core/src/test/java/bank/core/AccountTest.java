@@ -57,11 +57,11 @@ public class AccountTest {
 
     @Test
     public void testTransfer() {
-        assertThrows(IllegalArgumentException.class, () -> account1.transferTo(50.0, account1));
-        account1.transferTo(50.0, account2);
+        assertThrows(IllegalArgumentException.class, () -> account1.transferTo(50.0, account1.getAccountNumber()));
+        account1.transferTo(50.0, account2.getAccountNumber());
         assertEquals(150.0, account2.getBalance());
         assertEquals(50.0, account1.getBalance());
-        account1.transferFrom(50.0, account2);
+        account1.transferFrom(50.0, account2.getAccountNumber());
         assertEquals(100.0, account2.getBalance());
         assertEquals(100.0, account1.getBalance());
     }
