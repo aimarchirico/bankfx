@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  * Represents a user in the bank system. A user has an SSN, name, password, and a list of accounts.
  */
 public class User {
+    private Bank bank;  
     private final String ssn;
     private String name;
     private String password;
@@ -29,15 +30,16 @@ public class User {
         ssnCheck(ssn);
         passwordCheck(password);
         nameCheck(name);
+        bank = Bank.getInstance();
         this.ssn = ssn;
         this.name = name;
         this.password = password;
         this.accounts = new ArrayList<>();
         this.createAccount("Brukskonto", name);
-
     }
+
     /**
-     * Constructs a new User with the given SSN, name, password, and list of accoutn.
+     * Constructs a new User with the given SSN, name, password, and list of account.
      *
      * @param ssn the user's social security number
      * @param name the user's name
@@ -160,12 +162,14 @@ public class User {
      * @throws IllegalArgumentException if the user doesn't own the source account or, if specified, the
      *         target account
      */
-    public void transfer(Account sourceAccount, Account targetAccount, double amount, boolean checkBothAccounts) {
+    public void transfer(long sourceAccountNumber, long targetAccountNumber, double amount, boolean checkBothAccounts) {
+        Account sourceAccount = bank.getAccountByNumber(sourceAccountNumber);
+        Account targetAccount = bank.getAccountByNumber(targetAccountNumber);
         isOwnerOfAccountCheck(sourceAccount);
         if (checkBothAccounts) {
             isOwnerOfAccountCheck(targetAccount);
         }
-        sourceAccount.transferTo(amount, targetAccount);
+        sourceAccount.transferTo(amount, targetAccountNumber);
     }
 
     /**
@@ -221,7 +225,7 @@ public class User {
     }
 
     /**
-     * Validates the user's name.
+     * Validates the user's name. 
      *
      * @param name the name to check
      * @throws IllegalArgumentException if the name is invalid
