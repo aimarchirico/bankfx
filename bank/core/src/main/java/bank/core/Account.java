@@ -2,6 +2,7 @@ package bank.core;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Represents a bank account with a balance, account holder name, and account type. Supports
@@ -13,7 +14,6 @@ public class Account {
     private Double balance;
     private String name;
     private String accountType;
-    private static long accountNumberCounter = 1000000000L;
     private final long accountNumber;
     private final List<String> accountTypes = Collections.unmodifiableList(List.of("Sparekonto", "Brukskonto"));
 
@@ -31,7 +31,21 @@ public class Account {
         }
         accountTypeCheck(accountType);
         nameCheck(name);
+        bank = Bank.getInstance();
         this.accountNumber = generateAccountNumber();
+        this.balance = balance;
+        this.name = name;
+        this.accountType = accountType;
+        bank.addAccount(this);
+    }
+
+    public Account(Double balance, String name, String accountType, long accountNumber) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
+        }
+        accountTypeCheck(accountType);
+        nameCheck(name);
+        this.accountNumber = accountNumber;
         this.balance = balance;
         this.name = name;
         this.accountType = accountType;
@@ -41,11 +55,17 @@ public class Account {
 
     /**
      * Generates a unique account number for each account.
+     * Ensures uniqueness by checking existing account numbers.
      * 
      * @return Account number.
      */
     private synchronized long generateAccountNumber() {
-        return accountNumberCounter++;
+        long newAccountNumber;
+        do{
+            newAccountNumber = ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
+        }
+        while(bank.accountNumberInAccounts(newAccountNumber));
+        return newAccountNumber;
     }
 
     /**

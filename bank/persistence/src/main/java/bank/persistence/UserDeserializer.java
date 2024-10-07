@@ -44,9 +44,10 @@ public class UserDeserializer extends JsonDeserializer<User> {
           String accountName = accountNode.get("name").asText();
           String accountType = accountNode.get("accountType").asText();
           double balance = accountNode.get("balance").asDouble();
+          long accountNumber = accountNode.get("accountNumber").asLong();
 
           // Create an Account object and add to list
-          accounts.add(new Account(balance, accountName, accountType));
+          accounts.add(new Account(balance, accountName, accountType, accountNumber));
         }
       }
 
