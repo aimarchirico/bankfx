@@ -1,11 +1,13 @@
 package bank.persistence;
 
+import bank.core.Account;
 import bank.core.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +35,7 @@ public class BankPersistence {
    */
   public void writeToFile(File file, List<User> users) {
     try {
-      om.writeValue(file, users);
+      om.writerWithDefaultPrettyPrinter().writeValue(file, users);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -56,5 +58,18 @@ public class BankPersistence {
     }
   }
 
+  public static void main(String[] args) {
+    
+    Account account1 = new Account(30.0, "felix", "Sparekonto");
+    User felix = new User("28120300001", "Felix", "Banan123");
+    felix.addAccount(account1);
+    List<User> users = new ArrayList<>();
+    users.add(felix);
+    BankPersistence bp  = new BankPersistence();
+    bp.writeToFile(new File("max.json"), users);
+    UserDataStorage uds = new UserDataStorage("max.json");
+    System.out.println(uds.getUsers().get(0));
+    
+  }
 }
 
