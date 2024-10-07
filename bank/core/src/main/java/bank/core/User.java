@@ -55,6 +55,10 @@ public class User {
 
     }
 
+    
+    /** 
+     * @return List<Account>
+     */
     public List<Account> getAccounts() {
         return this.accounts;
     }

@@ -27,6 +27,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
    * Method for deserializing and returning a {@link User} instance.
    *
    * @param treeNode the {@link JsonNode}
+   * @throws IllegalArgumentException if node is missing required field
    */
   User deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode objectNode) {
@@ -40,9 +41,9 @@ public class UserDeserializer extends JsonDeserializer<User> {
       List<Account> accounts = new ArrayList<>();
       if (accountsNode != null && accountsNode.isArray()) {
         for (JsonNode accountNode : accountsNode) {
-          String accountName = accountNode.get("name").asText(); // Get account name
-          String accountType = accountNode.get("accountType").asText(); // Get account type
-          double balance = accountNode.get("balance").asDouble(); // Get balance field
+          String accountName = accountNode.get("name").asText();
+          String accountType = accountNode.get("accountType").asText();
+          double balance = accountNode.get("balance").asDouble();
 
           // Create an Account object and add to list
           accounts.add(new Account(balance, accountName, accountType));

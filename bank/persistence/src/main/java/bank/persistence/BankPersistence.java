@@ -1,24 +1,23 @@
 package bank.persistence;
 
-import bank.core.Account;
 import bank.core.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Handles persistence of {@link User} data, allowing for reading and writing user lists to files.
+ * Handles persistence of {@link User} data, allowing for reading and writing
+ * user lists to files.
  */
 public class BankPersistence {
 
   private ObjectMapper om;
 
   /**
-   * Initializes the {@link BankPersistence} object with a custom deserializer 
+   * Initializes the {@link BankPersistence} object with a custom deserializer
    * for {@link User} objects.
    */
   public BankPersistence() {
@@ -26,11 +25,10 @@ public class BankPersistence {
     om.registerModule(new SimpleModule().addDeserializer(User.class, new UserDeserializer()));
   }
 
-
   /**
    * Writes a {@link List} of {@link User} objects to a {@link File}.
    *
-   * @param file the file to write the user data to
+   * @param file  the file to write the user data to
    * @param users the list of users to write to the file
    */
   public void writeToFile(File file, List<User> users) {
@@ -42,11 +40,10 @@ public class BankPersistence {
 
   }
 
-
   /**
    * Reads a {@link List} of {@link User} objects from a {@link File}.
    *
-   * @param file the file to read user data from
+   * @param file      the file to read user data from
    * @param reference type reference indicating the expected data format
    * @return a list of user objects or <code>null</code> if an error occurs
    */
@@ -59,4 +56,3 @@ public class BankPersistence {
   }
 
 }
-

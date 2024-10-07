@@ -112,6 +112,11 @@ public class UserDataStorage {
     return null;
   }
 
+  
+  /** 
+   * @param ssn
+   * @return List<Account>
+   */
   public List<Account> getUserAccounts (String ssn) {
     User user = getUser(ssn);
     return user.getAccounts();
