@@ -24,7 +24,7 @@ Kjør `mvn -version` for å verifisere at riktig versjon av Maven og Java er inn
   - Kjøre `mvn clean` for å fjerne tidligere kompilert versjon.
   - Kjøre `mvn compile` for å kompilere kildekoden.
   - Kjøre `mvn test` for å kjøre testene. Dette vil også genere en rapport for testdekningsgrad som man finner i `target/site` i den aktuelle modulen. Du kan legge til `-DheadlessTests` for å kjøre ui-tester i bakgrunnen.
-  - Kjøre `mvn install` for å installere prosjektet lokalt
+  - Kjøre `mvn install` for å installere prosjektet lokalt.
 - Fra [`bank/ui`](bank/ui)-mappa kan du:
   - Kjøre `mvn javafx:run` for å starte appen (må først kompileres).
 
