@@ -8,8 +8,7 @@ import java.util.Map;
  * ensure only one instance exists.
  */
 public class Bank {
-  private static Bank instance;
-  private Map<Long, Account> accounts = new HashMap<>();
+  private final Map<Long, Account> accounts = new HashMap<>();
 
   /**
    * Private constructor to prevent instantiation from outside the class. Initializes the Bank with an
@@ -18,15 +17,19 @@ public class Bank {
   private Bank() {}
 
   /**
-   * Returns the single instance of the Bank class. If no instance exists, it creates one.
-   *
+   * A static inner class that holds the single instance of the Bank class.
+   * <p>
+   * This inner class is not loaded until it is referenced
+   */
+  private static class SingletonHolder {
+    private static final Bank INSTANCE = new Bank();
+  }
+
+  /**
    * @return the singleton instance of Bank.
    */
-  public static synchronized Bank getInstance() {
-    if (instance == null) {
-      instance = new Bank();
-    }
-    return instance;
+  public static Bank getInstance() {
+    return SingletonHolder.INSTANCE;
   }
 
   /**
@@ -35,20 +38,20 @@ public class Bank {
    * @param account the account to add.
    */
   public void addAccount(Account account) {
-    if (account == null){
+    if (account == null) {
       throw new IllegalArgumentException("account can not be null");
     }
     accounts.put(account.getAccountNumber(), account);
   }
 
   /**
- * Removes an account based on the account number.
- *
- * @param accountNumber The account number of the account to be removed.
- * @throws IllegalArgumentException if the account number is not registered.
- */
+   * Removes an account based on the account number.
+   *
+   * @param accountNumber The account number of the account to be removed.
+   * @throws IllegalArgumentException if the account number is not registered.
+   */
   public void removeAccount(long accountNumber) {
-    if(!accountNumberInAccounts(accountNumber)){
+    if (!accountNumberInAccounts(accountNumber)) {
       throw new IllegalArgumentException("The account is not registered");
     }
     accounts.remove(accountNumber);

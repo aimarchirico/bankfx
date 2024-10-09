@@ -138,6 +138,9 @@ public class User {
         if (accounts.contains(account)) {
             throw new IllegalArgumentException("Account already exists");
         }
+        if(accounts.size() == 3){
+            throw new IllegalArgumentException("User can have a maximum of 3 accounts");
+        }
         accounts.add(account);
     }
 

@@ -5,16 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the Account class, verifying its behavior and error handling.
+ */
 public class AccountTest {
     Account account1;
     Account account2;
 
+    /**
+     * Initializes test accounts before each test.
+     */
     @BeforeEach
     public void setup() {
         account1 = new Account(100.0, "sparekonto", "Sparekonto");
         account2 = new Account(100.0, "brukskonto", "Brukskonto");
     }
 
+    /**
+     * Tests the Account constructor for valid and invalid inputs.
+     */
     @Test
     public void testConstructor() {
         // Illegal balance
@@ -25,6 +34,9 @@ public class AccountTest {
         assertThrows(IllegalArgumentException.class, () -> new Account(10.0, "-*¨^", "Sparekonto")); // Illegal name
     }
 
+    /**
+     * Tests deposit and withdrawal methods of the Account class.
+     */
     @Test
     public void testWithdrawDeposit() {
         assertEquals(100.0, account1.getBalance());
@@ -35,6 +47,9 @@ public class AccountTest {
         assertThrows(IllegalArgumentException.class, () -> account1.withDraw(200.0));
     }
 
+    /**
+     * Tests changing the name of the account.
+     */
     @Test
     public void testNameChange() {
         assertEquals("sparekonto", account1.getName());
@@ -46,6 +61,9 @@ public class AccountTest {
 
     }
 
+    /**
+     * Tests changing the account type.
+     */
     @Test
     public void testAccountTypeChange() {
         assertEquals("Sparekonto", account1.getAccountType());
@@ -55,6 +73,9 @@ public class AccountTest {
 
     }
 
+    /**
+     * Tests the transfer functionality between accounts.
+     */
     @Test
     public void testTransfer() {
         assertThrows(IllegalArgumentException.class, () -> account1.transferTo(50.0, account1.getAccountNumber()));
@@ -65,6 +86,4 @@ public class AccountTest {
         assertEquals(100.0, account2.getBalance());
         assertEquals(100.0, account1.getBalance());
     }
-
-
 }
