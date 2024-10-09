@@ -5,7 +5,7 @@
     "tasks": [
       {
         "label": "run",
-        "detail": "This will compile source code and launch app.",
+        "detail": "This will install and launch app.",
         "type": "shell",
         "group": {
           "kind": "build",
@@ -14,31 +14,31 @@
         "options": {
                 "cwd": "${workspaceFolder}/bank"
             },
-        "command": "mvn clean compile; cd ui; mvn javafx:run",
+        "command": "mvn clean install -DskipTests -DskipUiTests; cd ui; mvn javafx:run",
         "presentation": {
             "reveal": "always"
         }
       },
       {
         "label": "compile",
-        "detail": "This is set to run before launching app from Run and Debug.",
+        "detail": "This is set to install app before launching from Run and Debug.",
         "type": "shell",
         "options": {
                 "cwd": "${workspaceFolder}/bank"
             },
-        "command": "mvn clean compile",
+        "command": "mvn clean install -DskipTests -DskipUiTests",
         "presentation": {
             "reveal": "always"
         }
       },
       {
         "label": "compile_silent",
-        "detail": "This is set to automatically compile project when project folder is opened.",
+        "detail": "This is set to automatically install app when project folder is opened.",
         "type": "shell",
         "options": {
                 "cwd": "${workspaceFolder}/bank"
             },
-        "command": "mvn clean compile",
+        "command": "mvn clean install -DskipTests -DskipUiTests",
         "presentation": {
             "reveal": "silent",
             "close": true

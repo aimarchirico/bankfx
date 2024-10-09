@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "bank.core/bank.core.Main",
+            "projectName": "core"
+        },
+        {
+            "type": "java",
             "name": "BankApp",
             "request": "launch",
             "mainClass": "bank.ui/bank.ui.BankApp",
