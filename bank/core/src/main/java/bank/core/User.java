@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
 
 
 /**
- * Represents a user in the bank system. A user has an SSN, name, password,
- * and a list of accounts.
+ * Represents a user in the bank system. A user has an SSN, name, password, and a list of accounts.
  */
 public class User {
+    private Bank bank;  
     private final String ssn;
     private String name;
     private String password;
@@ -30,10 +30,39 @@ public class User {
         ssnCheck(ssn);
         passwordCheck(password);
         nameCheck(name);
+        bank = Bank.getInstance();
         this.ssn = ssn;
         this.name = name;
         this.password = password;
         this.accounts = new ArrayList<>();
+        this.createAccount("Brukskonto", name);
+    }
+
+    /**
+     * Constructs a new User with the given SSN, name, password, and list of account.
+     *
+     * @param ssn the user's social security number
+     * @param name the user's name
+     * @param password the user's password
+     * @param accounts list of user accounts
+     */
+    public User(String ssn, String name, String password, List<Account> accounts) {
+        ssnCheck(ssn);
+        passwordCheck(password);
+        nameCheck(name);
+        this.ssn = ssn;
+        this.name = name;
+        this.password = password;
+        this.accounts = accounts;
+
+    }
+
+    
+    /** 
+     * @return List<Account>
+     */
+    public List<Account> getAccounts() {
+        return this.accounts;
     }
 
     /**
@@ -89,9 +118,10 @@ public class User {
      * Creates a new account for the user with the given account type.
      *
      * @param accountType the type of the new account
+     * @param accountName the name of the account
      */
-    public void createAccount(String accountType) {
-        Account account = new Account(0.0, this.getName(), accountType);
+    public void createAccount(String accountType, String accountName) {
+        Account account = new Account(0.0, accountName, accountType);
         addAccount(account);
     }
 
@@ -107,6 +137,9 @@ public class User {
         }
         if (accounts.contains(account)) {
             throw new IllegalArgumentException("Account already exists");
+        }
+        if(accounts.size() == 3){
+            throw new IllegalArgumentException("User can have a maximum of 3 accounts");
         }
         accounts.add(account);
     }
@@ -129,16 +162,17 @@ public class User {
      * @param targetAccount the account to deposit to
      * @param amount the amount to transfer
      * @param checkBothAccounts whether to check if the user owns both accounts
-     * @throws IllegalArgumentException if the user doesn't own the source account
-     *         or, if specified, the target account
+     * @throws IllegalArgumentException if the user doesn't own the source account or, if specified, the
+     *         target account
      */
-    public void transfer(Account sourceAccount, Account targetAccount, double amount, boolean checkBothAccounts) {
+    public void transfer(long sourceAccountNumber, long targetAccountNumber, double amount, boolean checkBothAccounts) {
+        Account sourceAccount = bank.getAccountByNumber(sourceAccountNumber);
+        Account targetAccount = bank.getAccountByNumber(targetAccountNumber);
         isOwnerOfAccountCheck(sourceAccount);
         if (checkBothAccounts) {
             isOwnerOfAccountCheck(targetAccount);
         }
-        sourceAccount.withDraw(amount);
-        targetAccount.deposit(amount);
+        sourceAccount.transferTo(amount, targetAccountNumber);
     }
 
     /**
@@ -194,7 +228,7 @@ public class User {
     }
 
     /**
-     * Validates the user's name.
+     * Validates the user's name. 
      *
      * @param name the name to check
      * @throws IllegalArgumentException if the name is invalid

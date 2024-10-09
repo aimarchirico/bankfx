@@ -2,11 +2,19 @@ package bank.core;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Represents a bank account with a balance, account holder name, and account type. Supports
+ * depositing, withdrawing, and transferring funds. Each account is assigned a unique account
+ * number.
+ */
 public class Account {
+    private Bank bank;
     private Double balance;
     private String name;
     private String accountType;
+    private final long accountNumber;
     private final List<String> accountTypes = Collections.unmodifiableList(List.of("Sparekonto", "Brukskonto"));
 
     /**
@@ -23,10 +31,50 @@ public class Account {
         }
         accountTypeCheck(accountType);
         nameCheck(name);
+        bank = Bank.getInstance();
+        this.accountNumber = generateAccountNumber();
         this.balance = balance;
         this.name = name;
         this.accountType = accountType;
+        bank.addAccount(this);
     }
+
+    public Account(Double balance, String name, String accountType, long accountNumber) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
+        }
+        accountTypeCheck(accountType);
+        nameCheck(name);
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.name = name;
+        this.accountType = accountType;
+        bank = Bank.getInstance();
+        bank.addAccount(this);
+    }
+
+    /**
+     * Generates a unique account number for each account.
+     * Ensures uniqueness by checking existing account numbers.
+     * 
+     * @return Account number.
+     */
+    private synchronized long generateAccountNumber() {
+        long newAccountNumber;
+        do{
+            newAccountNumber = ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
+        }
+        while(bank.accountNumberInAccounts(newAccountNumber));
+        return newAccountNumber;
+    }
+
+    /**
+     * @return The account number of this account.
+     */
+    public long getAccountNumber() {
+        return accountNumber;
+    }
+
 
     /**
      * @return String name of the user
@@ -92,32 +140,37 @@ public class Account {
      * Transfers an amount from this account to a given account
      * 
      * @param amount amount to transfer
-     * @param account destination account
+     * @param accountNumber account number to destination account
      */
-    public void transferTo(Double amount, Account account) {
+    public void transferTo(Double amount, long accountNumber) {
+        Account recepientAccount = bank.getAccountByNumber(accountNumber);
         if (amount < 0) {
             throw new IllegalArgumentException(
                     "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
         }
-        if (this.equals(account)) {
+        if (this.equals(recepientAccount)) {
             throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
         }
         this.withDraw(amount);
-        account.deposit(amount);
+        recepientAccount.deposit(amount);
     }
 
     /**
      * Transfers an amount from another account to this account
      * 
      * @param amount amount to transfer
-     * @param account account to withdraw from
+     * @param accountNumber account number to withdraw from
      */
-    public void transferFrom(Double amount, Account account) {
+    public void transferFrom(Double amount, long accountNumber) {
+        Account senderAccount = bank.getAccountByNumber(accountNumber);
         if (amount < 0) {
             throw new IllegalArgumentException(
                     "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
         }
-        account.withDraw(amount);
+        if (this.equals(senderAccount)) {
+            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
+        }
+        senderAccount.withDraw(amount);
         this.deposit(amount);
     }
 
