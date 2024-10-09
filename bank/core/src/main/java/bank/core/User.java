@@ -120,9 +120,10 @@ public class User {
      * @param accountType the type of the new account
      * @param accountName the name of the account
      */
-    public void createAccount(String accountType, String accountName) {
+    public Account createAccount(String accountType, String accountName) {
         Account account = new Account(0.0, accountName, accountType);
         addAccount(account);
+        return account;
     }
 
     /**
