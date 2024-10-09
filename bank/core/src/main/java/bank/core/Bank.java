@@ -4,28 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The Bank class represents a central entity managing accounts. It uses the Singleton pattern to
- * ensure only one instance exists.
+ * The Bank class represents a central entity managing accounts. 
+ * It uses the Singleton pattern to ensure only one instance exists.
  */
 public class Bank {
   private final Map<Long, Account> accounts = new HashMap<>();
 
   /**
-   * Private constructor to prevent instantiation from outside the class. Initializes the Bank with an
-   * empty account registry.
+   * Private constructor to prevent instantiation from outside the class. 
+   * Initializes the Bank with an empty account registry.
    */
   private Bank() {}
 
   /**
    * A static inner class that holds the single instance of the Bank class.
-   * <p>
-   * This inner class is not loaded until it is referenced
+   * This inner class is not loaded until it is referenced.
    */
   private static class SingletonHolder {
     private static final Bank INSTANCE = new Bank();
   }
 
   /**
+   * Returns the Bank instance.
+   *
    * @return the singleton instance of Bank.
    */
   public static Bank getInstance() {
@@ -34,7 +35,7 @@ public class Bank {
 
   /**
    * Adds an account to the bank's records.
-   * 
+   *
    * @param account the account to add.
    */
   public void addAccount(Account account) {
