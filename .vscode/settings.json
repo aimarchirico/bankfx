@@ -3,7 +3,8 @@
     "maven.view": "flat",
     "java.format.settings.url": "bank/config/checkstyle/eclipse-java-google-style.xml",
     "[java]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false
     },
     "task.allowAutomaticTasks": "on",
 }    

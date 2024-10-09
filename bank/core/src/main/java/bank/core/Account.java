@@ -10,226 +10,246 @@ import java.util.concurrent.ThreadLocalRandom;
  * number.
  */
 public class Account {
-    private Bank bank;
-    private Double balance;
-    private String name;
-    private String accountType;
-    private final long accountNumber;
-    private final List<String> accountTypes = Collections.unmodifiableList(List.of("Sparekonto", "Brukskonto"));
+  private Bank bank;
+  private Double balance;
+  private String name;
+  private String accountType;
+  private final long accountNumber;
+  private final List<String> accountTypes = 
+      Collections.unmodifiableList(List.of("Sparekonto", "Brukskonto"));
 
-    /**
-     * Constructs a new `Account` object.
-     *
-     * @param balance The initial balance of the account. Must be greater than or equal to zero.
-     * @param name The name of the account holder.
-     * @param accountType The type of account. Must be one of the allowed account types
-     * @throws IllegalArgumentException if the balance is negative or the account type is invalid.
-     */
-    public Account(Double balance, String name, String accountType) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
-        }
-        accountTypeCheck(accountType);
-        nameCheck(name);
-        bank = Bank.getInstance();
-        this.accountNumber = generateAccountNumber();
-        this.balance = balance;
-        this.name = name;
-        this.accountType = accountType;
-        bank.addAccount(this);
+  /**
+   * Constructs a new `Account` object.
+   *
+   * @param balance The initial balance of the account. Must be greater than or equal to zero.
+   * @param name The name of the account holder.
+   * @param accountType The type of account. Must be one of the allowed account types
+   * @throws IllegalArgumentException if the balance is negative or the account type is invalid.
+   */
+  public Account(Double balance, String name, String accountType) {
+    if (balance < 0) {
+      throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
     }
+    accountTypeCheck(accountType);
+    nameCheck(name);
+    bank = Bank.getInstance();
+    this.accountNumber = generateAccountNumber();
+    this.balance = balance;
+    this.name = name;
+    this.accountType = accountType;
+    bank.addAccount(this);
+  }
 
-    public Account(Double balance, String name, String accountType, long accountNumber) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
-        }
-        accountTypeCheck(accountType);
-        nameCheck(name);
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.name = name;
-        this.accountType = accountType;
-        bank = Bank.getInstance();
-        bank.addAccount(this);
+  /**
+   * Constructs a new `Account` object.
+   *
+   * @param balance The initial balance of the account. Must be greater than or equal to zero.
+   * @param name The name of the account holder.
+   * @param accountType The type of account. Must be one of the allowed account types
+   * @param accountNumber The account number.
+   * @throws IllegalArgumentException if the balance is negative or the account type is invalid.
+   */
+  public Account(Double balance, String name, String accountType, long accountNumber) {
+    if (balance < 0) {
+      throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
     }
+    accountTypeCheck(accountType);
+    nameCheck(name);
+    this.accountNumber = accountNumber;
+    this.balance = balance;
+    this.name = name;
+    this.accountType = accountType;
+    bank = Bank.getInstance();
+    bank.addAccount(this);
+  }
 
-    /**
-     * Generates a unique account number for each account.
-     * Ensures uniqueness by checking existing account numbers.
-     * 
-     * @return Account number.
-     */
-    private synchronized long generateAccountNumber() {
-        long newAccountNumber;
-        do{
-            newAccountNumber = ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
-        }
-        while(bank.accountNumberInAccounts(newAccountNumber));
-        return newAccountNumber;
+  /**
+   * Generates a unique account number for each account. Ensures uniqueness by checking existing
+   * account numbers.
+   *
+   * @return Account number.
+   */
+  private synchronized long generateAccountNumber() {
+    long newAccountNumber;
+    do {
+      newAccountNumber = ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
+    } while (bank.accountNumberInAccounts(newAccountNumber));
+    return newAccountNumber;
+  }
+
+  /**
+   * Returns account number. 
+   *
+   * @return The account number of this account.
+   */
+  public long getAccountNumber() {
+    return accountNumber;
+  }
+
+
+  /**
+   * Returns name of the account. 
+   *
+   * @return String name of the account
+   */
+
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+   * Returns the type of account.
+   *
+   * @return String account type
+   */
+
+  public String getAccountType() {
+    return this.accountType;
+  }
+
+  /**
+   * Return the balance of the account.
+   *
+   * @return double
+   */
+  public double getBalance() {
+    return this.balance;
+  }
+
+  /**
+   * Deposits an amount to the account.
+   *
+   * @param amount The amount to deposit. Must be greater than or equal to zero
+   * @throws IllegalArgumentException if the amount is negative
+   */
+  public void deposit(Double amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException(
+          "Can't deposit negative amount, amount : " + amount + " Account: " + this.getName());
     }
+    this.balance += amount;
+  }
 
-    /**
-     * @return The account number of this account.
-     */
-    public long getAccountNumber() {
-        return accountNumber;
+  /**
+   * Withdraws an amount from the account.
+   *
+   * @param amount The amount to withdraw. Must be greater than or equal to zero
+   * @throws IllegalArgumentException if the amount is negative
+   */
+  public void withDraw(Double amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException(
+          "Can't withdraw negative amount, amount : " + amount + " Account: " + this.getName());
     }
-
-
-    /**
-     * @return String name of the user
-     */
-
-    public String getName() {
-        return this.name;
+    if (getBalance() - amount < 0) {
+      throw new IllegalArgumentException(
+          "Can't withdraw an amount that makes the balance negative: balance after withdrawl: "
+              + (getBalance() - amount) + " Account: " + this.getName());
     }
+    this.balance -= amount;
+  }
 
-    /**
-     * @return String account type
-     */
 
-    public String getAccountType() {
-        return this.accountType;
+
+  /**
+   * Transfers an amount from this account to a given account.
+   *
+   * @param amount amount to transfer
+   * @param accountNumber account number to destination account
+   */
+  public void transferTo(Double amount, long accountNumber) {
+    Account recepientAccount = bank.getAccountByNumber(accountNumber);
+    if (amount < 0) {
+      throw new IllegalArgumentException(
+          "Can't transfer negative amount, amount : " + amount + " Account: " 
+              + this.getName());
     }
-
-    /**
-     * Return the balance of the account
-     * 
-     * @return double
-     */
-    public double getBalance() {
-        return this.balance;
+    if (this.equals(recepientAccount)) {
+      throw new IllegalArgumentException("Can't transfer to same account, Account: " 
+          + this.getName());
     }
+    this.withDraw(amount);
+    recepientAccount.deposit(amount);
+  }
 
-    /**
-     * Deposits an amount to the account
-     * 
-     * @param amount The amount to deposit. Must be greater than or equal to zero
-     * @throws IllegalArgumentException if the amount is negative
-     */
-    public void deposit(Double amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't deposit negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        this.balance += amount;
+  /**
+   * Transfers an amount from another account to this account.
+   *
+   * @param amount amount to transfer
+   * @param accountNumber account number to withdraw from
+   */
+  public void transferFrom(Double amount, long accountNumber) {
+    Account senderAccount = bank.getAccountByNumber(accountNumber);
+    if (amount < 0) {
+      throw new IllegalArgumentException(
+          "Can't transfer negative amount, amount : " + amount + " Account: " 
+              + this.getName());
     }
-
-    /**
-     * Withdraws an amount from the account
-     * 
-     * @param amount The amount to withdraw. Must be greater than or equal to zero
-     * @throws IllegalArgumentException if the amount is negative
-     */
-    public void withDraw(Double amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't withdraw negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        if (getBalance() - amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't withdraw an amount that makes the balance negative: balance after withdrawl: "
-                            + (getBalance() - amount) + " Account: " + this.getName());
-        }
-        this.balance -= amount;
+    if (this.equals(senderAccount)) {
+      throw new IllegalArgumentException("Can't transfer to same account, Account: " 
+          + this.getName());
     }
+    senderAccount.withDraw(amount);
+    this.deposit(amount);
+  }
 
+  /**
+   * Changes the name of the account.
+   *
+   * @param name the new name for the account
+   * @throws IllegalArgumentException if the name is not valid
+   */
+  public void changeName(String name) {
+    nameCheck(name);
+    this.name = name;
+  }
 
+  /**
+   * Changes account type.
+   *
+   * @param accountType the new type for the account
+   * @throws IllegalArgumentException if teh accountType is invalid
+   */
+  public void changeAccountType(String accountType) {
+    accountTypeCheck(accountType);
+    this.accountType = accountType;
+  }
 
-    /**
-     * Transfers an amount from this account to a given account
-     * 
-     * @param amount amount to transfer
-     * @param accountNumber account number to destination account
-     */
-    public void transferTo(Double amount, long accountNumber) {
-        Account recepientAccount = bank.getAccountByNumber(accountNumber);
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        if (this.equals(recepientAccount)) {
-            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
-        }
-        this.withDraw(amount);
-        recepientAccount.deposit(amount);
+  /**
+   * Validates the provided account type to ensure it is one of the allowed types.
+   *
+   * @param accountType The account type to be validated.
+   * @throws IllegalArgumentException if the account type is not valid.
+   */
+  private void accountTypeCheck(String accountType) {
+    if (!accountTypes.contains(accountType)) {
+      throw new IllegalArgumentException("Account must be of the valid types, accountType: " 
+          + accountTypes);
     }
+  }
 
-    /**
-     * Transfers an amount from another account to this account
-     * 
-     * @param amount amount to transfer
-     * @param accountNumber account number to withdraw from
-     */
-    public void transferFrom(Double amount, long accountNumber) {
-        Account senderAccount = bank.getAccountByNumber(accountNumber);
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        if (this.equals(senderAccount)) {
-            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
-        }
-        senderAccount.withDraw(amount);
-        this.deposit(amount);
+  /**
+   * Validates the provided name to ensure it meets the following criteria.:
+   * <ul>
+   * <li>Not null</li>
+   * <li>At least 2 characters long</li>
+   * <li>Contains only letters, spaces, and hyphens</li>
+   * </ul>
+   *
+   * @param name The name to be validated.
+   * @throws IllegalArgumentException if the name does not meet the validation criteria.
+   */
+  private void nameCheck(String name) {
+    if (name == null) {
+      throw new IllegalArgumentException("Name can not be null");
     }
-
-    /**
-     * Changes the name of the account
-     * 
-     * @param name
-     * @throws IllegalArgumentException if the name is not valid
-     */
-    public void changeName(String name) {
-        nameCheck(name);
-        this.name = name;
+    if (name.length() < 2) {
+      throw new IllegalArgumentException("Name needs at least 2 characters");
     }
-
-    /**
-     * Changes account type
-     * 
-     * @param accountType
-     * @throws IllegalArgumentException if teh accountType is invalid
-     */
-    public void changeAccountType(String accountType) {
-        accountTypeCheck(accountType);
-        this.accountType = accountType;
+    final String Name_regex = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
+    if (!name.matches(Name_regex)) {
+      throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
     }
-
-    /**
-     * Validates the provided account type to ensure it is one of the allowed types.
-     *
-     * @param accountType The account type to be validated.
-     * @throws IllegalArgumentException if the account type is not valid.
-     */
-    private void accountTypeCheck(String accountType) {
-        if (!accountTypes.contains(accountType)) {
-            throw new IllegalArgumentException("Account must be of the valid types, accountType: " + accountType);
-        }
-    }
-
-    /**
-     * Validates the provided name to ensure it meets the following criteria:
-     * <ul>
-     * <li>Not null</li>
-     * <li>At least 2 characters long</li>
-     * <li>Contains only letters, spaces, and hyphens</li>
-     * </ul>
-     *
-     * @param name The name to be validated.
-     * @throws IllegalArgumentException if the name does not meet the validation criteria.
-     */
-    private void nameCheck(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name can not be null");
-        }
-        if (name.length() < 2) {
-            throw new IllegalArgumentException("Name needs at least 2 characters");
-        }
-        final String NAME_REGEX = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
-        if (!name.matches(NAME_REGEX)) {
-            throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
-        }
-    }
+  }
 
 }

@@ -19,13 +19,11 @@ Brukeren er ikke en allerede eksisterende kunde av banken og ønsker derfor å r
 
 som privatperson ønsker jeg å kunne ha en måte å holde styr på pengene mine. 
 
-Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn, som brukeren enkelt kan finne frem til senere. Det er viktig at brukeren kan både ta ut og legge inn penger til kontoene.
+Brukeren har allerede registrert seg som bruker og ønsker nå å kunne opprette en sparekonto og en brukskonto med navn, som brukeren enkelt kan finne frem til senere. 
 
 ### Viktig å kunne se:
 - knapp for å lage ny spare-/brukskonto
 - oversikt over allerede eksisterende spare-/brukskontoer
-- knapp for innskudd og uttak
 
 ### Viktig å kunne gjøre:
 - registrere ny spare-/brukskonto
-- kunne legge inn eller ta ut penger fra en allerede eksisterende konto
