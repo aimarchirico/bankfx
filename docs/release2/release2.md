@@ -16,7 +16,7 @@ Vi har lagt til Javadoc på alle klasser og metoder. I rotmappa ligger det også
 I denne releasen hadde vi fokus på gode arbeidsvaner. Vi lagde issues på alt av oppgaver vi gjorde og alle commits ble gjort til egen branch for så å opprette en merge request inn til master. Alle commit-meldinger er riktig strukturert med en oversikt over scope, type og beskrivelse av hva som er endret. Vi drev med parprogrammering og dokumenterte co-author som en fotnote i commit-meldinger. 
 
 ### Persistens:
-For lagring av data har vi brukt json. Filen [UserData.json](../../bank\persistence\src\main\resources\bank\persistence\UserData.json) er strukturert som en liste av [User](../../bank\core\src\main\java\bank\core\User.java)-instanser med feltene `ssn`, `name` og `password`. Denne er også utvidet til å inneholde feltet `accounts` som da er en liste bestående av en brukers tilhørende [Account](../../bank\core\src\main\java\bank\core\Account.java)-instanser. Vi bruker json fordi det er lett lesbart og nyttig for lagring av hierarkisk data slik User- og Account-klassene inneholder. 
+For lagring av data har vi brukt json. Filen [UserData.json](../../bank\persistence\src\main\resources\bank\persistence\UserData.json) er strukturert som en liste av [User](../../bank\core\src\main\java\bank\core\User.java)-instanser med feltene `ssn`, `name` og `password`. Denne er også utvidet til å inneholde feltet `accounts` som da er en liste bestående av en brukers tilhørende [Account](../../bank\core\src\main\java\bank\core\Account.java)-instanser. Vi bruker json fordi det er lett lesbart og nyttig for lagring av hierarkisk data slik User- og Account-klassene inneholder. Når det gjelder lagring har vi valgt implisitt lagring for vår applikasjon. Ettersom det er en bankapplikasjon gir det mer mening at lagring skjer implisitt i bakgrunnen uten at brukeren må gjøre noe. Fokuset for brukeren ligger ikke på hvordan ting blir lagret, det er kun viktig at det faktisk blir lagret. Brukeren må kun bekrefte valg, men etter det vil det bli lagret i bakgrunnen til json-filen. 
 
 ### Ny funksjonalitet
 Vi begynte å implementere funskjonalitet for bankkontoer. Da lagde vi nye klasser Account og Bank med tilhørende tester. Vi har implementert det meste av kjernelogikken for Account, User og Bank. Funksjonalitet når Account er ferdig implementert med ui, er betaling, overføring, innskudd og uttak (se [bank/readme.md](../../bank/readme.md)). Foreløpig er det kun mulig å opprette og å se eksisterende bankkontoer i UI-et. UI-et er også utbedret slik at det er mer brukervennlig og penere. Det er også gjort noen endringer i VSCode config filene. Blant annet er det lagt til anbefalte utvidelser og en task som automatisk kjører nødvendige mvn commands i terminalen for å installere og starte appen (se [readme.md](../../readme.md)).
@@ -57,6 +57,7 @@ Vi begynte å implementere funskjonalitet for bankkontoer. Da lagde vi nye klass
   - utvid mvn kommando forklaring
   - skriv release 2 dokumentasjon
   - legg til siste issues i release docs
+  - skriv om implisitt lagring
 - *Diverse issues:*
   - lag penere ui
   - implementer sletting av brukere fra json
