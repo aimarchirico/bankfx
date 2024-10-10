@@ -57,6 +57,11 @@ public class OverviewController {
     UiUtils.newScene(this, logoutIcon, "Login.fxml");
   }
 
+  /**
+   * Open new account scene.
+   *
+   * @throws IOException when file is invalid
+   */
   @FXML
   private void openNewAccount() throws IOException {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "NewAccount.fxml");
