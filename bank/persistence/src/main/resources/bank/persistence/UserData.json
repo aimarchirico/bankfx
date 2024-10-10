@@ -32,5 +32,10 @@
     "name" : "Spar",
     "accountType" : "Sparekonto",
     "accountNumber" : 93158219162
+  }, {
+    "balance" : 0.0,
+    "name" : "Tull",
+    "accountType" : "Brukskonto",
+    "accountNumber" : 54176873216
   } ]
 } ]

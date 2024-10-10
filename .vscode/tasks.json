@@ -20,7 +20,7 @@
         }
       },
       {
-        "label": "compile",
+        "label": "install",
         "detail": "This is set to install app before launching from Run and Debug.",
         "type": "shell",
         "options": {
@@ -30,22 +30,6 @@
         "presentation": {
             "reveal": "always"
         }
-      },
-      {
-        "label": "compile_silent",
-        "detail": "This is set to automatically install app when project folder is opened.",
-        "type": "shell",
-        "options": {
-                "cwd": "${workspaceFolder}/bank"
-            },
-        "command": "mvn clean install -DskipTests -DskipUiTests",
-        "presentation": {
-            "reveal": "silent",
-            "close": true
-        },
-        "runOptions": {
-                "runOn": "folderOpen",
-            }
       }
     ]
   }

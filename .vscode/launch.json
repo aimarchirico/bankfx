@@ -18,7 +18,7 @@
             "mainClass": "bank.ui/bank.ui.BankApp",
             "projectName": "ui",
             "cwd": "${workspaceFolder}/bank/ui",
-            "preLaunchTask": "compile"
+            "preLaunchTask": "install"
         }
     ]
 }

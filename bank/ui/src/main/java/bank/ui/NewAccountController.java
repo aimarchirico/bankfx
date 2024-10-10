@@ -32,6 +32,11 @@ public class NewAccountController {
     this.user = user;
   }
 
+  /**
+   * Open overview scene.
+   *
+   * @throws IOException when file is invalid
+   */
   @FXML
   private void openOverview() throws IOException {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, backIcon, "Overview.fxml");
@@ -39,6 +44,11 @@ public class NewAccountController {
     controller.setUser(user);
   }
 
+  /**
+   * Create a new account.
+   *
+   * @throws IOException when file is invalid
+   */
   @FXML
   private void newAccount() throws IOException {
     try {
@@ -52,6 +62,10 @@ public class NewAccountController {
 
   }
 
+  /**
+   * Dismiss error message.
+   * Delegates to UiUtils.
+   */
   @FXML
   private void dismissError() throws IOException {
     UiUtils.dismissError(errorButton);

@@ -36,6 +36,7 @@ Vi begynte å implementere funskjonalitet for bankkontoer. Da lagde vi nye klass
   - oppdater test til Bruker-klassen for å dekke ny funskjonalitet
   - tester til Account
   - lag test til Bank klasse
+  - verifiser at testdekningsgrad er tilstrekkelig
 - *Milepæl 2: Bankkontoer*
   - lage Account klasse
   - oppdater readme til å illustrere ny funksjonalitet for bankkontoer
@@ -47,12 +48,15 @@ Vi begynte å implementere funskjonalitet for bankkontoer. Da lagde vi nye klass
   - lagring av kontoer i json
   - spotbug in Bank.java
   - legge til kontonummer i UserDeserializer
+  - utvid ui til å benytte seg av bankkontoer
 - *Milepæl 3: Dokumentasjon til release 2*
   - dokumenter arkitektur med minst et diagram (bruk PlantUML) i tillegg til teksten i readme
+  - legg til javadoc i klasser og testklasser
   - skriv release 2 dokumentasjon
   - fjern duplikat tekst "For å kun kjøre testene..." i readme
   - utvid mvn kommando forklaring
   - skriv release 2 dokumentasjon
+  - legg til siste issues i release docs
 - *Diverse issues:*
   - lag penere ui
   - implementer sletting av brukere fra json
