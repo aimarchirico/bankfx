@@ -10,7 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * number.
  */
 public class Account {
-    private Bank bank;
     private Double balance;
     private String name;
     private String accountType;
@@ -31,12 +30,10 @@ public class Account {
         }
         accountTypeCheck(accountType);
         nameCheck(name);
-        bank = Bank.getInstance();
         this.accountNumber = generateAccountNumber();
         this.balance = balance;
         this.name = name;
         this.accountType = accountType;
-        bank.addAccount(this);
     }
 
     public Account(Double balance, String name, String accountType, long accountNumber) {
@@ -49,8 +46,6 @@ public class Account {
         this.balance = balance;
         this.name = name;
         this.accountType = accountType;
-        bank = Bank.getInstance();
-        bank.addAccount(this);
     }
 
     /**
@@ -60,12 +55,7 @@ public class Account {
      * @return Account number.
      */
     private synchronized long generateAccountNumber() {
-        long newAccountNumber;
-        do{
-            newAccountNumber = ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
-        }
-        while(bank.accountNumberInAccounts(newAccountNumber));
-        return newAccountNumber;
+        return ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L);
     }
 
     /**
@@ -132,46 +122,6 @@ public class Account {
                             + (getBalance() - amount) + " Account: " + this.getName());
         }
         this.balance -= amount;
-    }
-
-
-
-    /**
-     * Transfers an amount from this account to a given account
-     * 
-     * @param amount amount to transfer
-     * @param accountNumber account number to destination account
-     */
-    public void transferTo(Double amount, long accountNumber) {
-        Account recepientAccount = bank.getAccountByNumber(accountNumber);
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        if (this.equals(recepientAccount)) {
-            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
-        }
-        this.withDraw(amount);
-        recepientAccount.deposit(amount);
-    }
-
-    /**
-     * Transfers an amount from another account to this account
-     * 
-     * @param amount amount to transfer
-     * @param accountNumber account number to withdraw from
-     */
-    public void transferFrom(Double amount, long accountNumber) {
-        Account senderAccount = bank.getAccountByNumber(accountNumber);
-        if (amount < 0) {
-            throw new IllegalArgumentException(
-                    "Can't transfer negative amount, amount : " + amount + " Account: " + this.getName());
-        }
-        if (this.equals(senderAccount)) {
-            throw new IllegalArgumentException("Can't transfer to same account, Account: " + this.getName());
-        }
-        senderAccount.withDraw(amount);
-        this.deposit(amount);
     }
 
     /**

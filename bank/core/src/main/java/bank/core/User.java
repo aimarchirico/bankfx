@@ -12,8 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Represents a user in the bank system. A user has an SSN, name, password, and a list of accounts.
  */
-public class User {
-    private Bank bank;  
+public class User { 
     private final String ssn;
     private String name;
     private String password;
@@ -30,7 +29,6 @@ public class User {
         ssnCheck(ssn);
         passwordCheck(password);
         nameCheck(name);
-        bank = Bank.getInstance();
         this.ssn = ssn;
         this.name = name;
         this.password = password;
@@ -152,28 +150,12 @@ public class User {
      */
     public void deleteAccount(Account account) {
         isOwnerOfAccountCheck(account);
+        if (account.getBalance() != 0){
+            throw new IllegalArgumentException("The balance has to be 0");
+        }
         accounts.remove(account);
     }
 
-    /**
-     * Transfers money from one account to another.
-     *
-     * @param sourceAccount the account to withdraw from
-     * @param targetAccount the account to deposit to
-     * @param amount the amount to transfer
-     * @param checkBothAccounts whether to check if the user owns both accounts
-     * @throws IllegalArgumentException if the user doesn't own the source account or, if specified, the
-     *         target account
-     */
-    public void transfer(long sourceAccountNumber, long targetAccountNumber, double amount, boolean checkBothAccounts) {
-        Account sourceAccount = bank.getAccountByNumber(sourceAccountNumber);
-        Account targetAccount = bank.getAccountByNumber(targetAccountNumber);
-        isOwnerOfAccountCheck(sourceAccount);
-        if (checkBothAccounts) {
-            isOwnerOfAccountCheck(targetAccount);
-        }
-        sourceAccount.transferTo(amount, targetAccountNumber);
-    }
 
     /**
      * Checks if the given password is valid.
