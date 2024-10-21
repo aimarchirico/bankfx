@@ -69,6 +69,14 @@ public class OverviewController {
     controller.setUser(user);
   }
 
+  @FXML
+  private void openTransfer() throws IOException{
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Transfer.fxml");
+    TransferController controller = fxmlLoader.getController();
+    controller.setUser(user);
+    controller.update();
+  }
+
   /**
    * Updates the list of accounts. 
    */
@@ -104,6 +112,7 @@ public class OverviewController {
       i++;
     }
   }
+  
 
 
   /**
@@ -116,4 +125,5 @@ public class OverviewController {
     welcomeText.setText("Welcome, " + this.user.getName() + "!");
     update();
   }
+  
 }

@@ -179,6 +179,11 @@ public class User {
     sourceAccount.transferTo(amount, targetAccountNumber);
   }
 
+  public void transferTo(Double amount, Account source, Account target) {
+    source.withDraw(amount);
+    target.deposit(amount);
+  }
+
   /**
    * Checks if the given password is valid.
    *
