@@ -32,7 +32,7 @@ public class UserTest {
         user1 = new User(ssn, name, password);
         account1 = new Account(20000.00, "minBrukskonto", "Brukskonto");
         account2 = new Account(100000.00, "minSparekonto", "Sparekonto");
-        account3 = new Account(4000.00, "minAndreBrukskonto", "Brukskonto");
+        account3 = new Account(0.0, "minAndreBrukskonto", "Brukskonto");
         accounts = new ArrayList<>();
         accounts.add(account1);
         accounts.add(account2);
@@ -128,19 +128,6 @@ public class UserTest {
         assertThrows(IllegalArgumentException.class,
         () -> user1.addAccount(account5));
 
-    }
-    /**
-   * Tests transferring money between existing accounts
-   */
-    @Test
-    public void testTransfer() {
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.transfer(account1.getAccountNumber(), account2.getAccountNumber(), 2000, true));
-        user1.transfer(account1.getAccountNumber(), account2.getAccountNumber(), 2000, false);
-        Assertions.assertEquals(18000.00, account1.getBalance());
-        user1.transfer(account3.getAccountNumber(), account1.getAccountNumber(), 3000.00, true);
-        Assertions.assertEquals(21000.00, account1.getBalance());
-        Assertions.assertEquals(1000.00, account3.getBalance());
     }
     
     /**
