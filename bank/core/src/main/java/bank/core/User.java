@@ -36,61 +36,42 @@ public class User {
         this.createAccount("Brukskonto", name);
     }
 
-    /**
-     * Constructs a new User with the given SSN, name, password, and list of account.
-     *
-     * @param ssn the user's social security number
-     * @param name the user's name
-     * @param password the user's password
-     * @param accounts list of user accounts
-     */
-    public User(String ssn, String name, String password, List<Account> accounts) {
-        ssnCheck(ssn);
-        passwordCheck(password);
-        nameCheck(name);
-        this.ssn = ssn;
-        this.name = name;
-        this.password = password;
-        this.accounts = accounts;
+  }
 
+  /**
+   * Validates the user's name.
+   *
+   * @param name the name to check
+   * @throws IllegalArgumentException if the name is invalid
+   */
+  public void nameCheck(String name) {
+    if (name == null) {
+      throw new IllegalArgumentException("Name can not be null");
     }
+    if (name.length() < 2) {
+      throw new IllegalArgumentException("Name needs at least 2 characters");
+    }
+    final String Name_regex = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
+    if (!name.matches(Name_regex)) {
+      throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
+    }
+  }
 
-    
-    /** 
-     * @return List<Account>
-     */
-    public List<Account> getAccounts() {
-        return this.accounts;
+  /**
+   * Checks if the user owns the given account.
+   *
+   * @param account the account to check
+   * @throws IllegalArgumentException if the user doesn't own the account
+   */
+  public void isOwnerOfAccountCheck(Account account) {
+    if (account == null) {
+      throw new IllegalArgumentException("Account can not be null");
     }
-
-    /**
-     * Gets the user's social security number.
-     *
-     * @return the user's SSN
-     */
-    public String getSsn() {
-        return ssn;
+    if (!accounts.contains(account)) {
+      throw new IllegalArgumentException("You don't have access to this " 
+          + account.getAccountType() + " account.");
     }
-
-    /**
-     * Gets the user's name.
-     *
-     * @return the user's name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the user's name.
-     *
-     * @param name the new name of the user
-     * @throws IllegalArgumentException if the name is invalid
-     */
-    public void setName(String name) {
-        nameCheck(name);
-        this.name = name;
-    }
+  }
 
     /**
      * Gets the user's password.

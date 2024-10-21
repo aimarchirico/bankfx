@@ -24,15 +24,15 @@ Kjør `mvn -version` for å verifisere at riktig versjon av Maven og Java er inn
   - Kjøre `mvn clean` for å fjerne tidligere kompilert versjon.
   - Kjøre `mvn compile` for å kompilere kildekoden.
   - Kjøre `mvn test` for å kjøre testene. Dette vil også genere en rapport for testdekningsgrad som man finner i `target/site` i den aktuelle modulen. Du kan legge til `-DheadlessTests` for å kjøre ui-tester i bakgrunnen.
-  - Kjøre `mvn install` for å installere prosjektet lokalt
+  - Kjøre `mvn install` for å installere prosjektet lokalt. Du kan legge til `-DskipUiTests` for å skippe ui-tester og `-DskipTests` for å skippe øvrige tester. 
 - Fra [`bank/ui`](bank/ui)-mappa kan du:
-  - Kjøre `mvn javafx:run` for å starte appen (må først kompileres).
+  - Kjøre `mvn javafx:run` for å starte appen (må først installeres).
 
 ## Stegvis forklaring for kjøring
 1. Kjør `cd bank` (gitt at du starter helt i rot).
-2. Kjør `mvn clean compile`.
+2. Kjør `mvn clean install`.
 3. Kjør `cd ui`.
 4. Kjør `mvn javafx:run`.
 5. Hvis du har gjort det riktig skal appen nå åpnes!
 
-Alternativt er det laget en VSCode task ved navn `run` (den er satt som default build task og kan da kjøres med `ctrl+shift+b` hvis du ikke har endret snarveien) som vil gjøre steg 1-4 for deg. 
+Alternativt er det laget en VSCode task ved navn `run` (den er satt som default build task og kan da kjøres med `ctrl+shift+b` hvis du ikke har endret snarveien) som vil gjøre steg 1-4 for deg. Merk at `run` skipper testene når den installerer for å spare tid.  

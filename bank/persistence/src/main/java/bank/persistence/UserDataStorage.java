@@ -64,6 +64,23 @@ public class UserDataStorage {
   }
 
   /**
+   * Updates a {@link User} in the data {@link File} if the user exists.
+   *
+   * @param user the user to be added
+   */
+  public void updateUserData(User user) {
+    fetchUserData();
+    User existing = getUser(user.getSsn());
+    if (existing != null) {
+      users.remove(existing);
+      users.add(user);
+      bankPers.writeToFile(file, users);
+    }
+
+  }
+  
+
+  /**
    * Deletes a {@link User} from the data {@link File}.
    *
    * @param user the user to be removed
@@ -114,10 +131,12 @@ public class UserDataStorage {
 
   
   /** 
-   * @param ssn
-   * @return List<Account>
+   * Returns the list of accounts for a user.
+   *
+   * @param ssn the ssn of the user
+   * @return the list of accounts
    */
-  public List<Account> getUserAccounts (String ssn) {
+  public List<Account> getUserAccounts(String ssn) {
     User user = getUser(ssn);
     return user.getAccounts();
   }
