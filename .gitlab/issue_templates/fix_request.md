@@ -1,9 +1,8 @@
 <!--
   Bug Fix (fix) Issue-mal
   Formål: Rapportere en feil og foreslå en løsning.
+  Skriv tittel på formatet: fix(scope): [Kort tittel]
 -->
-
-## fix(scope): [Kort tittel]
 
 ### Beskrivelse
 <!-- En klar og konsis beskrivelse av hva feilen er. Inkluder eventuelle feilmeldinger eller symptomer. -->

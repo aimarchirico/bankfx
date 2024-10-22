@@ -1,9 +1,8 @@
 <!--
   Feature (feat) Issue-mal
   Formål: Foreslå ny funksjonalitet eller forbedringer.
+  Skriv tittel på formatet: feat(scope): [Kort tittel]
 -->
-
-## feat(scope): [Kort tittel]
 
 ### Beskrivelse
 <!-- En detaljert beskrivelse av funksjonaliteten. Hvilket problem løser den? Hva er forventet oppførsel? -->

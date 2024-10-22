@@ -1,6 +1,7 @@
 <!--
   Test (test) Issue-mal
   Formål: Foreslå nye tester eller forbedringer av eksisterende tester.
+  Skriv tittel på formatet: test(scope): [Kort tittel]
 -->
 
 ## Testforespørsel: [Kort beskrivelse av testen]
