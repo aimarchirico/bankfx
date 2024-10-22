@@ -1,9 +1,8 @@
 <!--
   Dokumentasjon (docs) Issue-mal
   Formål: Foreslå ny eller oppdatert dokumentasjon.
+  Skriv tittel på formatet: docs(scope): [Kort tittel]
 -->
-
-## docs(scope): [Kort tittel]
 
 ### Beskrivelse
 <!-- En detaljert beskrivelse av dokumentasjonsendringen. -->
