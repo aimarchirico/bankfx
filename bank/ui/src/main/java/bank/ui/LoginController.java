@@ -1,9 +1,7 @@
 package bank.ui;
 
-import bank.core.User;
-import bank.persistence.UserDataStorage;
-import bank.persistence.Utils;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -25,6 +23,8 @@ public class LoginController {
   private TextField ssnField;
   @FXML
   private Button errorButton;
+  @FXML
+  private UserAccess userAccess;
 
 
   /**
@@ -33,16 +33,15 @@ public class LoginController {
    * @throws IOException when file is invalid
    */
   @FXML
-  private void openCreateUser() throws IOException {
+  public void openCreateUser() throws IOException {
     UiUtils.newScene(this, createUserButton, "CreateUser.fxml");
   }
 
   /**
-   * Dismiss error message.
-   * Delegates to UiUtils.
+   * Dismiss error message. Delegates to UiUtils.
    */
   @FXML
-  private void dismissError() {
+  public void dismissError() {
     UiUtils.dismissError(errorButton);
   }
 
@@ -52,17 +51,44 @@ public class LoginController {
    * @throws IOException when file is invalid
    */
   @FXML
-  private void login() throws IOException {
-    UserDataStorage storage = new UserDataStorage(Utils.path);
-    User user = storage.getUser(ssnField.getText());
-    if (user == null || !user.getPassword().equals(passwordField.getText())) {
-      UiUtils.showError(errorButton, "Incorrect social security number or password");
+  public void login() throws IOException {
+    try {
+      if (userAccess == null) {
+        setUserAccess(new UserAccess());
+      }
+      try {
+        userAccess.getUserRequest(ssnField.getText(), passwordField.getText());
+        FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
+        OverviewController controller = fxmlLoader.getController();
+        controller.setUserAccess(userAccess);
 
-    } else {
-      FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
-      OverviewController controller = fxmlLoader.getController();
-      controller.setUser(user);
+      } catch (Exception e) {
+        UiUtils.showError(errorButton, e.getMessage());
+      }
+    } catch (URISyntaxException e) {
+      UiUtils.showError(errorButton, e.getMessage());
     }
+  }
+
+
+
+  /**
+   * Sets userAccess
+   * 
+   * @param userAccess
+   */
+  public void setUserAccess(UserAccess userAccess) {
+    this.userAccess = userAccess;
+  }
+
+
+  /**
+   * Gets userAccess
+   * 
+   * @return UserAccess
+   */
+  public UserAccess getUserAccess() {
+    return this.userAccess;
   }
 
 }
