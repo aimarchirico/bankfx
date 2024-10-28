@@ -1,6 +1,5 @@
 package bank.ui;
 
-import bank.core.User;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.fxml.FXML;
@@ -24,6 +23,8 @@ public class LoginController {
   private TextField ssnField;
   @FXML
   private Button errorButton;
+  @FXML
+  private UserAccess userAccess;
 
 
   /**
@@ -32,7 +33,7 @@ public class LoginController {
    * @throws IOException when file is invalid
    */
   @FXML
-  private void openCreateUser() throws IOException {
+  public void openCreateUser() throws IOException {
     UiUtils.newScene(this, createUserButton, "CreateUser.fxml");
   }
 
@@ -40,7 +41,7 @@ public class LoginController {
    * Dismiss error message. Delegates to UiUtils.
    */
   @FXML
-  private void dismissError() {
+  public void dismissError() {
     UiUtils.dismissError(errorButton);
   }
 
@@ -50,9 +51,11 @@ public class LoginController {
    * @throws IOException when file is invalid
    */
   @FXML
-  private void login() throws IOException {
+  public void login() throws IOException {
     try {
-      UserAccess userAccess = new UserAccess();
+      if (userAccess == null) {
+        setUserAccess(new UserAccess());
+      }
       try {
         userAccess.getUserRequest(ssnField.getText(), passwordField.getText());
         FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
@@ -63,8 +66,29 @@ public class LoginController {
         UiUtils.showError(errorButton, e.getMessage());
       }
     } catch (URISyntaxException e) {
-      UiUtils.showError(errorButton, "Error contacting server");
+      UiUtils.showError(errorButton, e.getMessage());
     }
+  }
+
+
+
+  /**
+   * Sets userAccess
+   * 
+   * @param userAccess
+   */
+  public void setUserAccess(UserAccess userAccess) {
+    this.userAccess = userAccess;
+  }
+
+
+  /**
+   * Gets userAccess
+   * 
+   * @return UserAccess
+   */
+  public UserAccess getUserAccess() {
+    return this.userAccess;
   }
 
 }
