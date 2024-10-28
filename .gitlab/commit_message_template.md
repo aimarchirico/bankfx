@@ -1,8 +1,7 @@
 ## Commit message template
-  
-type(scope): Tittel
 
-En mer detaljert forklaring av hva som er gjort, hvorfor det er gjort, og eventuelle implikasjoner.
+type(scope): Short title
 
-co-authored by: Angir medforfattere av endringen. 
+Detailed explanation of changes. 
 
+co-authored by: [name] 

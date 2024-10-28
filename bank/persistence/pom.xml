@@ -13,11 +13,6 @@
 
     <artifactId>persistence</artifactId>
 
-
-    <properties>
-        <jackson.version>2.14.0-rc2</jackson.version>
-    </properties>
-
     <dependencies>
       <dependency>
         <groupId>gr2422.bank</groupId>
@@ -28,13 +23,11 @@
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>${jackson.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>${jackson.version}</version>
     </dependency>
 
     </dependencies>

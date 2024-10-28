@@ -33,30 +33,32 @@ public class UserDeserializer extends JsonDeserializer<User> {
   User deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode objectNode) {
       JsonNode ssnNode = objectNode.get("ssn");
-      String ssn = ssnNode.asText();
       JsonNode nameNode = objectNode.get("name");
-      String name = nameNode.asText();
       JsonNode passwordNode = objectNode.get("password");
-      String password = passwordNode.asText();
       JsonNode accountsNode = objectNode.get("accounts");
       List<Account> accounts = new ArrayList<>();
       if (accountsNode != null && accountsNode.isArray()) {
         for (JsonNode accountNode : accountsNode) {
-          String accountName = accountNode.get("name").asText();
-          String accountType = accountNode.get("accountType").asText();
-          double balance = accountNode.get("balance").asDouble();
-          long accountNumber = accountNode.get("accountNumber").asLong();
+          JsonNode accountNameNode = accountNode.get("name");
+          JsonNode accountTypeNode = accountNode.get("accountType");
+          JsonNode balanceNode = accountNode.get("balance");
+          JsonNode accountNumberNode = accountNode.get("accountNumber");
 
-          // Create an Account object and add to list
-          accounts.add(new Account(balance, accountName, accountType, accountNumber));
+          if (accountNameNode == null || accountTypeNode == null  
+              || balanceNode == null || accountNumberNode == null) {
+            throw new IllegalArgumentException("Missing required field.");
+          }
+
+          accounts.add(new Account(balanceNode.asDouble(), accountNameNode.asText(), 
+              accountTypeNode.asText(), accountNumberNode.asLong()));
         }
       }
 
-      if (ssn == null || name == null || password == null) {
-        throw new IllegalArgumentException("Missing required field");
+      if (ssnNode == null || nameNode == null || passwordNode == null) {
+        throw new IllegalArgumentException("Missing required field.");
       }
 
-      return new User(ssn, name, password, accounts);
+      return new User(ssnNode.asText(), nameNode.asText(), passwordNode.asText(), accounts);
     }
     return null;
   }
