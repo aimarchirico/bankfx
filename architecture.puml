@@ -9,10 +9,10 @@ component persistence {
 }
 
 component jackson {
-    package databind
+    component jackson.databind
 }
 
-bank.persistence ..> databind
+bank.persistence ..> jackson.databind
 bank.persistence ..> bank.core
 
 component ui {
@@ -20,17 +20,40 @@ component ui {
 }
 
 component javafx {
-	package fxml
-    package controls
+	component javafx.fxml
+    component javafx.controls
+}
+
+component java.net {
+	component java.net.http
 }
 
 bank.ui ..> bank.core
 bank.ui ..> bank.persistence
-bank.ui ..> fxml
-bank.ui ..> controls
+bank.ui ..> javafx.fxml
+bank.ui ..> javafx.controls
+bank.ui ..> jackson.databind
 
-component api {
-	package bank.api
+component rest {
+	package bank.rest
 }
+
+component spring {
+  component spring.web
+  component spring.beans
+  component spring.boot
+  component spring.context
+  component spring.webmvc
+}
+
+bank.rest ..> bank.core
+bank.rest ..> bank.persistence
+bank.rest ..> jackson.databind
+bank.rest ..> spring.web
+bank.rest ..> spring.beans
+bank.rest ..> spring.boot
+bank.rest ..> spring.context
+bank.rest ..> spring.boot
+bank.rest ..> spring.webmvc
 
 @enduml

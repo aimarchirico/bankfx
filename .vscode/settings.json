@@ -7,4 +7,5 @@
         "editor.detectIndentation": false
     },
     "task.allowAutomaticTasks": "on",
+    "java.compile.nullAnalysis.mode": "automatic",
 }    
