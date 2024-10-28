@@ -243,7 +243,7 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException("Failed to process POST request: " + e.getMessage(), e);
+      throw new RuntimeException("Failed to process POST request: " + e.getMessage());
     }
   }
 
@@ -260,7 +260,7 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException("Failed to process GET request: " + e.getMessage(), e);
+      throw new RuntimeException("Failed to process GET request: " + e.getMessage());
     }
   }
 
@@ -278,7 +278,7 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException("Failed to process DELETE request: " + e.getMessage(), e);
+      throw new RuntimeException("Failed to process DELETE request: " + e.getMessage());
     }
   }
 
@@ -289,25 +289,17 @@ public class UserAccess {
    */
   private void handleResponse(HttpResponse<String> response) {
     if (response.statusCode() != 200 && response.statusCode() != 201) {
-      throw new RuntimeException("Failed to process request: " + response.body());
+      throw new RuntimeException(response.body());
     }
     if (response.statusCode() == 200 || response.statusCode() == 201) {
       try {
         setUser(objectMapper.readValue(response.body(), User.class));
       } catch (JsonMappingException e) {
-        throw new RuntimeException("Failed to map response to User: " + e.getMessage(), e);
+        throw new RuntimeException("Failed to map response to User: " + e.getMessage());
       } catch (JsonProcessingException e) {
-        throw new RuntimeException("Failed to process response JSON: " + e.getMessage(), e);
+        throw new RuntimeException("Failed to process response JSON: " + e.getMessage());
       }
     }
-  }
-
-  public static void main(String[] args) throws URISyntaxException {
-    UserAccess ua = new UserAccess();
-    ua.getUserRequest("01010000000", "A123456z");
-    ua.depositRequest(10000000000L, 100);
-    // ua.createAccountRequest(new Account(1001.0, "Ny", "Savings Account"));
-    System.out.println(ua.getUser().getAccounts().get(0).getBalance());
   }
 
 }
