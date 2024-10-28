@@ -1,8 +1,6 @@
 package bank.ui;
 
 import bank.core.User;
-import bank.persistence.UserDataStorage;
-import bank.persistence.Utils;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.fxml.FXML;
@@ -59,8 +57,7 @@ public class LoginController {
         userAccess.getUserRequest(ssnField.getText(), passwordField.getText());
         FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
         OverviewController controller = fxmlLoader.getController();
-        User user = userAccess.getUser();
-        controller.setUser(user);
+        controller.setUserAccess(userAccess);
 
       } catch (Exception e) {
         UiUtils.showError(errorButton, e.getMessage());
