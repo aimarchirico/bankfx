@@ -1,40 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-          <groupId>gr2422.bank</groupId>
-          <artifactId>parent</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <relativePath>..</relativePath>
+        <groupId>gr2422.bank</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>ui</artifactId>
 
     <dependencies>
         <dependency>
-          <groupId>gr2422.bank</groupId>
-          <artifactId>core</artifactId>
-          <version>1.0-SNAPSHOT</version>
+            <groupId>gr2422.bank</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-          <groupId>gr2422.bank</groupId>
-          <artifactId>persistence</artifactId>
-          <version>1.0-SNAPSHOT</version>
+            <groupId>gr2422.bank</groupId>
+            <artifactId>persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
-          <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-    </dependency>
-        
+        <!-- junit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+        </dependency>
+
+        <!-- mockito -->
+        <dependency>
+            <groupId>
+					org.mockito
+				</groupId>
+            <artifactId>
+					mockito-inline
+				</artifactId>
+        </dependency>
+
+        <!-- powermock -->
+        <dependency>
+            <groupId>
+					org.powermock
+				</groupId>
+            <artifactId>
+					powermock-module-junit4
+				</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>
+					org.powermock
+				</groupId>
+            <artifactId>
+					powermock-api-mockito2
+				</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- javafx -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -48,17 +90,17 @@
         </dependency>
 
         <!-- Test with TextFX -->
-		<dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-core</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-junit5</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.16-alpha</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.16-alpha</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testfx/openjfx-monocle -->
@@ -105,14 +147,14 @@
                         <headless>${headlessTests}</headless>
                     </systemPropertyVariables>
                     <argLine>
-                    @{jacocoArgLine} -Dtestfx.robot=awt
-                    --add-opens bank.ui/bank.ui=ALL-UNNAMED 
-                    --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                    --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED 
-                    --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
-                    --add-exports javafx.graphics/com.sun.glass.ui.delegate=ALL-UNNAMED
-                    --add-exports javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
-                    --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
+                        @{jacocoArgLine} -Dtestfx.robot=awt
+                        --add-opens bank.ui/bank.ui=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.glass.ui.delegate=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
+                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>

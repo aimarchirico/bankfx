@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-          <groupId>gr2422.bank</groupId>
-          <artifactId>parent</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <relativePath>..</relativePath>
+        <groupId>gr2422.bank</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>rest</artifactId>
 
     <dependencies>
-      <dependency>
-        <groupId>gr2422.bank</groupId>
-        <artifactId>core</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>gr2422.bank</groupId>
-        <artifactId>persistence</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-    </dependency>
-  
-            <!-- Spring dependencies -->
+        <dependency>
+            <groupId>gr2422.bank</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>gr2422.bank</groupId>
+            <artifactId>persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+
+        <!-- Spring dependencies -->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -58,12 +49,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>6.1.14</version> 
+            <version>6.1.14</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.1.14</version> 
+            <version>6.1.14</version>
         </dependency>
 
         <dependency>
@@ -83,17 +74,70 @@
             </exclusions>
         </dependency>
 
+        <!-- junit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+        </dependency>
+
+        <!-- mockito -->
+        <dependency>
+            <groupId>
+					org.mockito
+				</groupId>
+            <artifactId>
+					mockito-inline
+				</artifactId>
+        </dependency>
+
+        <!-- powermock -->
+        <dependency>
+            <groupId>
+					org.powermock
+				</groupId>
+            <artifactId>
+					powermock-module-junit4
+				</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>
+					org.powermock
+				</groupId>
+            <artifactId>
+					powermock-api-mockito2
+				</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
 
     </dependencies>
 
     <build>
-      <plugins>
-            <!-- Run the checkstyle code quality tool -->
+        <plugins>
+            <!-- Configure the checkstyle code quality tool -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
-            <!-- Run the spotbugs code quality tool -->
+            <!-- Configure the spotbugs code quality tool -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -117,12 +161,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                    @{jacocoArgLine}
-                    --add-opens bank.rest/bank.rest=ALL-UNNAMED</argLine>
+                        @{jacocoArgLine}
+                        --add-opens bank.rest/bank.rest=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
-        
-      </plugins>
+
+        </plugins>
     </build>
 
 </project>
