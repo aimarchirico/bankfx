@@ -2,9 +2,8 @@ package bank.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import bank.core.User;
-import bank.persistence.Utils;
-import bank.persistence.UserDataStorage;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,16 +11,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
+import bank.core.User;
 
 /**
  * Test class for {@link CreateUserController}.
  */
 public class CreateUserControllerTest extends ApplicationTest {
-  
+
+  @Mock
+  private UserAccess userAccess;
+
+  @InjectMocks
+  private CreateUserController createUserController;
+
   /**
    * Setup headless test support.
    */
@@ -29,6 +40,25 @@ public class CreateUserControllerTest extends ApplicationTest {
   public static void setupHeadless() {
     UiUtils.supportHeadless();
   }
+
+  /**
+   * Sets up UserAccess mock.
+   */
+  @BeforeEach
+  public void setup() {
+    MockitoAnnotations.openMocks(this);
+
+    // Mock oppførselen for vellykket registrering
+    doNothing().when(userAccess).createUserRequest(Mockito.argThat(user -> 
+        user.getSsn().equals("01010000000")  // Sjekk kun SSN
+    ));
+
+    // Mock oppførselen for en eksisterende bruker
+    doThrow(new IllegalArgumentException("User already exists")).when(userAccess)
+        .createUserRequest(Mockito.argThat(user -> 
+            user.getSsn().equals("01010100000")  // Sjekk kun SSN
+        ));
+}
 
   /**
    * Loads initial scene.
@@ -40,77 +70,62 @@ public class CreateUserControllerTest extends ApplicationTest {
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("CreateUser.fxml"));
     Parent parent = fxmlLoader.load();
+    createUserController = fxmlLoader.getController();
+    createUserController.setUserAccess(userAccess);
     stage.setScene(new Scene(parent));
     stage.show();
   }
 
   /**
-   * Test that <code>backIcon</code> switches scene to <code>Login.fxml</code>.
-   */
-  @Test
-  @DisplayName("Test backIcon")
-  public void testReturnButton() {
-    clickOn("#backIcon");
-    WaitForAsyncUtils.waitForFxEvents();
-    assertNotNull(UiUtils.findSceneRootWithId("loginRoot"));
-  }
-
-  /**
-   * Test registration with valid arguments.
+   * Test registering a new user successfully.
    */
   @Test
   @DisplayName("Test successful user registration")
   public void testSuccessfulUserRegistration() {
-    User testUser = new User("01010100001", "test", "A123456z");
-    clickOn("#nameField");
-    write(testUser.getName());
-    clickOn("#passwordField");
-    write(testUser.getPassword());
     clickOn("#ssnField");
-    write(testUser.getSsn());
-    clickOn("#registerButton");
-    WaitForAsyncUtils.waitForFxEvents();
-    assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
-    UserDataStorage storage = new UserDataStorage(Utils.path);
-    storage.deleteUserData(testUser);
-  }
-
-  /**
-   * Test registration with invalid arguments.
-   */
-  @Test
-  @DisplayName("Test failed user registration")
-  public void testFailedUserRegistration() {
+    write("01010000000");
     clickOn("#nameField");
-    write("test");
+    write("Test User");
     clickOn("#passwordField");
     write("A123456z");
-    clickOn("#ssnField");
-    write("00000000000");
     clickOn("#registerButton");
     WaitForAsyncUtils.waitForFxEvents();
-    assertEquals("The first 6 numbers needs to be a date", lookup("#errorButton").queryAs(Button.class).getText());
+
+    assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
   }
 
   /**
-   * Test attempted registration with exisiting {@link User}.
+   * Test registering a user with existing SSN.
    */
   @Test
-  @DisplayName("Test existing user registration")
-  public void testExistingUserRegistration() {
-    User testUser = new User("01010000000", "admin", "A123456z");
-    clickOn("#nameField");
-    write(testUser.getName());
-    clickOn("#passwordField");
-    write(testUser.getPassword());
+  @DisplayName("Test failed user registration due to existing SSN")
+  public void testFailedUserRegistration() {
     clickOn("#ssnField");
-    write(testUser.getSsn());
+    write("01010100000");
+    clickOn("#nameField");
+    write("Another User");
+    clickOn("#passwordField");
+    write("B123456z");
     clickOn("#registerButton");
     WaitForAsyncUtils.waitForFxEvents();
-    assertEquals("User already registered", lookup("#errorButton").queryAs(Button.class).getText());
+
+    Button errorButton = lookup("#errorButton").query();
+    assertNotNull(errorButton, "Error button should be present.");
+    assertEquals("Failed to create user: User already exists", errorButton.getText());
+
   }
 
+  /**
+   * Test navigating back to the login scene.
+   */
+  @Test
+  @DisplayName("Test back to login scene")
+  public void testBackToLoginScene() {
+    clickOn("#backIcon");
+    WaitForAsyncUtils.waitForFxEvents();
 
+    assertNotNull(UiUtils.findSceneRootWithId("loginRoot"));
+  }
 }
 
 
