@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import bank.core.Account;
-import bank.core.User;
-import bank.persistence.UserDataStorage;
-import bank.persistence.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -18,55 +16,74 @@ public class TransferController {
   @FXML
   private ImageView logoutIcon;
   @FXML
-  private User user;
+  private UserAccess userAccess;
   @FXML
-  private ChoiceBox<String> transferToField;
+  private ChoiceBox<String> transferTargetField;
   @FXML
-  private ChoiceBox<String> transferFromField;
+  private ChoiceBox<String> transferSourceField;
   @FXML
   private TextField transferAmountField;
+  @FXML
+  private Button errorButton;
+  @FXML
+  private Button confirmTransferButton;
 
 
   @FXML
   private void openOverview() throws IOException {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
-    controller.setUser(user);
+    controller.setUserAccess(userAccess);
   }
 
-  // Må endres etter bytte til REST-api modell
   @FXML
   private void handleTransfer() {
-    List<Account> userAccounts = user.getAccounts();
-    String fromAccName = transferFromField.getValue();
-    String toAccName = transferToField.getValue();
+    List<Account> userAccounts = userAccess.getUser().getAccounts();
+    String sourceAccName = transferSourceField.getValue();
+    String targetAccName = transferTargetField.getValue();
     Double amount = 0.0;
     try {
       amount = Double.parseDouble(transferAmountField.getText());
     } catch (NumberFormatException e) {
-      //Error handling
+      UiUtils.showError(errorButton, "Amount is not in the right format");
     }
 
-    Optional<Account> toAccount =
-        userAccounts.stream().filter(Account -> toAccName.equals(Account.getName())).findFirst();
-    Optional<Account> fromAccount =
-        userAccounts.stream().filter(Account -> fromAccName.equals(Account.getName())).findFirst();
-    if (toAccount.isPresent() && fromAccount.isPresent()) {
-      user.transferTo(amount, fromAccount.get(), toAccount.get());
+    Optional<Account> targetAccount =
+        userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
+    Optional<Account> sourceAccount =
+        userAccounts.stream().filter(Account -> sourceAccName.equals(Account.getName())).findFirst();
+    if (targetAccount.isPresent() && sourceAccount.isPresent()) {
+      try {
+        userAccess.transferRequest(sourceAccount.get().getAccountNumber(), targetAccount.get().getAccountNumber(),
+            amount);
+      } catch (Exception e) {
+        UiUtils.showError(errorButton, e.getMessage());
+      }
+    } else {
+      UiUtils.showError(errorButton, "Something went wrong trying to select account");
     }
-    UserDataStorage uds = new UserDataStorage(Utils.path);
-    uds.updateUserData(user);
+  }
+  /**
+   * Dismiss error message. Delegates to UiUtils.
+   */
+  @FXML
+  public void dismissError() {
+    UiUtils.dismissError(errorButton);
   }
 
   public void update() {
-    List<Account> accounts = user.getAccounts();
+    List<Account> accounts = userAccess.getUser().getAccounts();
     List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
-    transferToField.getItems().addAll(accountNames);
-    transferFromField.getItems().addAll(accountNames);
+    transferTargetField.getItems().addAll(accountNames);
+    transferSourceField.getItems().addAll(accountNames);
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUserAccess(UserAccess userAccess) {
+    this.userAccess = userAccess;
+  }
+
+  public UserAccess getUserAccess() {
+    return userAccess;
   }
 
 }
