@@ -5,41 +5,39 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 
 /**
- * Represents a user in the bank system. A user has an SSN, name, password, and a list of accounts.
+ * Represents a user in the bank system. A user has an SSN, name, password, and a {@link List} of
+ * {@link Account}s.
  */
 public class User {
-  private Bank bank;
   private final String ssn;
-  private String name;
-  private String password;
+  private final String name;
+  private final String password;
   private List<Account> accounts;
 
   /**
    * Constructs a new User with the given SSN, name, and password.
    *
-   * @param ssn the user's social security number
-   * @param name the user's name
-   * @param password the user's password
+   * @param ssn the User's social security number
+   * @param name the User's name
+   * @param password the User's password
    */
   public User(String ssn, String name, String password) {
     ssnCheck(ssn);
     passwordCheck(password);
     nameCheck(name);
-    bank = Bank.getInstance();
     this.ssn = ssn;
     this.name = name;
     this.password = password;
     this.accounts = new ArrayList<>();
-    this.createAccount("Brukskonto", name);
+    this.addAccount("Checking Account", name);
   }
 
   /**
-   * Constructs a new User with the given SSN, name, password, and list of account.
+   * Constructs a new User with the given SSN, name, password, and {@link List} of {@link Account}s.
    *
    * @param ssn the user's social security number
    * @param name the user's name
@@ -59,7 +57,7 @@ public class User {
 
 
   /**
-   * Returns the list of accounts.
+   * Gets the list of accounts.
    *
    * @return the list of accounts
    */
@@ -86,17 +84,6 @@ public class User {
   }
 
   /**
-   * Sets the user's name.
-   *
-   * @param name the new name of the user
-   * @throws IllegalArgumentException if the name is invalid
-   */
-  public void setName(String name) {
-    nameCheck(name);
-    this.name = name;
-  }
-
-  /**
    * Gets the user's password.
    *
    * @return the user's password
@@ -106,23 +93,12 @@ public class User {
   }
 
   /**
-   * Sets the user's password.
-   *
-   * @param password the new password of the user
-   * @throws IllegalArgumentException if the password is invalid
-   */
-  public void setPassword(String password) {
-    passwordCheck(password);
-    this.password = password;
-  }
-
-  /**
    * Creates a new account for the user with the given account type.
    *
    * @param accountType the type of the new account
    * @param accountName the name of the account
    */
-  public Account createAccount(String accountType, String accountName) {
+  protected Account addAccount(String accountType, String accountName) {
     Account account = new Account(0.0, accountName, accountType);
     addAccount(account);
     return account;
@@ -134,7 +110,7 @@ public class User {
    * @param account the account to add
    * @throws IllegalArgumentException if the account is null or already exists
    */
-  public void addAccount(Account account) {
+  protected void addAccount(Account account) {
     if (account == null) {
       throw new IllegalArgumentException("Account can not be null");
     }
@@ -153,30 +129,14 @@ public class User {
    * @param account the account to delete
    * @throws IllegalArgumentException if the user doesn't own the account
    */
-  public void deleteAccount(Account account) {
-    isOwnerOfAccountCheck(account);
-    accounts.remove(account);
-  }
-
-  /**
-   * Transfers money from one account to another.
-   *
-   * @param sourceAccountNumber the account to withdraw from
-   * @param targetAccountNumber the account to deposit to
-   * @param amount the amount to transfer
-   * @param checkBothAccounts whether to check if the user owns both accounts
-   * @throws IllegalArgumentException if the user doesn't own the source account or, 
-      if specified, the target account
-   */
-  public void transfer(long sourceAccountNumber, long targetAccountNumber, 
-      double amount, boolean checkBothAccounts) {
-    Account sourceAccount = bank.getAccountByNumber(sourceAccountNumber);
-    Account targetAccount = bank.getAccountByNumber(targetAccountNumber);
-    isOwnerOfAccountCheck(sourceAccount);
-    if (checkBothAccounts) {
-      isOwnerOfAccountCheck(targetAccount);
+  protected void removeAccount(Account account) {
+    if (account == null) {
+      throw new IllegalArgumentException("Account can not be null");
     }
-    sourceAccount.transferTo(amount, targetAccountNumber);
+    if (account.getBalance() != 0) {
+      throw new IllegalArgumentException("The balance has to be 0");
+    }
+    accounts.remove(account);
   }
 
   public void transferTo(Double amount, Account source, Account target) {
@@ -190,17 +150,18 @@ public class User {
    * @param password the password to check
    * @throws IllegalArgumentException if the password is invalid
    */
-  public void passwordCheck(String password) {
+  protected void passwordCheck(String password) {
     if (password == null) {
       throw new IllegalArgumentException("Password can not be null");
     }
     if (password.length() < 6) {
       throw new IllegalArgumentException("Password needs at least 6 charachters");
     }
-    final String Password_regex = "^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\\d).+$";
-    Pattern pattern = Pattern.compile(Password_regex);
+    final String password_regex = "^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\\d).+$";
+    Pattern pattern = Pattern.compile(password_regex);
     if (!pattern.matcher(password).matches()) {
-      throw new IllegalArgumentException(
+      throw new 
+          IllegalArgumentException(
           "Password needs at least 1 small letter, 1 capital letter and 1 number");
     }
   }
@@ -211,7 +172,7 @@ public class User {
    * @param ssn the SSN to check
    * @throws IllegalArgumentException if the SSN is invalid
    */
-  public void ssnCheck(String ssn) {
+  protected void ssnCheck(String ssn) {
     if (ssn == null) {
       throw new IllegalArgumentException("Social security number can not be null");
     }
@@ -222,10 +183,8 @@ public class User {
     int month = Integer.parseInt(ssn.substring(2, 4));
     int year = Integer.parseInt(ssn.substring(4, 6));
 
-    // Konverter to-sifret år til fire-sifret år
     year += (year >= 24 ? 1900 : 2000);
 
-    // Opprett en streng i format ddMMyyyy for å bruke med LocalDate
     String dateStr = String.format("%02d%02d%04d", day, month, year);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
@@ -243,49 +202,18 @@ public class User {
    * @param name the name to check
    * @throws IllegalArgumentException if the name is invalid
    */
-  public void nameCheck(String name) {
+  protected void nameCheck(String name) {
     if (name == null) {
       throw new IllegalArgumentException("Name can not be null");
     }
     if (name.length() < 2) {
       throw new IllegalArgumentException("Name needs at least 2 characters");
     }
-    final String Name_regex = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
-    if (!name.matches(Name_regex)) {
+    final String name_regex = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
+    if (!name.matches(name_regex)) {
       throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
     }
   }
 
-  /**
-   * Checks if the user owns the given account.
-   *
-   * @param account the account to check
-   * @throws IllegalArgumentException if the user doesn't own the account
-   */
-  public void isOwnerOfAccountCheck(Account account) {
-    if (account == null) {
-      throw new IllegalArgumentException("Account can not be null");
-    }
-    if (!accounts.contains(account)) {
-      throw new IllegalArgumentException("You don't have access to this " 
-          + account.getAccountType() + " account.");
-    }
-  }
-
-  /**
-   * Compares this user's SSN with another user's SSN.
-   *
-   * @param o the object to compare with
-   * @return true if the SSNs are equal, false otherwise
-   */
-  public boolean ssnEquals(Object o) {
-    if (this == o) {
-      return true;
-    } 
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    } 
-    User user = (User) o;
-    return Objects.equals(getSsn(), user.getSsn());
-  }
 }
+

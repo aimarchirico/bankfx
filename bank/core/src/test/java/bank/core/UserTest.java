@@ -1,162 +1,96 @@
 package bank.core;
 
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for the {@link User} class, ensuring that user management functionalities work as
- * expected.
+ * Test class for the {@link User} class.
  */
 public class UserTest {
-    String ssn = "23069456293";
-    String name = "Kari Nordmann";
-    String password = "passWord123";
-    User user1;
-    User user2;
-    Account account1;
-    Account account2;
-    Account account3;
-    List<Account> accounts;
+  String ssn = "23069456293";
+  String name = "Kari Nordmann";
+  String password = "passWord123";
+  User user;
+  Account account1;
+  Account account2;
+  List<Account> accounts;
 
-    /**
-   * Sets up the test environment by initializing two users, three accounts and adding some of the accounts to each user. 
+  /**
+   * Sets up the test environment by initializing two {@link USer}s and three {@link Account}s.
    */
-    @BeforeEach
-	public void setup() {
-        user1 = new User(ssn, name, password);
-        account1 = new Account(20000.00, "minBrukskonto", "Brukskonto");
-        account2 = new Account(100000.00, "minSparekonto", "Sparekonto");
-        account3 = new Account(4000.00, "minAndreBrukskonto", "Brukskonto");
-        accounts = new ArrayList<>();
-        accounts.add(account1);
-        accounts.add(account2);
-        accounts.add(account3);
-        user2 = new User(ssn, name, password, accounts);
-        user1.addAccount(account1);
-        user1.addAccount(account3);
-	}
+  @BeforeEach
+  public void setup() {
+    user = new User(ssn, name, password);
+    account1 = new Account(20000.00, "myChecking", "Checking Account");
+    account2 = new Account(100000.00, "mySavings", "Savings Account");
+    user.addAccount(account1);
+    user.addAccount(account2);
+  }
 
-    /**
-   * Tests that the constructor works by retrieving the getters, also tests changing objects with setters 
+  /**
+   * Tests that the constructor works by retrieving the getters.
    */
-    @Test
-    public void testConstructorSetAndGet() {
-        Assertions.assertEquals(name, user1.getName());
-        Assertions.assertEquals(ssn, user1.getSsn());
-        Assertions.assertEquals(password, user1.getPassword());
+  @Test
+  @DisplayName("Test constructor")
+  public void testConstructor() {
+    Assertions.assertEquals(name, user.getName());
+    Assertions.assertEquals(ssn, user.getSsn());
+    Assertions.assertEquals(password, user.getPassword());
+    Assertions.assertTrue(user.getAccounts().contains(account1) & user.getAccounts().contains(account2));
+  }
 
-        Assertions.assertEquals(name, user2.getName());
-        Assertions.assertEquals(ssn, user2.getSsn());
-        Assertions.assertEquals(password, user2.getPassword());
-        Assertions.assertEquals(accounts, user2.getAccounts());
-
-
-        String newName = "Kari Franskmann";
-        String newPassword = "baNaNa124";
-
-        user1.setName(newName);
-        Assertions.assertEquals(user1.getName(), newName);
-
-        user1.setPassword(newPassword);
-        Assertions.assertEquals(user1.getPassword(), newPassword);
-    }
-
-    /**
-   * Tests that illegal arguments in the constructor throws an exception
+  /**
+   * Tests that illegal arguments in the constructor throws an exception.
    */
-    @Test
-    public void testIllegalArguments() {
-        assertThrows(IllegalStateException.class,
-        () -> new User("32070043672", name, password)); //Illegal birthdate
+  @Test
+  @DisplayName("Test illegal arguments")
+  public void testIllegalArguments() {
+    assertThrows(IllegalStateException.class, () -> new User("32070043672", name, password)); // Illegal birthdate
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User("220700432672", name, password)); //Illegal social security number
+    assertThrows(IllegalArgumentException.class, () -> new User("220700432672", name, password)); // Illegal social
+                                                                                                  // security number
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(null, name, password)); //Illegal social security number
+    assertThrows(IllegalArgumentException.class, () -> new User(null, name, password)); // Illegal social security
+                                                                                        // number
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, "Mar0tin Hansen", password)); //Illegal name
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, "Mar0tin Hansen", password)); // Illegal name
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, "J", password)); //Illegal name
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, "J", password)); // Illegal name
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, null, password)); //Illegal name
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, null, password)); // Illegal name
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, name, "Password")); //Illegal password
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, name, "Password")); // Illegal password
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, name, "Pass6")); //Illegal password
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, name, "Pass6")); // Illegal password
 
-        assertThrows(IllegalArgumentException.class,
-        () -> new User(ssn, name, null)); //Illegal password
+    assertThrows(IllegalArgumentException.class, () -> new User(ssn, name, null)); // Illegal password
 
-        
-    }
 
-    /**
-   * Tests the addition or the absence of addition of an account to the user. Also checks that you can not add an already 
-   * added account, that you maximum can add three accounts to an user, and checks for proper handling of adding null accounts
+  }
+
+  /**
+   * Tests adding and removing an Account.
    */
-    @Test
-    public void testAddRemoveAndCreateAccountWithIsOwnerOfAccount() {
-        user1.deleteAccount(account3);
-        Account account4 = user1.createAccount("Sparekonto", "nySparekonto");
-        Account account5 = new Account(2000.0, "nyBrukskonto", "Brukskonto");
+  @DisplayName("Test add and remove Account")
+  @Test
+  public void testAddAndRemoveAccount() {
+    account2.withdraw(account2.getBalance());
+    user.removeAccount(account2);
+    Account account3 = new Account(2000.0, "New Checking", "Checking Account");
+    user.addAccount(account3);
+    Assertions.assertFalse(user.getAccounts().contains(account2));
+    Assertions.assertTrue(user.getAccounts().contains(account3));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> {
+      user.addAccount(null);
+    });
 
 
-        assertDoesNotThrow(()-> user1.isOwnerOfAccountCheck(account1));
-        assertDoesNotThrow(()-> user1.isOwnerOfAccountCheck(account4));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.isOwnerOfAccountCheck(account2));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.isOwnerOfAccountCheck(account3));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.isOwnerOfAccountCheck(null));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.addAccount(account1));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.addAccount(null));
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.addAccount(account5));
+  }
 
-    }
-    /**
-   * Tests transferring money between existing accounts
-   */
-    @Test
-    public void testTransfer() {
-        assertThrows(IllegalArgumentException.class,
-        () -> user1.transfer(account1.getAccountNumber(), account2.getAccountNumber(), 2000, true));
-        user1.transfer(account1.getAccountNumber(), account2.getAccountNumber(), 2000, false);
-        Assertions.assertEquals(18000.00, account1.getBalance());
-        user1.transfer(account3.getAccountNumber(), account1.getAccountNumber(), 3000.00, true);
-        Assertions.assertEquals(21000.00, account1.getBalance());
-        Assertions.assertEquals(1000.00, account3.getBalance());
-    }
-    
-    /**
-   * Tests that different inputs returns the right values
-   */
-    @Test
-    public void testSsnEquals() {
-        int i = 2221;
-        User user3 = new User(ssn, "Ola Nordmann", "heLLo123");
-
-        Assertions.assertTrue(user1.ssnEquals(user1));
-        Assertions.assertFalse(user1.ssnEquals(i));
-        Assertions.assertTrue(user1.ssnEquals(user3));
-
-       
-    }
 }
 
 
