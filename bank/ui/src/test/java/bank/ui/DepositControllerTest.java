@@ -1,9 +1,7 @@
 package bank.ui;
 
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import java.io.IOException;
@@ -24,16 +22,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/*
- * Test class for {@link LoginController}
- */
-public class TransferControllerTest extends ApplicationTest {
+public class DepositControllerTest extends ApplicationTest {
 
   @Mock
   private UserAccess userAccess;
 
   @InjectMocks
-  private TransferController transferController;
+  private DepositController depositController;
 
   @BeforeAll
   public static void setupHeadless() {
@@ -41,31 +36,23 @@ public class TransferControllerTest extends ApplicationTest {
   }
 
   private long accountNumber1;
-  private long accountNumber2;
-  private long accountNumber3;
 
   /**
-   * Initializes mock objects and test data before each test.
-   *
+   * Sets up mock objects and initializes test accounts before each test.
    * <p>
-   * Mocks user access, sets up three test accounts, and assigns two accounts for use in tests. A
-   * simulated user is returned by {@code userAccess.getUser()}
+   * Configures user access and test accounts for deposit functionality.
    */
   @BeforeEach
   public void setup() {
     MockitoAnnotations.openMocks(this);
-    transferController.setUserAccess(userAccess);
+    depositController.setUserAccess(userAccess);
     Account testAccount1 = new Account(100.0, "testAccountOne", "Savings Account");
     Account testAccount2 = new Account(100.0, "testAccountTwo", "Savings Account");
     Account testAccount3 = new Account(100.0, "testAccountThree", "Savings Account");
     accountNumber1 = testAccount1.getAccountNumber();
-    accountNumber2 = testAccount2.getAccountNumber();
     List<Account> testAccounts = List.of(testAccount1, testAccount2, testAccount3);
     User testUser = new User("10101000000", "Admin", "A12345z", testAccounts);
     doReturn(testUser).when(userAccess).getUser();
-    // Simulert unntak
-    doThrow(new IllegalArgumentException("Account balance would be negative")).when(userAccess)
-        .transferRequest(accountNumber2, accountNumber3, 2000.0);
   }
 
   /**
@@ -76,21 +63,19 @@ public class TransferControllerTest extends ApplicationTest {
    */
   @Override
   public void start(Stage stage) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Transfer.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Deposit.fxml"));
     Parent parent = fxmlLoader.load();
-    this.transferController = fxmlLoader.getController();
+    this.depositController = fxmlLoader.getController();
     MockitoAnnotations.openMocks(this);
     setup();
-    transferController.update();
+    depositController.update();
     stage.setScene(new Scene(parent));
     stage.show();
   }
 
   /**
-   * Tests the logout functionality by simulating a click on the logout icon and verifying that the
-   * user is returned to the overview screen.
-   *
-   * @throws Exception if the logout process fails or the root element is not found.
+   * Tests the logout functionality by clicking the logout icon and verifying that the overview screen
+   * loads.
    */
   @Test
   @DisplayName("Test logout function")
@@ -101,26 +86,19 @@ public class TransferControllerTest extends ApplicationTest {
   }
 
   /**
-   * Tests a successful transfer between two accounts by simulating interactions with UI fields for
-   * source account, target account, and transfer amount. Verifies that the transfer request is called
-   * once with the specified parameters.
-   *
-   * @throws Exception if any interaction with the UI components fails or if the transfer request
-   *         verification fails.
+   * Tests a successful deposit by selecting an account and amount, confirming the deposit, and
+   * verifying the request was processed.
    */
   @Test
   @DisplayName("Test succesful transfer between accounts")
-  public void testSuccessfulTransfer() {
-    clickOn("#transferSourceField");
+  public void testSuccessfulDeposit() {
+    clickOn("#depositTargetField");
     clickOn("testAccountOne");
-    clickOn("#transferTargetField");
-    clickOn("testAccountTwo");
-    clickOn("#transferAmountField");
+    clickOn("#depositAmountField");
     write("10");
-    clickOn("#confirmTransferButton");
+    clickOn("#confirmDepositButton");
     WaitForAsyncUtils.waitForFxEvents();
-    verify(userAccess, times(1)).transferRequest(accountNumber1, accountNumber2, 10.0);
+    verify(userAccess, times(1)).depositOrWithdrawRequest("deposit", accountNumber1, 10.0);;
 
   }
 }
-
