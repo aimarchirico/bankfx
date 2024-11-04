@@ -136,6 +136,14 @@
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
                     <mainClass>bank.ui/bank.ui.BankApp</mainClass>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>bankfx</launcher>
+                    <jlinkImageName>bankfx</jlinkImageName>
+                    <jlinkZipName>bankfx</jlinkZipName>
                 </configuration>
             </plugin>
             <plugin>
@@ -158,6 +166,35 @@
                     </argLine>
                 </configuration>
             </plugin>
+
+            <!-- config above and below taken from
+            https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>BankFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901.gr2422</vendor>
+                    <destination>target/dist</destination>
+                    <module>bank.ui/bank.ui.BankApp</module>
+                    <runtimeImage>target/bankfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options -->
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>BankFX</linuxMenuGroup>
+
+                    <!-- windows options -->
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>BankFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
