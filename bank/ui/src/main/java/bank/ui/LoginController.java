@@ -37,6 +37,8 @@ public class LoginController {
     UiUtils.newScene(this, createUserButton, "CreateUser.fxml");
   }
 
+  
+
   /**
    * Dismiss error message. Delegates to UiUtils.
    */

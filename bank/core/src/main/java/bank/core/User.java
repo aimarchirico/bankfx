@@ -139,6 +139,7 @@ public class User {
     accounts.remove(account);
   }
 
+
   /**
    * Checks if the given password is valid.
    *
