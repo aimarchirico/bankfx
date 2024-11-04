@@ -12,11 +12,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class DepositController {
+/**
+ * Controller class for handling deposit functionality in the banking application. Manages the user
+ * interface for depositing funds to an {@link Account}.
+ */
+public class DepositController extends Controller {
   @FXML
   private ImageView logoutIcon;
-  @FXML
-  private UserAccess userAccess;
   @FXML
   private ChoiceBox<String> depositTargetField;
   @FXML
@@ -26,22 +28,36 @@ public class DepositController {
   @FXML
   private Button confirmDepositButton;
 
+  /**
+   * Opens the {@link OverviewController} scene.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openOverview() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Overview.fxml");
+    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
   }
 
+  /**
+   * Opens the {@link TransferController} scene.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openTransfer() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Transfer.fxml");
+    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Transfer.fxml");
     TransferController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
   }
 
+  /**
+   * Handles the deposit action, depositing a specified amount into the chosen {@link Account}.
+   * Displays error messages if there is an issue with the amount or the deposit operation.
+   */
   @FXML
   private void handleDeposit() {
     List<Account> userAccounts = userAccess.getUser().getAccounts();
@@ -50,7 +66,7 @@ public class DepositController {
     try {
       amount = Double.parseDouble(depositAmountField.getText());
     } catch (NumberFormatException e) {
-      UiUtils.showError(errorButton, "Amount is not in the right format");
+      showError("Amount is not in the right format");
     }
     Optional<Account> targetAccount =
         userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
@@ -58,37 +74,23 @@ public class DepositController {
       try {
         userAccess.depositOrWithdrawRequest("deposit", targetAccount.get().getAccountNumber(), amount);
       } catch (Exception e) {
-        UiUtils.showError(errorButton, e.getMessage());
+        showError(e.getMessage());
       }
     }
     try {
       openOverview();
     } catch (Exception e) {
-      UiUtils.showError(errorButton, e.getMessage());
+      showError(e.getMessage());
     }
   }
 
+  /**
+   * Updates the available {@link Account}s in the deposit target field.
+   * Populates the {@link ChoiceBox} with account names associated with the user.
+   */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
     List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
     depositTargetField.getItems().addAll(accountNames);
   }
-
-  /**
-   * Dismiss error message. Delegates to UiUtils.
-   */
-  @FXML
-  public void dismissError() {
-    UiUtils.dismissError(errorButton);
-  }
-
-  public void setUserAccess(UserAccess userAccess) {
-    this.userAccess = userAccess;
-  }
-
-  public UserAccess getUserAccess() {
-    return userAccess;
-  }
-
-
 }
