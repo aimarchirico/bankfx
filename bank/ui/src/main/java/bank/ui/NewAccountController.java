@@ -1,20 +1,21 @@
 package bank.ui;
 
-import bank.core.User;
-import bank.persistence.UserDataStorage;
-import bank.persistence.Utils;
+import bank.core.Account;
+
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.Node;
+
 
 /**
  * Controller class for <code>NewAccount.fxml</code>.
  */
 public class NewAccountController {
-  private User user;
+  private UserAccess userAccess;
 
 
   @FXML
@@ -28,8 +29,13 @@ public class NewAccountController {
   @FXML
   private Button errorButton;
 
-  public void setUser(User user) {
-    this.user = user;
+  /**
+   * Sets the currently active {@link UserAccess}.
+   *
+   * @param userAccess the UserAccess to set as active
+   */
+  public void setUserAccess(UserAccess userAccess) {
+    this.userAccess = userAccess;
   }
 
   /**
@@ -37,11 +43,20 @@ public class NewAccountController {
    *
    * @throws IOException when file is invalid
    */
-  @FXML
-  private void openOverview() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, backIcon, "Overview.fxml");
+  
+  private void openOverview(Node node) throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, node, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
-    controller.setUser(user);
+    controller.setUserAccess(userAccess);
+  }
+
+  /**
+   * Uses the openOverview function with the right input.
+   * @throws IOException 
+   */
+  @FXML
+  private void goBack() throws IOException {
+    openOverview(backIcon);
   }
 
   /**
@@ -52,10 +67,8 @@ public class NewAccountController {
   @FXML
   private void newAccount() throws IOException {
     try {
-      user.createAccount(typeField.getText(), nameField.getText());
-      UserDataStorage storage = new UserDataStorage(Utils.path);
-      storage.updateUserData(user);
-      openOverview();
+      userAccess.createAccountRequest(new Account(0.0, nameField.getText(), typeField.getText()));
+      openOverview(confirmButton);
     } catch (Exception e) {
       UiUtils.showError(errorButton, e.getMessage());
     }
