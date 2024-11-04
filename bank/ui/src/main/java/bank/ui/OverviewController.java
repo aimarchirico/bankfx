@@ -3,7 +3,6 @@ package bank.ui;
 import bank.core.Account;
 import java.io.IOException;
 import java.util.List;
-import java.util.zip.DeflaterOutputStream;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ import javafx.scene.text.Text;
 /**
  * Controller class for <code>Overview.fxml</code>.
  */
-public class OverviewController {
+public class OverviewController extends Controller {
 
   @FXML
   private ImageView logoutIcon;
@@ -33,8 +32,6 @@ public class OverviewController {
   @FXML
   private Text welcomeText;
   @FXML
-  private UserAccess userAccess;
-  @FXML
   private AnchorPane listRoot;
   @FXML
   private Button createAccountButton;
@@ -49,7 +46,7 @@ public class OverviewController {
    */
   @FXML
   private void openLogin() throws IOException {
-    UiUtils.newScene(this, logoutIcon, "Login.fxml");
+    newScene(this, logoutIcon, "Login.fxml");
   }
 
   /**
@@ -64,9 +61,14 @@ public class OverviewController {
     // paymentController.setUserAccess(userAccess);
   }
 
+  /**
+   * Opens the {@link DepositController} scene for making a deposit.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openDeposit() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Deposit.fxml");
+    FXMLLoader fxmlLoader = newScene(this, createAccountButton, "Deposit.fxml");
     DepositController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
@@ -80,7 +82,7 @@ public class OverviewController {
    */
   @FXML
   private void openNewAccount() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "NewAccount.fxml");
+    FXMLLoader fxmlLoader = newScene(this, createAccountButton, "NewAccount.fxml");
     NewAccountController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
   }
@@ -97,9 +99,14 @@ public class OverviewController {
     // controller.setUserAccess(userAccess);
   }
 
+  /**
+   * Opens the {@link TransferController} scene for initiating a transfer.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openTransfer() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Transfer.fxml");
+    FXMLLoader fxmlLoader = newScene(this, createAccountButton, "Transfer.fxml");
     TransferController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
@@ -148,6 +155,7 @@ public class OverviewController {
    *
    * @param userAccess the current user
    */
+  @Override
   public void setUserAccess(UserAccess userAccess) {
     this.userAccess = userAccess;
     welcomeText.setText("Welcome, " + this.userAccess.getUser().getName() + "!");
