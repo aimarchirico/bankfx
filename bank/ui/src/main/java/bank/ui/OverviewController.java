@@ -1,9 +1,9 @@
 package bank.ui;
 
 import bank.core.Account;
-import bank.core.User;
 import java.io.IOException;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -29,22 +29,17 @@ public class OverviewController {
   private ImageView withdrawalIcon;
   @FXML
   private ImageView depositIcon;
-  @FXML
-  private Text paymentText;
-  @FXML
-  private Text transferText;
-  @FXML
-  private Text withdrawalText;
-  @FXML
-  private Text depositText;
+
   @FXML
   private Text welcomeText;
   @FXML
-  private User user;
+  private UserAccess userAccess;
   @FXML
   private AnchorPane listRoot;
   @FXML
   private Button createAccountButton;
+  @FXML
+  private Button deleteAccountButton;
 
 
   /**
@@ -58,6 +53,27 @@ public class OverviewController {
   }
 
   /**
+   * Open payment scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openPayment() throws IOException {
+    // FXMLLoader fxmlLoader = UiUtils.newScene(this, paymentIcon, "Payment.fxml");
+    // PaymentController paymentController = fxmlLoader.getController();
+    // paymentController.setUserAccess(userAccess);
+  }
+
+  @FXML
+  private void openDeposit() throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Deposit.fxml");
+    DepositController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+
+  /**
    * Open new account scene.
    *
    * @throws IOException when file is invalid
@@ -66,14 +82,34 @@ public class OverviewController {
   private void openNewAccount() throws IOException {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "NewAccount.fxml");
     NewAccountController controller = fxmlLoader.getController();
-    controller.setUser(user);
+    controller.setUserAccess(userAccess);
   }
 
   /**
-   * Updates the list of accounts. 
+   * Open delete account scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void deleteAccount() throws IOException {
+    // FXMLLoader fxmlLoader = UiUtils.newScene(this, deleteAccountButton, "DeleteAccount.fxml");
+    // DeleteAccountController controller = fxmlLoader.getController();
+    // controller.setUserAccess(userAccess);
+  }
+
+  @FXML
+  private void openTransfer() throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Transfer.fxml");
+    TransferController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  /**
+   * Updates the list of accounts.
    */
   public void update() {
-    List<Account> accounts = user.getAccounts();
+    List<Account> accounts = userAccess.getUser().getAccounts();
     int i = 0;
     for (Account account : accounts) {
 
@@ -106,14 +142,16 @@ public class OverviewController {
   }
 
 
+
   /**
-   * Set the current {@link User} and update welcome text.
+   * Set the current {@link UserAccess} and update welcome text.
    *
-   * @param user the current user
+   * @param userAccess the current user
    */
-  public void setUser(User user) {
-    this.user = user;
-    welcomeText.setText("Welcome, " + this.user.getName() + "!");
+  public void setUserAccess(UserAccess userAccess) {
+    this.userAccess = userAccess;
+    welcomeText.setText("Welcome, " + this.userAccess.getUser().getName() + "!");
     update();
   }
+
 }
