@@ -67,7 +67,7 @@
                </cursor>
             </Text>
             <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#474747" height="30.0" layoutX="13.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-            <ImageView fx:id="paymentIcon" fitHeight="46.0" fitWidth="20.0" layoutX="28.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paymentIcon" fitHeight="46.0" fitWidth="20.0" layoutX="28.0" layoutY="10.0" onMouseClicked="#openPayment" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/payment.png" />
                </image>
@@ -129,6 +129,16 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="265.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <children>
+            <Button fx:id="deleteAccountButton" layoutX="14.0" layoutY="191.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete account">
+               <font>
+                  <Font name="Verdana Bold" size="8.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
          <children>
             <Button fx:id="createAccountButton" layoutX="154.0" layoutY="191.0" mnemonicParsing="false" onAction="#openNewAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="New account">
                <font>
