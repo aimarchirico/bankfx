@@ -3,6 +3,7 @@ package bank.ui;
 import bank.core.Account;
 import java.io.IOException;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -28,7 +29,7 @@ public class OverviewController {
   private ImageView withdrawalIcon;
   @FXML
   private ImageView depositIcon;
- 
+
   @FXML
   private Text welcomeText;
   @FXML
@@ -58,10 +59,19 @@ public class OverviewController {
    */
   @FXML
   private void openPayment() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, paymentIcon, "Payment.fxml");
-    PaymentController paymentController = fxmlLoader.getController();
-    paymentController.setUserAccess(userAccess);
+    // FXMLLoader fxmlLoader = UiUtils.newScene(this, paymentIcon, "Payment.fxml");
+    // PaymentController paymentController = fxmlLoader.getController();
+    // paymentController.setUserAccess(userAccess);
   }
+
+  @FXML
+  private void openDeposit() throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Deposit.fxml");
+    DepositController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
 
   /**
    * Open new account scene.
@@ -82,21 +92,21 @@ public class OverviewController {
    */
   @FXML
   private void deleteAccount() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, deleteAccountButton, "DeleteAccount.fxml");
-    DeleteAccountController controller = fxmlLoader.getController();
-    controller.setUserAccess(userAccess);
+    // FXMLLoader fxmlLoader = UiUtils.newScene(this, deleteAccountButton, "DeleteAccount.fxml");
+    // DeleteAccountController controller = fxmlLoader.getController();
+    // controller.setUserAccess(userAccess);
   }
 
   @FXML
-  private void openTransfer() throws IOException{
+  private void openTransfer() throws IOException {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, createAccountButton, "Transfer.fxml");
     TransferController controller = fxmlLoader.getController();
-    controller.setUser(user);
+    controller.setUserAccess(userAccess);
     controller.update();
   }
 
   /**
-   * Updates the list of accounts. 
+   * Updates the list of accounts.
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
@@ -130,7 +140,7 @@ public class OverviewController {
       i++;
     }
   }
-  
+
 
 
   /**
@@ -143,5 +153,5 @@ public class OverviewController {
     welcomeText.setText("Welcome, " + this.userAccess.getUser().getName() + "!");
     update();
   }
-  
+
 }

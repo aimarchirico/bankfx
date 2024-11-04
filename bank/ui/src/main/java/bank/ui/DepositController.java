@@ -31,6 +31,15 @@ public class DepositController {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  @FXML
+  private void openTransfer() throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Transfer.fxml");
+    TransferController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
   }
 
   @FXML
@@ -51,6 +60,11 @@ public class DepositController {
       } catch (Exception e) {
         UiUtils.showError(errorButton, e.getMessage());
       }
+    }
+    try {
+      openOverview();
+    } catch (Exception e) {
+      UiUtils.showError(errorButton, e.getMessage());
     }
   }
 

@@ -34,6 +34,15 @@ public class TransferController {
     FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  @FXML
+  private void openDeposit() throws IOException {
+    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Deposit.fxml");
+    DepositController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
   }
 
   @FXML
@@ -62,7 +71,13 @@ public class TransferController {
     } else {
       UiUtils.showError(errorButton, "Something went wrong trying to select account");
     }
+    try {
+      openOverview();
+    } catch (Exception e) {
+      UiUtils.showError(errorButton, e.getMessage());
+    }
   }
+
   /**
    * Dismiss error message. Delegates to UiUtils.
    */

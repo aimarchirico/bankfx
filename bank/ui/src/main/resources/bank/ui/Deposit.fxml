@@ -45,7 +45,7 @@
 
 <AnchorPane fx:id="depositRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #151515;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.ui.DepositController">
    <children>
-      <Text fx:id="welcomeText" fill="#e2e2e2" layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="268.0">
+      <Text fx:id="welcomeText" fill="#e2e2e2" layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="268.0">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font>
@@ -68,7 +68,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#474747" height="30.0" layoutX="13.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
             <ImageView fx:id="paymentIcon" fitHeight="46.0" fitWidth="20.0" layoutX="28.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/payment.png" />
@@ -85,8 +84,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#474747" height="30.0" layoutX="88.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-            <ImageView fx:id="transferIcon" fitHeight="46.0" fitWidth="20.0" layoutX="103.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="transferIcon" fitHeight="46.0" fitWidth="20.0" layoutX="103.0" layoutY="10.0" onMouseClicked="#openTransfer" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/transfer.png" />
                </image>
@@ -102,7 +100,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#474747" height="30.0" layoutX="163.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
             <ImageView fx:id="withdrawalIcon" fitHeight="46.0" fitWidth="20.0" layoutX="178.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/withdrawal.png" />
