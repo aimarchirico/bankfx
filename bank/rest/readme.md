@@ -1,7 +1,7 @@
 # Bank API Dokumentasjon
 
 ## Generell informasjon
-Bank API-en tilbyr en RESTful tjeneste for å administrere brukere og kontoer i en bank. API-et gir funksjonalitet for å legge til og slette brukere, opprette og slette kontoer, samt utføre innskudd, uttak, overføringer, og betalinger. 
+Bank API-en tilbyr en RESTful tjeneste for å administrere brukere og kontoer i en bank. API-et gir funksjonalitet for å legge til og slette brukere, opprette og slette kontoer, samt utføre innskudd, uttak, overføringer, og betalinger. API-en er implementert vha. Spring Framework. 
 
 API-et forventer at alle forespørsler som krever brukerautentisering sender fødselsnummer (`ssn`) og passord (`password`) som parameter.
 
