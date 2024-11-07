@@ -9,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Super class for controllers.
+ *
+ */
 public class Controller {
 
   @FXML
@@ -36,7 +40,6 @@ public class Controller {
   /**
    * Utility method for showing error.
    *
-   * @param errorButton the errorButton to update
    * @param message the error message to show
    */
   public void showError(String message) {
@@ -47,7 +50,6 @@ public class Controller {
   /**
    * Utility method for dismissing error.
    *
-   * @param errorButton the errorButton to dismiss
    */
   public void dismissError() {
     errorButton.setVisible(false);
@@ -55,7 +57,7 @@ public class Controller {
 
   /**
    * Set userAccess.
-   * 
+   *
    * @param userAccess instanse of UserAccess
    */
   public void setUserAccess(UserAccess userAccess) {
@@ -63,8 +65,8 @@ public class Controller {
   }
 
   /**
-   * Gets userAccess
-   * 
+   * Gets userAccess.
+   *
    * @return UserAccess
    */
   public UserAccess getUserAccess() {

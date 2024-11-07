@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 /**
  * Controller class for <code>Login.fxml</code>.
  */
-public class LoginController extends Controller{
+public class LoginController extends Controller {
 
   @FXML
   private Button createUserButton;

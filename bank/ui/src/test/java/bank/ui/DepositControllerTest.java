@@ -74,13 +74,13 @@ public class DepositControllerTest extends ApplicationTest {
   }
 
   /**
-   * Tests the logout functionality by clicking the logout icon and verifying that the overview screen
+   * Tests the home functionality by clicking the home icon and verifying that the overview screen
    * loads.
    */
   @Test
-  @DisplayName("Test logout function")
-  public void testLogoutButton() {
-    clickOn("#logoutIcon");
+  @DisplayName("Test home function")
+  public void testHomeButton() {
+    clickOn("#homeIcon");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
   }

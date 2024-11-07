@@ -1,10 +1,10 @@
 package bank.ui;
 
+import bank.core.Account;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import bank.core.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  */
 public class DepositController extends Controller {
   @FXML
-  private ImageView logoutIcon;
+  private ImageView homeIcon;
   @FXML
   private ChoiceBox<String> depositTargetField;
   @FXML
@@ -35,7 +35,7 @@ public class DepositController extends Controller {
    */
   @FXML
   private void openOverview() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Overview.fxml");
+    FXMLLoader fxmlLoader = newScene(this, homeIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
@@ -48,7 +48,7 @@ public class DepositController extends Controller {
    */
   @FXML
   private void openTransfer() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Transfer.fxml");
+    FXMLLoader fxmlLoader = newScene(this, homeIcon, "Transfer.fxml");
     TransferController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
@@ -69,10 +69,12 @@ public class DepositController extends Controller {
       showError("Amount is not in the right format");
     }
     Optional<Account> targetAccount =
-        userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
+        userAccounts.stream().filter(account -> targetAccName
+            .equals(account.getName())).findFirst();
     if (targetAccount.isPresent()) {
       try {
-        userAccess.depositOrWithdrawRequest("deposit", targetAccount.get().getAccountNumber(), amount);
+        userAccess.depositOrWithdrawRequest("deposit", targetAccount
+            .get().getAccountNumber(), amount);
       } catch (Exception e) {
         showError(e.getMessage());
       }
@@ -85,12 +87,13 @@ public class DepositController extends Controller {
   }
 
   /**
-   * Updates the available {@link Account}s in the deposit target field.
-   * Populates the {@link ChoiceBox} with account names associated with the user.
+   * Updates the available {@link Account}s in the deposit target field. Populates the
+   * {@link ChoiceBox} with account names associated with the user.
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream()
+        .map(Account::getName).collect(Collectors.toList());
     depositTargetField.getItems().addAll(accountNames);
   }
 }

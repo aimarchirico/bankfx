@@ -21,7 +21,7 @@ public class UiUtils {
       System.setProperty("prism.text", "t2k");
       System.setProperty("java.awt.headless", "true");
     }
-  }  
+  }
 
   /**
    * Finds the root {@link Parent} of a scene by its id.

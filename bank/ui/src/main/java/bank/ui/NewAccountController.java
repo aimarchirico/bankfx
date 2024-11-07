@@ -1,20 +1,18 @@
 package bank.ui;
 
 import bank.core.Account;
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node;
-
 
 /**
  * Controller class for <code>NewAccount.fxml</code>.
  */
-public class NewAccountController extends Controller{
+public class NewAccountController extends Controller {
 
   @FXML
   private ImageView backIcon;
@@ -32,7 +30,7 @@ public class NewAccountController extends Controller{
    *
    * @throws IOException when file is invalid
    */
-  
+
   private void openOverview(Node node) throws IOException {
     FXMLLoader fxmlLoader = newScene(this, node, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
@@ -41,7 +39,8 @@ public class NewAccountController extends Controller{
 
   /**
    * Uses the openOverview function with the right input.
-   * @throws IOException 
+   *
+   * @throws IOException when file is invalid
    */
   @FXML
   private void goBack() throws IOException {

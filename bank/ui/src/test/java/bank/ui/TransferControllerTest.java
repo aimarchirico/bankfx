@@ -87,15 +87,15 @@ public class TransferControllerTest extends ApplicationTest {
   }
 
   /**
-   * Tests the logout functionality by simulating a click on the logout icon and verifying that the
+   * Tests the home functionality by simulating a click on the home icon and verifying that the
    * user is returned to the overview screen.
    *
-   * @throws Exception if the logout process fails or the root element is not found.
+   * @throws Exception if the home process fails or the root element is not found.
    */
   @Test
-  @DisplayName("Test logout function")
-  public void testLogoutButton() {
-    clickOn("#logoutIcon");
+  @DisplayName("Test home function")
+  public void testHomeButton() {
+    clickOn("#homeIcon");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
   }

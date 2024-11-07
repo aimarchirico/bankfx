@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 /**
  * Controller class for <code>CreateUser.fxml</code>.
  */
-public class CreateUserController extends Controller{
+public class CreateUserController extends Controller {
 
   @FXML
   private ImageView backIcon;
@@ -30,10 +30,9 @@ public class CreateUserController extends Controller{
    * Default constructor that initializes a new UserAccess instance.
    */
   public CreateUserController() {
-    try{
+    try {
       this.userAccess = new UserAccess();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       showError("Failed to create user: " + e.getMessage());
     }
   }
