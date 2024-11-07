@@ -113,6 +113,13 @@ public class UserPersistence {
   }
 
   /**
+   * Returns the file.
+   */
+  public File getFile() {
+    return file;
+  }
+
+  /**
    * Reads a {@link List} of {@link User} objects from a file.
    *
    * @return a list of User instances

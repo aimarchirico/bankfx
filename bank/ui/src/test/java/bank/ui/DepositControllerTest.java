@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -27,7 +26,6 @@ public class DepositControllerTest extends ApplicationTest {
   @Mock
   private UserAccess userAccess;
 
-  @InjectMocks
   private DepositController depositController;
 
   @BeforeAll
@@ -83,6 +81,17 @@ public class DepositControllerTest extends ApplicationTest {
     clickOn("#homeIcon");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
+  }
+
+    /**
+   * Test opening deposit screen.
+   */
+  @Test
+  @DisplayName("Test transfer button")
+  public void testTransferButton() {
+    clickOn("#transferIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("transferRoot"));
   }
 
   /**

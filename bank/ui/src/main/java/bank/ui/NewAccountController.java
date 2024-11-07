@@ -35,6 +35,7 @@ public class NewAccountController extends Controller {
     FXMLLoader fxmlLoader = newScene(this, node, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
+    controller.update();
   }
 
   /**

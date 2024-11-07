@@ -51,6 +51,7 @@ public class LoginController extends Controller {
         FXMLLoader fxmlLoader = newScene(this, loginButton, "Overview.fxml");
         OverviewController controller = fxmlLoader.getController();
         controller.setUserAccess(userAccess);
+        controller.update();
 
       } catch (Exception e) {
         showError(e.getMessage());

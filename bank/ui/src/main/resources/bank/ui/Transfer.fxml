@@ -109,7 +109,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" onMouseClicked="#openDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
