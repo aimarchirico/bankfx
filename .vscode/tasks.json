@@ -34,7 +34,7 @@
         "detail": "This will start frontend client.",
         "type": "shell",
         "options": {
-                "cwd": "${workspaceFolder}/bank/rest"
+                "cwd": "${workspaceFolder}/bank/ui"
             },
         "command": "mvn javafx:run",
         "presentation": {

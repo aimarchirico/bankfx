@@ -20,6 +20,9 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **BankService-klasse**: Dette er klassen for å definere nødvendigheter for Bank-serveren. Dette inneholder blant annet å  instansiere UserPersistence for håndtering av datalagring. 
   - **BankController-klasse**: Den har ansvar for å definere alle API-endepunkter og metoder. Dette blir da metodene som kalles når API-et kalles og må derfor inneholde metoder som støtter all funkjonalitet som front-end forventer. Dette er da alt av transaksjoner og endring av brukere og kontoer. 
 
+![Architecture](diagrams/svg/architecture.svg)
+*Pakkediagram av strukturen til Maven-prosjektet*
+
 ## Nødvendige versjoner
 - Maven 3.9.9
 - Java 17.0.12-tem
@@ -36,6 +39,8 @@ Kjør `mvn -version` for å verifisere at riktig versjon av Maven og Java er inn
   - Kjøre `mvn spotbugs:spotbugs` for å sjekke etter mulige bugs i koden. Den kjøres også implisitt som en del av Mavens `verify`-fase.  
 - Fra [`bank/ui`](bank/ui)-mappa kan du:
   - Kjøre `mvn javafx:run` for å starte appen (prosjektet må først installeres).
+  - Kjøre `mvn javafx:jlink` for å generere runtime image av appen (prosjektet må først installeres). 
+  - Kjøre `mvn jpackage:jpackage` for å generere installerbar pakke til appen (du må først generere runtime image).
 - Fra [`bank/rest`](bank/ui)-mappa kan du:
   - Kjøre `mvn spring-boot:run` for å starte REST-serveren (prosjektet må først installeres).
 
@@ -46,20 +51,23 @@ Kjør `mvn -version` for å verifisere at riktig versjon av Maven og Java er inn
 
 ## Stegvis forklaring for kjøring
 
-### Start server:
+### 1. Innstaller prosjektet:
 1. Kjør `cd bank` (gitt at du starter helt i rot).
 2. Kjør `mvn clean install`.
-3. Kjør `cd rest`.
-4. Kjør `mvn spring-boot:run`.
-5. Hvis du har gjort det riktig skal serveren nå startes. 
 
-Etter at serveren er startet kan man starte klienten (javafx-appen). Det er viktig at klienten startes fra et nytt terminal-vindu. Dersom serveren ikke er startet først vil naturligvis alle handlinger i klienten feile da den ikke får kontakt med serveren. 
+Hvis du har gjort det riktig skal prosjektet nå innstalleres. 
 
-### Start klient:
-1. Kjør `cd bank` (gitt at du starter helt i rot).
-2. Kjør `mvn clean install`.
-3. Kjør `cd ui`.
-4. Kjør `mvn javafx:run`.
-5. Hvis du har gjort det riktig skal serveren nå startes. 
+### 2. Start server:
+1. Kjør `cd rest` (gitt at du nå er i `bank`-mappen).
+2. Kjør `mvn spring-boot:run`.
+
+Hvis du har gjort det riktig skal serveren nå startes.  
+
+### 3. Start klient:
+1. Åpne nytt terminalvindu.
+2. Kjør `cd bank/ui` (gitt at du starter helt i rot).
+3. Kjør `mvn javafx:run`.
+
+Hvis du har gjort det riktig skal appen nå startes. 
 
 Alternativt er det laget en VSCode task ved navn `start` (den er satt som default build task og kan da kjøres med `ctrl+shift+b` hvis du ikke har endret snarveien) som vil installere og starte klient og server for deg. 
