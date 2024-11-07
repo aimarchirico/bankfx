@@ -9,10 +9,10 @@ component persistence {
 }
 
 component jackson {
-    component jackson.databind
+    component com.fasterxml.jackson.databind
 }
 
-bank.persistence ..> jackson.databind
+bank.persistence ..> com.fasterxml.jackson.databind
 bank.persistence ..> bank.core
 
 component ui {
@@ -32,7 +32,8 @@ bank.ui ..> bank.core
 bank.ui ..> bank.persistence
 bank.ui ..> javafx.fxml
 bank.ui ..> javafx.controls
-bank.ui ..> jackson.databind
+bank.ui ..> com.fasterxml.jackson.databind
+bank.ui ..> java.net.http
 
 component rest {
 	package bank.rest
@@ -44,11 +45,12 @@ component spring {
   component spring.boot
   component spring.context
   component spring.webmvc
+  component spring.core
 }
 
 bank.rest ..> bank.core
 bank.rest ..> bank.persistence
-bank.rest ..> jackson.databind
+bank.rest ..> com.fasterxml.jackson.databind
 bank.rest ..> spring.web
 bank.rest ..> spring.beans
 bank.rest ..> spring.boot

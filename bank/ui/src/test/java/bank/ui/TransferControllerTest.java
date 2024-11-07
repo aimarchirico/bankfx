@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -32,7 +31,6 @@ public class TransferControllerTest extends ApplicationTest {
   @Mock
   private UserAccess userAccess;
 
-  @InjectMocks
   private TransferController transferController;
 
   @BeforeAll
@@ -63,7 +61,6 @@ public class TransferControllerTest extends ApplicationTest {
     List<Account> testAccounts = List.of(testAccount1, testAccount2, testAccount3);
     User testUser = new User("10101000000", "Admin", "A12345z", testAccounts);
     doReturn(testUser).when(userAccess).getUser();
-    // Simulert unntak
     doThrow(new IllegalArgumentException("Account balance would be negative")).when(userAccess)
         .transferRequest(accountNumber2, accountNumber3, 2000.0);
   }
@@ -87,17 +84,28 @@ public class TransferControllerTest extends ApplicationTest {
   }
 
   /**
-   * Tests the logout functionality by simulating a click on the logout icon and verifying that the
-   * user is returned to the overview screen.
+   * Tests the home functionality by simulating a click on the home icon and verifying that the user
+   * is returned to the overview screen.
    *
-   * @throws Exception if the logout process fails or the root element is not found.
+   * @throws Exception if the home process fails or the root element is not found.
    */
   @Test
-  @DisplayName("Test logout function")
-  public void testLogoutButton() {
-    clickOn("#logoutIcon");
+  @DisplayName("Test home function")
+  public void testHomeButton() {
+    clickOn("#homeIcon");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
+  }
+
+  /**
+   * Test opening deposit screen.
+   */
+  @Test
+  @DisplayName("Test deposit button")
+  public void testDepositButton() {
+    clickOn("#depositIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("depositRoot"));
   }
 
   /**

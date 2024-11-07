@@ -1,4 +1,4 @@
-## Bank™
+## BankFX
 
 Dette er en app som skal gjøre det lett for brukere å få oversikt over bankkontoer og håndtere banktjenester hos Bank™. 
 

@@ -159,7 +159,6 @@ public class OverviewController extends Controller {
   public void setUserAccess(UserAccess userAccess) {
     this.userAccess = userAccess;
     welcomeText.setText("Welcome, " + this.userAccess.getUser().getName() + "!");
-    update();
   }
 
 }

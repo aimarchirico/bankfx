@@ -2,6 +2,7 @@ package bank.persistence;
 
 import static org.junit.jupiter.api.Assertions.*;
 import bank.core.User;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,15 @@ public class UserPersistenceTest {
       userPersistence.initializeFile();
     });
   }
+
+  /**
+   * Deletes file. 
+   */
+  @AfterEach
+  void tearDown() {
+    assertTrue(userPersistence.getFile().delete());
+  }
+  
 
   /**
    * Tests that a {@link List} of {@link User} objects is written to a file using
@@ -65,5 +75,6 @@ public class UserPersistenceTest {
     });
 
   }
+
 
 }

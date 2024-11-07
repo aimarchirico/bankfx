@@ -50,9 +50,9 @@
             <Font name="Verdana Bold" size="20.0" />
          </font>
       </Text>
-      <ImageView fx:id="logoutIcon" fitHeight="46.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#openOverview" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="homeIcon" fitHeight="46.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#openOverview" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/logout.png" />
+            <Image url="@images/home.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -76,7 +76,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" onMouseClicked="#openTransfer" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -131,12 +131,15 @@
          <children>
             <AnchorPane layoutX="9.0" layoutY="14.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
-                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit to:" wrappingWidth="135.42578125">
+                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="135.42578125">
                      <font>
                         <Font name="Verdana Bold" size="8.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="depositTargetField" layoutX="125.0" layoutY="7.0" prefHeight="30.0" prefWidth="115.0" />
+                  <ChoiceBox fx:id="depositTargetField" layoutX="125.0" layoutY="7.0" prefHeight="30.0" prefWidth="115.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="9.0" layoutY="86.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">

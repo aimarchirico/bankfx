@@ -143,8 +143,8 @@ public class Account {
   private void accountTypeCheck(String accountType) {
     if (!accountTypes.contains(accountType)) {
       throw new 
-          IllegalArgumentException("Account must be of the valid types, accountType: "
-          + accountType);
+          IllegalArgumentException("Account must be of the valid types: "
+          + accountTypes);
     }
   }
 

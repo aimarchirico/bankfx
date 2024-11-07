@@ -111,6 +111,9 @@ public class Bank {
    */
   public void addAccount(User user, Account account) {
     userCheck(user);
+    if (account == null) {
+      throw new IllegalArgumentException("Account cannot be null");
+    }
     if (getAccountByNumber(account.getAccountNumber()) != null) {
       throw new IllegalStateException("Account with specified account number already exists");
     }

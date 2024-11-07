@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 /**
  * Controller class for <code>Login.fxml</code>.
  */
-public class LoginController extends Controller{
+public class LoginController extends Controller {
 
   @FXML
   private Button createUserButton;
@@ -51,6 +51,7 @@ public class LoginController extends Controller{
         FXMLLoader fxmlLoader = newScene(this, loginButton, "Overview.fxml");
         OverviewController controller = fxmlLoader.getController();
         controller.setUserAccess(userAccess);
+        controller.update();
 
       } catch (Exception e) {
         showError(e.getMessage());

@@ -112,9 +112,9 @@ public class BankTest {
   @DisplayName("Test transfer")
   public void testTransfer() {
     assertDoesNotThrow(() -> {
-      bank.payment(user1, account1, account3, 100.0);
+      bank.transfer(user1, account1, account2, 100.0);
       assertEquals(400, account1.getBalance(), "Source account balance should be decreased");
-      assertEquals(200, account3.getBalance(), "Target account balance should be increased");
+      assertEquals(200, account2.getBalance(), "Target account balance should be increased");
     });
   }
 
@@ -164,4 +164,50 @@ public class BankTest {
     assertDoesNotThrow(() -> bank.userCheck(user1), "User should be registered in the bank");
     assertThrows(IllegalStateException.class, () -> bank.userCheck(user3), "User3 should not be registered");
   }
+
+      /**
+     * Tests adding an account to the bank.
+     * Checks if the account is added successfully, or if an exception is thrown when:
+     * - the account already exists,
+     * - the user is not registered, or
+     * - either user or account is null.
+     */
+    @Test
+    @DisplayName("Test add account")
+    void testAddAccount() {
+        Account newAccount = new Account(0.0, "Test", "Checking Account"); 
+        bank.addAccount(user2, newAccount);
+        assertEquals(newAccount, bank.getAccountByNumber(newAccount.getAccountNumber()));
+
+        assertThrows(IllegalStateException.class, () -> bank.addAccount(user2, newAccount));
+
+        User unregisteredUser = new User("01010044559", "Test", "Hei123");
+        assertThrows(IllegalStateException.class, () -> bank.addAccount(unregisteredUser, newAccount));
+
+        assertThrows(IllegalArgumentException.class, () -> bank.addAccount(null, newAccount));
+        assertThrows(IllegalArgumentException.class, () -> bank.addAccount(user2, null));
+    }
+
+    /**
+     * Tests removing an account from the bank.
+     * Checks if the account is removed successfully, or if an exception is thrown when:
+     * - the user does not own the account,
+     * - the user is not registered, or
+     * - either user or account is null.
+     */
+    @Test
+    @DisplayName("Test remove account")
+    void testRemoveAccount() throws IllegalAccessException {
+      account1.withdraw(account1.getBalance());
+        bank.removeAccount(user1, account1);
+        assertNull(bank.getAccountByNumber(account1.getAccountNumber()));
+
+        assertThrows(IllegalAccessException.class, () -> bank.removeAccount(user2, account2));
+
+        User unregisteredUser = new User("01010044559", "Test", "Hei123");
+        assertThrows(IllegalStateException.class, () -> bank.removeAccount(unregisteredUser, account1));
+
+        assertThrows(IllegalArgumentException.class, () -> bank.removeAccount(null, account1));
+        assertThrows(IllegalArgumentException.class, () -> bank.removeAccount(user1, null));
+    }
 }
