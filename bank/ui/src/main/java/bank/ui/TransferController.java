@@ -12,11 +12,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class TransferController {
+/**
+ * Controller class for managing fund transfers between accounts in the banking application.
+ */
+public class TransferController extends Controller{
   @FXML
   private ImageView logoutIcon;
-  @FXML
-  private UserAccess userAccess;
   @FXML
   private ChoiceBox<String> transferTargetField;
   @FXML
@@ -28,23 +29,36 @@ public class TransferController {
   @FXML
   private Button confirmTransferButton;
 
-
+  /**
+   * Opens the {@link OverviewController} scene to view account overview.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openOverview() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Overview.fxml");
+    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
   }
 
+  /**
+   * Opens the {@link DepositController} scene for making a deposit.
+   *
+   * @throws IOException if the scene file is invalid
+   */
   @FXML
   private void openDeposit() throws IOException {
-    FXMLLoader fxmlLoader = UiUtils.newScene(this, logoutIcon, "Deposit.fxml");
+    FXMLLoader fxmlLoader = newScene(this, logoutIcon, "Deposit.fxml");
     DepositController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
   }
 
+  /**
+   * Handles the transfer of funds between accounts based on user input.
+   * Validates the input and initiates the transfer request.
+   */
   @FXML
   private void handleTransfer() {
     List<Account> userAccounts = userAccess.getUser().getAccounts();
@@ -54,7 +68,7 @@ public class TransferController {
     try {
       amount = Double.parseDouble(transferAmountField.getText());
     } catch (NumberFormatException e) {
-      UiUtils.showError(errorButton, "Amount is not in the right format");
+      showError("Amount is not in the right format");
     }
 
     Optional<Account> targetAccount =
@@ -66,39 +80,26 @@ public class TransferController {
         userAccess.transferRequest(sourceAccount.get().getAccountNumber(), targetAccount.get().getAccountNumber(),
             amount);
       } catch (Exception e) {
-        UiUtils.showError(errorButton, e.getMessage());
+        showError(e.getMessage());
       }
     } else {
-      UiUtils.showError(errorButton, "Something went wrong trying to select account");
+      showError("Something went wrong trying to select account");
     }
     try {
       openOverview();
     } catch (Exception e) {
-      UiUtils.showError(errorButton, e.getMessage());
+      showError(e.getMessage());
     }
   }
 
   /**
-   * Dismiss error message. Delegates to UiUtils.
+   * Updates the source and target account fields with the user's account names.
    */
-  @FXML
-  public void dismissError() {
-    UiUtils.dismissError(errorButton);
-  }
-
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
     List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
     transferTargetField.getItems().addAll(accountNames);
     transferSourceField.getItems().addAll(accountNames);
-  }
-
-  public void setUserAccess(UserAccess userAccess) {
-    this.userAccess = userAccess;
-  }
-
-  public UserAccess getUserAccess() {
-    return userAccess;
   }
 
 }

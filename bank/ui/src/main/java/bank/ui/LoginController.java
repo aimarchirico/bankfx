@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 /**
  * Controller class for <code>Login.fxml</code>.
  */
-public class LoginController {
+public class LoginController extends Controller{
 
   @FXML
   private Button createUserButton;
@@ -23,8 +23,6 @@ public class LoginController {
   private TextField ssnField;
   @FXML
   private Button errorButton;
-  @FXML
-  private UserAccess userAccess;
 
 
   /**
@@ -34,17 +32,7 @@ public class LoginController {
    */
   @FXML
   public void openCreateUser() throws IOException {
-    UiUtils.newScene(this, createUserButton, "CreateUser.fxml");
-  }
-
-  
-
-  /**
-   * Dismiss error message. Delegates to UiUtils.
-   */
-  @FXML
-  public void dismissError() {
-    UiUtils.dismissError(errorButton);
+    newScene(this, createUserButton, "CreateUser.fxml");
   }
 
   /**
@@ -60,37 +48,15 @@ public class LoginController {
       }
       try {
         userAccess.getUserRequest(ssnField.getText(), passwordField.getText());
-        FXMLLoader fxmlLoader = UiUtils.newScene(this, loginButton, "Overview.fxml");
+        FXMLLoader fxmlLoader = newScene(this, loginButton, "Overview.fxml");
         OverviewController controller = fxmlLoader.getController();
         controller.setUserAccess(userAccess);
 
       } catch (Exception e) {
-        UiUtils.showError(errorButton, e.getMessage());
+        showError(e.getMessage());
       }
     } catch (URISyntaxException e) {
-      UiUtils.showError(errorButton, e.getMessage());
+      showError(e.getMessage());
     }
   }
-
-
-
-  /**
-   * Sets userAccess
-   * 
-   * @param userAccess
-   */
-  public void setUserAccess(UserAccess userAccess) {
-    this.userAccess = userAccess;
-  }
-
-
-  /**
-   * Gets userAccess
-   * 
-   * @return UserAccess
-   */
-  public UserAccess getUserAccess() {
-    return this.userAccess;
-  }
-
 }

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 /**
  * Controller class for <code>CreateUser.fxml</code>.
  */
-public class CreateUserController {
+public class CreateUserController extends Controller{
 
   @FXML
   private ImageView backIcon;
@@ -26,8 +26,6 @@ public class CreateUserController {
   @FXML
   private Button errorButton;
 
-  private UserAccess userAccess;
-
   /**
    * Default constructor that initializes a new UserAccess instance.
    */
@@ -36,17 +34,8 @@ public class CreateUserController {
       this.userAccess = new UserAccess();
     }
     catch (Exception e) {
-      UiUtils.showError(errorButton, "Failed to create user: " + e.getMessage());
+      showError("Failed to create user: " + e.getMessage());
     }
-  }
-
-  /**
-     * Set userAccess.
-     * 
-     * @param userAccess instanse of UserAccess
-     */
-    public void setUserAccess(UserAccess userAccess) {
-      this.userAccess = userAccess;
   }
 
   /**
@@ -56,15 +45,7 @@ public class CreateUserController {
    */
   @FXML
   private void openLogin() throws IOException {
-    UiUtils.newScene(this, backIcon, "Login.fxml");
-  }
-
-  /**
-   * Dismiss error message. Delegates to UiUtils.
-   */
-  @FXML
-  private void dismissError() {
-    UiUtils.dismissError(errorButton);
+    newScene(this, backIcon, "Login.fxml");
   }
 
   /**
@@ -79,12 +60,12 @@ public class CreateUserController {
       userAccess.createUserRequest(user);
       userAccess.setUser(user);
 
-      FXMLLoader fxmlLoader = UiUtils.newScene(this, backIcon, "Overview.fxml");
+      FXMLLoader fxmlLoader = newScene(this, backIcon, "Overview.fxml");
       OverviewController controller = fxmlLoader.getController();
       controller.setUserAccess(userAccess);
 
     } catch (Exception e) {
-      UiUtils.showError(errorButton, "Failed to create user: " + e.getMessage());
+      showError("Failed to create user: " + e.getMessage());
     }
   }
 }
