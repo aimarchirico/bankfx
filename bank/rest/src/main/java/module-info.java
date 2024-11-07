@@ -8,7 +8,8 @@ module bank.rest {
   requires spring.context;
   requires spring.boot.autoconfigure;
   requires spring.webmvc;
+  requires spring.core;
 
-  opens bank.rest to spring.beans, spring.context, spring.web;
+  opens bank.rest to spring.beans, spring.context, spring.web, spring.core;
 
 }
