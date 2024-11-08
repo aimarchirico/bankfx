@@ -97,7 +97,38 @@ public class OverviewControllerTest extends ApplicationTest {
     assertNotNull(UiUtils.findSceneRootWithId("transferRoot"));
   }
 
+  /**
+   * Test opening payment screen.
+   */
+  @Test
+  @DisplayName("Test payment button")
+  public void testPayment() {
+    clickOn("#paymentIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("paymentRoot"));
+  }
 
+  /**
+   * Test opening withdrawal screen.
+   */
+  @Test
+  @DisplayName("Test withdrawal button")
+  public void testWithdrawalButton() {
+    clickOn("#withdrawalIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("withdrawalRoot"));
+  }
+
+  /**
+   * Test that <code>deleteAccountButton</code> switches scene to <code>DeleteAccount.fxml</code>.
+   */
+  @Test
+  @DisplayName("Test deleteAccount button")
+  public void testDeleteAccountButton() {
+    clickOn("#deleteAccountButton");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("deleteAccountRoot"));
+  }
 }
 
 
