@@ -67,6 +67,51 @@ public class NewAccountControllerTest extends ApplicationTest {
     stage.show();
   }
 
+   /**
+   * Test opening transfer screen.
+   */
+  @Test
+  @DisplayName("Test transfer button")
+  public void testTransferButton() {
+    clickOn("#transferIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("transferRoot"));
+  }
+
+  /**
+   * Test opening payment screen.
+   */
+  @Test
+  @DisplayName("Test payment button")
+  public void testPayment() {
+    clickOn("#paymentIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("paymentRoot"));
+  }
+
+   /**
+   * Test opening deposit screen.
+   */
+  @Test
+  @DisplayName("Test deposit button")
+  public void testDepositButton() {
+    clickOn("#depositIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("depositRoot"));
+  }
+
+  /**
+   * Test opening withdrawal screen.
+   */
+  @Test
+  @DisplayName("Test withdrawal button")
+  public void testWithdrawalButton() {
+    clickOn("#withdrawalIcon");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(UiUtils.findSceneRootWithId("withdrawalRoot"));
+  }
+
+
   /**
    * Test that clicking the back button navigates to the overview scene.
    */
@@ -86,8 +131,8 @@ public class NewAccountControllerTest extends ApplicationTest {
   public void testNewAccount_Success() throws IOException {
     clickOn("#nameField");
     write("Saving");
-    clickOn("#typeField");
-    write("Savings Account");
+    clickOn("#accountTypes");
+    clickOn("Savings Account");
     clickOn("#confirmButton");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(UiUtils.findSceneRootWithId("overviewRoot"));
@@ -102,8 +147,8 @@ public class NewAccountControllerTest extends ApplicationTest {
     doThrow(new IllegalStateException("Account creation failed.")).when(userAccess).createAccountRequest(any());
     clickOn("#nameField");
     write("Saving");
-    clickOn("#typeField");
-    write("Savings Account");
+    clickOn("#accountTypes");
+    clickOn("Savings Account");
     clickOn("#confirmButton");
     WaitForAsyncUtils.waitForFxEvents();
 

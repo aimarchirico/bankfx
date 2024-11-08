@@ -56,9 +56,10 @@ public class OverviewController extends Controller {
    */
   @FXML
   private void openPayment() throws IOException {
-    // FXMLLoader fxmlLoader = UiUtils.newScene(this, paymentIcon, "Payment.fxml");
-    // PaymentController paymentController = fxmlLoader.getController();
-    // paymentController.setUserAccess(userAccess);
+    FXMLLoader fxmlLoader = newScene(this, paymentIcon, "Payment.fxml");
+    PaymentController paymentController = fxmlLoader.getController();
+    paymentController.setUserAccess(userAccess);
+    paymentController.update();
   }
 
   /**
@@ -68,8 +69,21 @@ public class OverviewController extends Controller {
    */
   @FXML
   private void openDeposit() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, createAccountButton, "Deposit.fxml");
+    FXMLLoader fxmlLoader = newScene(this, depositIcon, "Deposit.fxml");
     DepositController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  /**
+   * Opens the {@link WithdrawalController} scene for making a withdrawal.
+   *
+   * @throws IOException if the scene file is invalid
+   */
+  @FXML
+  private void openWithdrawal() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, withdrawalIcon, "Withdrawal.fxml");
+    WithdrawalController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
   }
@@ -87,16 +101,17 @@ public class OverviewController extends Controller {
     controller.setUserAccess(userAccess);
   }
 
-  /**
+ /**
    * Open delete account scene.
    *
    * @throws IOException when file is invalid
    */
   @FXML
   private void deleteAccount() throws IOException {
-    // FXMLLoader fxmlLoader = UiUtils.newScene(this, deleteAccountButton, "DeleteAccount.fxml");
-    // DeleteAccountController controller = fxmlLoader.getController();
-    // controller.setUserAccess(userAccess);
+    FXMLLoader fxmlLoader = newScene(this, deleteAccountButton, "DeleteAccount.fxml");
+    DeleteAccountController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
   }
 
   /**
@@ -106,7 +121,7 @@ public class OverviewController extends Controller {
    */
   @FXML
   private void openTransfer() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, createAccountButton, "Transfer.fxml");
+    FXMLLoader fxmlLoader = newScene(this, transferIcon, "Transfer.fxml");
     TransferController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
