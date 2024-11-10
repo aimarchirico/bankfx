@@ -1,4 +1,5 @@
 package bank.ui;
+
 import java.io.IOException;
 import bank.core.Account;
 import java.util.List;
@@ -14,7 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 
 
-public class DeleteAccountController extends Controller{
+public class DeleteAccountController extends Controller {
   @FXML
   private ImageView backIcon;
   @FXML
@@ -37,7 +38,7 @@ public class DeleteAccountController extends Controller{
    *
    * @throws IOException when file is invalid
    */
-  
+
   private void openOverview(Node node) throws IOException {
     FXMLLoader fxmlLoader = newScene(this, node, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
@@ -47,14 +48,15 @@ public class DeleteAccountController extends Controller{
 
   /**
    * Uses the openOverview function with the right input.
-   * @throws IOException 
+   * 
+   * @throws IOException
    */
   @FXML
   private void goBack() throws IOException {
     openOverview(backIcon);
   }
 
-   /**
+  /**
    * Open payment scene.
    *
    * @throws IOException when file is invalid
@@ -112,17 +114,16 @@ public class DeleteAccountController extends Controller{
    */
   public void update() {
     ObservableList<String> accounts = FXCollections.observableArrayList();
-    List<String> accountNames = userAccess.getUser().getAccounts().stream()
-            .map(Account::getName)
-            .collect(Collectors.toList());
+    List<String> accountNames =
+        userAccess.getUser().getAccounts().stream().map(Account::getName).collect(Collectors.toList());
     accounts.setAll(accountNames);
     deleteChoiceBox.getItems().addAll(accountNames);
 
   }
 
   /**
-   * Handles the deletion of an account based on user input. Validates the input and
-   * initiates the deleteAccount request.
+   * Handles the deletion of an account based on user input. Validates the input and initiates the
+   * deleteAccount request.
    */
   @FXML
   private void confirmDeleteAccount() {
@@ -130,26 +131,25 @@ public class DeleteAccountController extends Controller{
     try {
       List<Account> userAccounts = userAccess.getUser().getAccounts();
       String targetAccName = deleteChoiceBox.getValue();
-      targetAccount =
-        userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
-    } catch (Exception e){
+      targetAccount = userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
+    } catch (Exception e) {
       showError("You must choose an account to delete");
       return;
     }
-    
+
     try {
       userAccess.deleteAccountRequest(targetAccount.get().getAccountNumber());
     } catch (Exception e) {
       showError(e.getMessage());
       return;
     }
-    
+
     try {
       openOverview(confirmButton);
     } catch (Exception e) {
       showError(e.getMessage());
     }
   }
-  
+
 
 }

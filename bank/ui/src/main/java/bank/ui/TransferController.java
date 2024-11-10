@@ -19,6 +19,14 @@ public class TransferController extends Controller {
   @FXML
   private ImageView homeIcon;
   @FXML
+  private ImageView transferIcon;
+  @FXML
+  private ImageView withdrawalIcon;
+  @FXML
+  private ImageView depositIcon;
+  @FXML
+  private ImageView paymentIcon;
+  @FXML
   private ChoiceBox<String> transferTargetField;
   @FXML
   private ChoiceBox<String> transferSourceField;
@@ -56,6 +64,32 @@ public class TransferController extends Controller {
   }
 
   /**
+   * Opens the {@link WithdrawalController} scene for making a withdrawal.
+   *
+   * @throws IOException if the scene file is invalid
+   */
+  @FXML
+  private void openWithdrawal() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, withdrawalIcon, "Withdrawal.fxml");
+    WithdrawalController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  /**
+   * Open payment scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openPayment() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, paymentIcon, "Payment.fxml");
+    PaymentController paymentController = fxmlLoader.getController();
+    paymentController.setUserAccess(userAccess);
+    paymentController.update();
+  }
+
+  /**
    * Handles the transfer of funds between accounts based on user input. Validates the input and
    * initiates the transfer request.
    */
@@ -72,15 +106,12 @@ public class TransferController extends Controller {
     }
 
     Optional<Account> targetAccount =
-        userAccounts.stream().filter(account -> targetAccName
-            .equals(account.getName())).findFirst();
+        userAccounts.stream().filter(account -> targetAccName.equals(account.getName())).findFirst();
     Optional<Account> sourceAccount =
-        userAccounts.stream().filter(account -> sourceAccName
-            .equals(account.getName())).findFirst();
+        userAccounts.stream().filter(account -> sourceAccName.equals(account.getName())).findFirst();
     if (targetAccount.isPresent() && sourceAccount.isPresent()) {
       try {
-        userAccess.transferRequest(sourceAccount.get()
-            .getAccountNumber(), targetAccount.get().getAccountNumber(),
+        userAccess.transferRequest(sourceAccount.get().getAccountNumber(), targetAccount.get().getAccountNumber(),
             amount);
       } catch (Exception e) {
         showError(e.getMessage());
@@ -100,8 +131,7 @@ public class TransferController extends Controller {
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream()
-        .map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
     transferTargetField.getItems().addAll(accountNames);
     transferSourceField.getItems().addAll(accountNames);
   }
