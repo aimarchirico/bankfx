@@ -1,12 +1,12 @@
 package bank.ui;
 
-import java.io.IOException;
 import bank.core.Account;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * Controller class for <code>deleteAccount.fxml</code>.
+ */
 public class DeleteAccountController extends Controller {
   @FXML
   private ImageView backIcon;
@@ -48,8 +50,8 @@ public class DeleteAccountController extends Controller {
 
   /**
    * Uses the openOverview function with the right input.
-   * 
-   * @throws IOException
+   *
+   * @throws IOException when file is invalid
    */
   @FXML
   private void goBack() throws IOException {
@@ -115,7 +117,8 @@ public class DeleteAccountController extends Controller {
   public void update() {
     ObservableList<String> accounts = FXCollections.observableArrayList();
     List<String> accountNames =
-        userAccess.getUser().getAccounts().stream().map(Account::getName).collect(Collectors.toList());
+        userAccess.getUser().getAccounts().stream()
+            .map(Account::getName).collect(Collectors.toList());
     accounts.setAll(accountNames);
     deleteChoiceBox.getItems().addAll(accountNames);
 
@@ -131,7 +134,8 @@ public class DeleteAccountController extends Controller {
     try {
       List<Account> userAccounts = userAccess.getUser().getAccounts();
       String targetAccName = deleteChoiceBox.getValue();
-      targetAccount = userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
+      targetAccount = userAccounts.stream()
+          .filter(account -> targetAccName.equals(account.getName())).findFirst();
     } catch (Exception e) {
       showError("You must choose an account to delete");
       return;

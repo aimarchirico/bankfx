@@ -117,7 +117,8 @@ public class NewAccountController extends Controller {
   @FXML
   private void newAccount() {
     try {
-      userAccess.createAccountRequest(new Account(0.0, nameField.getText(), accountTypes.getValue()));
+      userAccess.createAccountRequest(new 
+          Account(0.0, nameField.getText(), accountTypes.getValue()));
       openOverview(confirmButton);
     } catch (Exception e) {
       showError(e.getMessage());

@@ -96,7 +96,7 @@ public class TransferController extends Controller {
   @FXML
   private void handleTransfer() {
     if (isFieldEmpty(transferSourceField) || isFieldEmpty(transferTargetField)) {
-      showError("All fields must be selected");
+      showError("All fields must be selected.");
       return;
     }
     List<Account> userAccounts = userAccess.getUser().getAccounts();
@@ -106,17 +106,20 @@ public class TransferController extends Controller {
     try {
       amount = Double.parseDouble(transferAmountField.getText());
     } catch (NumberFormatException e) {
-      showError("Amount is not in the right format");
+      showError("Amount is not in the right format.");
       return;
     }
 
     Optional<Account> targetAccount =
-        userAccounts.stream().filter(account -> targetAccName.equals(account.getName())).findFirst();
+        userAccounts.stream().filter(account -> targetAccName
+            .equals(account.getName())).findFirst();
     Optional<Account> sourceAccount =
-        userAccounts.stream().filter(account -> sourceAccName.equals(account.getName())).findFirst();
+        userAccounts.stream().filter(account -> sourceAccName
+            .equals(account.getName())).findFirst();
     if (targetAccount.isPresent() && sourceAccount.isPresent()) {
       try {
-        userAccess.transferRequest(sourceAccount.get().getAccountNumber(), targetAccount.get().getAccountNumber(),
+        userAccess.transferRequest(sourceAccount.get()
+            .getAccountNumber(), targetAccount.get().getAccountNumber(),
             amount);
 
       } catch (Exception e) {
@@ -124,7 +127,7 @@ public class TransferController extends Controller {
         return;
       }
     } else {
-      showError("Something went wrong trying to select account");
+      showError("Something went wrong trying to select account.");
     }
     try {
       openOverview();
@@ -140,13 +143,14 @@ public class TransferController extends Controller {
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream()
+        .map(Account::getName).collect(Collectors.toList());
     transferTargetField.getItems().addAll(accountNames);
     transferSourceField.getItems().addAll(accountNames);
   }
 
   /**
-   * Checks if choicebox field is chosen
+   * Checks if choicebox field is chosen.
    */
   private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
     return choiceBox.getValue() == null;

@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -23,6 +24,9 @@ public class BankApp extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Login.fxml"));
     Parent parent = fxmlLoader.load();
     stage.setScene(new Scene(parent));
+    stage.setResizable(false);
+    stage.setTitle("BankFX");
+    stage.getIcons().add(new Image(this.getClass().getResourceAsStream("images/app.png")));
     stage.show();
   }
 
