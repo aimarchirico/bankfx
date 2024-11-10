@@ -43,7 +43,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="depositRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #151515;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.ui.DepositController">
+<AnchorPane fx:id="depositRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #151515;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.ui.DepositController">
    <children>
       <Text fx:id="welcomeText" fill="#e2e2e2" layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="268.0">
          <font>
@@ -127,22 +127,30 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="216.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="196.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
          <children>
-            <AnchorPane layoutX="9.0" layoutY="14.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
+            <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="135.42578125">
                      <font>
                         <Font name="Verdana Bold" size="8.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="depositTargetField" layoutX="125.0" layoutY="7.0" prefHeight="30.0" prefWidth="115.0">
+                  <ChoiceBox fx:id="depositTargetField" layoutX="95.0" layoutY="7.0" prefHeight="30.0" prefWidth="145.0" style="-fx-background-color: #808080;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="9.0" layoutY="86.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
+            <Button fx:id="errorButton" layoutX="8.0" layoutY="128.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
+               <font>
+                  <Font name="Verdana" size="8.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <AnchorPane layoutX="8.0" layoutY="71.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:" wrappingWidth="135.42578125">
                      <font>
@@ -159,7 +167,7 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <Button fx:id="confirmDepositButton" layoutX="159.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#handleDeposit" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
+            <Button fx:id="confirmDepositButton" layoutX="158.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#handleDeposit" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -169,14 +177,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="errorButton" layoutX="24.0" layoutY="325.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
-         <font>
-            <Font name="Verdana" size="8.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
 
    </children>
 </AnchorPane>

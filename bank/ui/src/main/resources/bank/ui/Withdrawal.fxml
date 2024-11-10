@@ -109,7 +109,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" strokeType="OUTSIDE" onMouseClicked="#openDeposit" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" onMouseClicked="#openDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -127,16 +127,16 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="265.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="205.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
          <children>
             <AnchorPane layoutX="8.0" layoutY="24.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
-                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal from:" wrappingWidth="135.42578125">
+                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" wrappingWidth="135.42578125">
                      <font>
                         <Font name="Verdana Bold" size="8.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="withdrawalSourceField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2; -fx-font-family: 'Verdana';-fx-background-radius: 5;">
+                  <ChoiceBox fx:id="withdrawalSourceField" layoutX="99.0" layoutY="7.0" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #808080;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor> 
@@ -168,7 +168,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="errorButton" layoutX="14.0" layoutY="132.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
+            <Button fx:id="errorButton" layoutX="8.0" layoutY="132.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
                 <font>
                     <Font name="Verdana" size="8.0" />
                 </font>
