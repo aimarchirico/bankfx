@@ -27,6 +27,14 @@ public class DepositController extends Controller {
   private Button errorButton;
   @FXML
   private Button confirmDepositButton;
+  @FXML
+  private ImageView transferIcon;
+  @FXML
+  private ImageView withdrawalIcon;
+  @FXML
+  private ImageView depositIcon;
+  @FXML
+  private ImageView paymentIcon;
 
   /**
    * Opens the {@link OverviewController} scene.
@@ -55,35 +63,68 @@ public class DepositController extends Controller {
   }
 
   /**
+   * Opens the {@link WithdrawalController} scene for making a withdrawal.
+   *
+   * @throws IOException if the scene file is invalid
+   */
+  @FXML
+  private void openWithdrawal() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, withdrawalIcon, "Withdrawal.fxml");
+    WithdrawalController controller = fxmlLoader.getController();
+    controller.setUserAccess(userAccess);
+    controller.update();
+  }
+
+  /**
+   * Open payment scene.
+   *
+   * @throws IOException when file is invalid
+   */
+  @FXML
+  private void openPayment() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, paymentIcon, "Payment.fxml");
+    PaymentController paymentController = fxmlLoader.getController();
+    paymentController.setUserAccess(userAccess);
+    paymentController.update();
+  }
+
+  /**
    * Handles the deposit action, depositing a specified amount into the chosen {@link Account}.
    * Displays error messages if there is an issue with the amount or the deposit operation.
    */
   @FXML
   private void handleDeposit() {
+    if (isFieldEmpty(depositTargetField)) {
+      showError("Deposit field is empty");
+      return;
+    }
+
+
     List<Account> userAccounts = userAccess.getUser().getAccounts();
     String targetAccName = depositTargetField.getValue();
     Double amount = 0.0;
     try {
       amount = Double.parseDouble(depositAmountField.getText());
-    } catch (NumberFormatException e) {
-      showError("Amount is not in the right format");
-    }
-    Optional<Account> targetAccount =
-        userAccounts.stream().filter(account -> targetAccName
-            .equals(account.getName())).findFirst();
-    if (targetAccount.isPresent()) {
+      Optional<Account> targetAccount =
+          userAccounts.stream().filter(account -> targetAccName.equals(account.getName())).findFirst();
+      if (targetAccount.isPresent()) {
+        try {
+          userAccess.depositOrWithdrawRequest("deposit", targetAccount.get().getAccountNumber(), amount);
+        } catch (Exception e) {
+          showError(e.getMessage());
+          return;
+        }
+      }
       try {
-        userAccess.depositOrWithdrawRequest("deposit", targetAccount
-            .get().getAccountNumber(), amount);
+        openOverview();
       } catch (Exception e) {
         showError(e.getMessage());
       }
+
+    } catch (NumberFormatException e) {
+      showError("Amount is not in the right format");
     }
-    try {
-      openOverview();
-    } catch (Exception e) {
-      showError(e.getMessage());
-    }
+
   }
 
   /**
@@ -92,8 +133,14 @@ public class DepositController extends Controller {
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream()
-        .map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
     depositTargetField.getItems().addAll(accountNames);
+  }
+
+  /**
+   * Checks if choicebox field is chosen
+   */
+  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+    return choiceBox.getValue() == null;
   }
 }

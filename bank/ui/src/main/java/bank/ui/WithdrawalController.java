@@ -1,4 +1,5 @@
 package bank.ui;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import javafx.scene.image.ImageView;
 /**
  * Controller class for <code>Withdrawal.fxml</code>.
  */
-public class WithdrawalController extends Controller{
+public class WithdrawalController extends Controller {
 
   @FXML
   private ImageView homeIcon;
@@ -92,6 +93,10 @@ public class WithdrawalController extends Controller{
    */
   @FXML
   private void handleWithdrawal() {
+    if (isFieldEmpty(withdrawalSourceField)) {
+      showError("Withdrawal field is empty");
+      return;
+    }
     List<Account> userAccounts = userAccess.getUser().getAccounts();
     String targetAccName = withdrawalSourceField.getValue();
     Double amount = 0.0;
@@ -120,6 +125,7 @@ public class WithdrawalController extends Controller{
       showError(e.getMessage());
     }
   }
+
   /**
    * Updates the source account field with the user's account names.
    */
@@ -129,4 +135,10 @@ public class WithdrawalController extends Controller{
     withdrawalSourceField.getItems().addAll(accountNames);
   }
 
+  /**
+   * Checks if choicebox field is chosen
+   */
+  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+    return choiceBox.getValue() == null;
+  }
 }

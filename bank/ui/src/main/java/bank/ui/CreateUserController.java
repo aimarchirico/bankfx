@@ -62,6 +62,7 @@ public class CreateUserController extends Controller {
       FXMLLoader fxmlLoader = newScene(this, backIcon, "Overview.fxml");
       OverviewController controller = fxmlLoader.getController();
       controller.setUserAccess(userAccess);
+      controller.update();
 
     } catch (Exception e) {
       showError("Failed to create user: " + e.getMessage());
