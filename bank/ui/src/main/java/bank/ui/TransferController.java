@@ -19,14 +19,6 @@ public class TransferController extends Controller {
   @FXML
   private ImageView homeIcon;
   @FXML
-  private ImageView paymentIcon;
-  @FXML
-  private ImageView transferIcon;
-  @FXML
-  private ImageView withdrawalIcon;
-  @FXML
-  private ImageView depositIcon;
-  @FXML
   private ChoiceBox<String> transferTargetField;
   @FXML
   private ChoiceBox<String> transferSourceField;
@@ -57,36 +49,10 @@ public class TransferController extends Controller {
    */
   @FXML
   private void openDeposit() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, depositIcon, "Deposit.fxml");
+    FXMLLoader fxmlLoader = newScene(this, homeIcon, "Deposit.fxml");
     DepositController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
-  }
-
-  /**
-   * Opens the {@link WithdrawalController} scene for making a withdrawal.
-   *
-   * @throws IOException if the scene file is invalid
-   */
-  @FXML
-  private void openWithdrawal() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, withdrawalIcon, "Withdrawal.fxml");
-    WithdrawalController controller = fxmlLoader.getController();
-    controller.setUserAccess(userAccess);
-    controller.update();
-  }
-
-  /**
-   * Open payment scene.
-   *
-   * @throws IOException when file is invalid
-   */
-  @FXML
-  private void openPayment() throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, homeIcon, "Payment.fxml");
-    PaymentController paymentController = fxmlLoader.getController();
-    paymentController.setUserAccess(userAccess);
-    paymentController.update();
   }
 
   /**
