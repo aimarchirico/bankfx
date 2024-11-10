@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import bank.core.Account;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 /**
  * Controller class for <code>Payment.fxml</code>.
  */
-public class PaymentController extends Controller{
+public class PaymentController extends Controller {
   @FXML
   private ImageView homeIcon;
   @FXML
@@ -38,7 +38,7 @@ public class PaymentController extends Controller{
   @FXML
   private Button errorButton;
 
-  
+
   /**
    * Updates the source account field with the user's account names.
    */
@@ -57,8 +57,8 @@ public class PaymentController extends Controller{
    * @throws IOException when file is invalid
    */
   @FXML
-  private void openOverview(Node node) throws IOException {
-    FXMLLoader fxmlLoader = newScene(this, node, "Overview.fxml");
+  private void openOverview() throws IOException {
+    FXMLLoader fxmlLoader = newScene(this, homeIcon, "Overview.fxml");
     OverviewController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
@@ -90,6 +90,7 @@ public class PaymentController extends Controller{
     controller.setUserAccess(userAccess);
     controller.update();
   }
+
   /**
    * Opens the {@link Withdrawal} scene for making a withdrawal.
    *
@@ -108,16 +109,20 @@ public class PaymentController extends Controller{
    */
   @FXML
   private void goHome() throws IOException {
-    openOverview(homeIcon);
+    openOverview();
   }
 
-  
+
   /**
    * Handles the payment of funds between accounts based on user input. Validates the input and
    * initiates the payment request.
    */
   @FXML
   private void handlePayment() {
+    if (isFieldEmpty(paymentSourceChoiceBox)) {
+      showError("Payment source is empty");
+      return;
+    }
     Optional<Account> account = Optional.empty();
     Double amount = 0.0;
     Long toAccountNumber = null;
@@ -150,9 +155,14 @@ public class PaymentController extends Controller{
     }
 
     try {
-      openOverview(confirmPaymentButton);
+      openOverview();
     } catch (Exception e) {
       showError(e.getMessage());
     }
+
+  }
+
+  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+    return choiceBox.getValue() == null;
   }
 }

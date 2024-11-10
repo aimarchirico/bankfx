@@ -95,6 +95,10 @@ public class TransferController extends Controller {
    */
   @FXML
   private void handleTransfer() {
+    if (isFieldEmpty(transferSourceField) || isFieldEmpty(transferTargetField)) {
+      showError("All fields must be selected");
+      return;
+    }
     List<Account> userAccounts = userAccess.getUser().getAccounts();
     String sourceAccName = transferSourceField.getValue();
     String targetAccName = transferTargetField.getValue();
@@ -103,6 +107,7 @@ public class TransferController extends Controller {
       amount = Double.parseDouble(transferAmountField.getText());
     } catch (NumberFormatException e) {
       showError("Amount is not in the right format");
+      return;
     }
 
     Optional<Account> targetAccount =
@@ -113,8 +118,10 @@ public class TransferController extends Controller {
       try {
         userAccess.transferRequest(sourceAccount.get().getAccountNumber(), targetAccount.get().getAccountNumber(),
             amount);
+
       } catch (Exception e) {
         showError(e.getMessage());
+        return;
       }
     } else {
       showError("Something went wrong trying to select account");
@@ -123,7 +130,9 @@ public class TransferController extends Controller {
       openOverview();
     } catch (Exception e) {
       showError(e.getMessage());
+      return;
     }
+
   }
 
   /**
@@ -136,4 +145,10 @@ public class TransferController extends Controller {
     transferSourceField.getItems().addAll(accountNames);
   }
 
+  /**
+   * Checks if choicebox field is chosen
+   */
+  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+    return choiceBox.getValue() == null;
+  }
 }
