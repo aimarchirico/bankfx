@@ -1,11 +1,10 @@
 package bank.ui;
 
+import bank.core.Account;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import bank.core.Account;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,7 +44,8 @@ public class PaymentController extends Controller {
   public void update() {
     ObservableList<String> accounts = FXCollections.observableArrayList();
     List<String> accountNames =
-        userAccess.getUser().getAccounts().stream().map(Account::getName).collect(Collectors.toList());
+        userAccess.getUser().getAccounts().stream()
+            .map(Account::getName).collect(Collectors.toList());
     accounts.setAll(accountNames);
     paymentSourceChoiceBox.setItems(accounts);
 
@@ -105,7 +105,7 @@ public class PaymentController extends Controller {
   }
 
   /**
-   * Starts the openOverview method with right input
+   * Starts the openOverview method with right input.
    */
   @FXML
   private void goHome() throws IOException {
@@ -120,7 +120,7 @@ public class PaymentController extends Controller {
   @FXML
   private void handlePayment() {
     if (isFieldEmpty(paymentSourceChoiceBox)) {
-      showError("Payment source is empty");
+      showError("Payment source is empty.");
       return;
     }
     Optional<Account> account = Optional.empty();
@@ -129,21 +129,22 @@ public class PaymentController extends Controller {
     try {
       String accName = paymentSourceChoiceBox.getValue();
       List<Account> userAccounts = userAccess.getUser().getAccounts();
-      account = userAccounts.stream().filter(Account -> accName.equals(Account.getName())).findFirst();
+      account = userAccounts.stream()
+          .filter(a -> accName.equals(a.getName())).findFirst();
     } catch (Exception e) {
-      showError("You must choose an account to pay from");
+      showError("You must choose an account to pay from.");
       return;
     }
     try {
       toAccountNumber = Long.parseLong(paymentTargetField.getText());
     } catch (NumberFormatException e) {
-      showError("To-field is not on the right format, it should be the account number");
+      showError("To-field is not on the right format, it should be the account number.");
       return;
     }
     try {
       amount = Double.parseDouble(amountField.getText());
     } catch (NumberFormatException e) {
-      showError("Amount is not in the right format");
+      showError("Amount is not in the right format.");
       return;
     }
     try {

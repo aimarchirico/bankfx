@@ -44,7 +44,7 @@
 
 <AnchorPane fx:id="createUserRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #151515;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.ui.CreateUserController">
    <children>
-      <Text fill="#e2e2e2" layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create user" textAlignment="CENTER" wrappingWidth="268.0">
+      <Text fill="#e2e2e2" layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create User" textAlignment="CENTER" wrappingWidth="268.0">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font>

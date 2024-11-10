@@ -123,9 +123,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="265.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="310.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
       <children>
-            <Button fx:id="deleteAccountButton" layoutX="14.0" layoutY="191.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete account">
+            <Button fx:id="deleteAccountButton" layoutX="157.0" layoutY="245.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete account">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -133,9 +133,25 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="createAccountButton" layoutX="154.0" layoutY="191.0" mnemonicParsing="false" onAction="#openNewAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="New account">
+            <Button fx:id="createAccountButton" layoutX="157.0" layoutY="189.0" mnemonicParsing="false" onAction="#openNewAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="New account">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="deleteUserButton" layoutX="8.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete user">
+               <font>
+                  <Font name="Verdana Bold" size="8.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="errorButton" layoutX="8.0" layoutY="245.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
+               <font>
+                  <Font name="Verdana" size="8.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -143,6 +159,14 @@
             </Button>
          </children>
       </AnchorPane>
+      <ImageView fx:id="refreshIcon" fitHeight="46.0" fitWidth="30.0" layoutX="254.0" layoutY="14.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/refresh.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
 
    </children>
 </AnchorPane>

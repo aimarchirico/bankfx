@@ -177,6 +177,7 @@
                 <version>1.4.0</version>
                 <configuration>
                     <name>BankFX</name>
+                    <icon>src/main/resources/bank/ui/images/app.ico</icon>
                     <appVersion>1.0.0</appVersion>
                     <vendor>it1901.gr2422</vendor>
                     <destination>target/dist</destination>

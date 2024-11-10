@@ -1,10 +1,10 @@
 package bank.ui;
 
+import bank.core.Account;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import bank.core.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -94,7 +94,7 @@ public class WithdrawalController extends Controller {
   @FXML
   private void handleWithdrawal() {
     if (isFieldEmpty(withdrawalSourceField)) {
-      showError("Withdrawal field is empty");
+      showError("Withdrawal field is empty.");
       return;
     }
     List<Account> userAccounts = userAccess.getUser().getAccounts();
@@ -103,11 +103,12 @@ public class WithdrawalController extends Controller {
     try {
       amount = Double.parseDouble(withdrawalAmountField.getText());
     } catch (NumberFormatException e) {
-      showError("Amount is not in the right format");
+      showError("Amount is not in the right format.");
       return;
     }
     Optional<Account> targetAccount =
-        userAccounts.stream().filter(Account -> targetAccName.equals(Account.getName())).findFirst();
+        userAccounts.stream().filter(account -> targetAccName
+            .equals(account.getName())).findFirst();
     if (targetAccount.isPresent()) {
       try {
         userAccess.withdrawRequest(targetAccount.get().getAccountNumber(), amount);
@@ -116,7 +117,7 @@ public class WithdrawalController extends Controller {
         return;
       }
     } else {
-      showError("You must choose an account");
+      showError("You must choose an account.");
       return;
     }
     try {
@@ -131,12 +132,13 @@ public class WithdrawalController extends Controller {
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream()
+        .map(Account::getName).collect(Collectors.toList());
     withdrawalSourceField.getItems().addAll(accountNames);
   }
 
   /**
-   * Checks if choicebox field is chosen
+   * Checks if choicebox field is chosen.
    */
   private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
     return choiceBox.getValue() == null;

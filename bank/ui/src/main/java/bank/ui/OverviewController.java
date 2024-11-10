@@ -1,11 +1,13 @@
 package bank.ui;
 
 import bank.core.Account;
+import bank.core.User;
 import java.io.IOException;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -37,6 +39,8 @@ public class OverviewController extends Controller {
   private Button createAccountButton;
   @FXML
   private Button deleteAccountButton;
+  @FXML
+  private Button deleteUserButton;
 
 
   /**
@@ -101,7 +105,7 @@ public class OverviewController extends Controller {
     controller.setUserAccess(userAccess);
   }
 
- /**
+  /**
    * Open delete account scene.
    *
    * @throws IOException when file is invalid
@@ -112,6 +116,19 @@ public class OverviewController extends Controller {
     DeleteAccountController controller = fxmlLoader.getController();
     controller.setUserAccess(userAccess);
     controller.update();
+  }
+
+  /**
+   * Attempts to delete user.
+   */
+  @FXML
+  private void deleteUser() throws IOException {
+    try {
+      userAccess.deleteUserRequest();
+      openLogin();
+    } catch (Exception e) {
+      showError(e.getMessage());
+    }
   }
 
   /**
@@ -128,6 +145,21 @@ public class OverviewController extends Controller {
   }
 
   /**
+   * Refreshes accounts by requesting user data. 
+   *
+   */
+  @FXML
+  private void refresh() throws IOException {
+    try {
+      User user = userAccess.getUser();
+      userAccess.getUserRequest(user.getSsn(), user.getPassword());
+      update();
+    } catch (Exception e) {
+      showError(e.getMessage());
+    }
+  }
+
+  /**
    * Updates the list of accounts.
    */
   public void update() {
@@ -137,28 +169,40 @@ public class OverviewController extends Controller {
 
       AnchorPane anchorPane = new AnchorPane();
       anchorPane.setStyle("-fx-background-color: #1f1f1f; -fx-background-radius: 10;");
-      anchorPane.setPrefHeight(46.0);
+      anchorPane.setPrefHeight(46.0); 
       anchorPane.setPrefWidth(249.0);
-
+  
+      // Account name text
       Text accountName = new Text(account.getName() + ":");
-      Text balance = new Text(String.valueOf(account.getBalance()) + " kr");
       accountName.setFont(new Font("Verdana Bold", 8.0));
-      accountName.setFill((Color.web("#e2e2e2")));
+      accountName.setFill(Color.web("#e2e2e2"));
+  
+      // Account number text 
+      TextField accountNumberField = new TextField(Long.toString(account.getAccountNumber()));
+      accountNumberField.setFont(new Font("Verdana", 7.0));
+      accountNumberField.setStyle("-fx-text-fill: #a2a2a2; -fx-background-color: transparent;");
+      accountNumberField.setEditable(false); // Make it read-only
+  
+      // Balance text
+      Text balance = new Text(String.valueOf(account.getBalance()) + " kr");
       balance.setFont(new Font("Verdana", 8.0));
-      balance.setFill((Color.web("#e2e2e2")));
-
-      anchorPane.getChildren().add(accountName);
-      anchorPane.getChildren().add(balance);
-
-
+      balance.setFill(Color.web("#e2e2e2"));
+  
+      // Add the texts to the AnchorPane
+      anchorPane.getChildren().addAll(accountName, accountNumberField, balance);
+  
       AnchorPane.setLeftAnchor(accountName, 14.0);
+      AnchorPane.setTopAnchor(accountName, 10.0);
+  
+      AnchorPane.setLeftAnchor(accountNumberField, 8.0);
+      AnchorPane.setTopAnchor(accountNumberField, 24.0);
+  
       AnchorPane.setLeftAnchor(balance, 135.0);
-      AnchorPane.setTopAnchor(accountName, 18.0);
       AnchorPane.setTopAnchor(balance, 18.0);
-
+  
       listRoot.getChildren().add(anchorPane);
       AnchorPane.setTopAnchor(anchorPane, 24.0 + i * 53);
-      AnchorPane.setLeftAnchor(anchorPane, 9.5);
+      AnchorPane.setLeftAnchor(anchorPane, 8.0);
       i++;
     }
   }
@@ -173,7 +217,7 @@ public class OverviewController extends Controller {
   @Override
   public void setUserAccess(UserAccess userAccess) {
     this.userAccess = userAccess;
-    welcomeText.setText("Welcome, " + this.userAccess.getUser().getName() + "!");
+    welcomeText.setText("Welcome, " + this.userAccess.getUser().getName());
   }
 
 }

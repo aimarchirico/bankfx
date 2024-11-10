@@ -95,7 +95,7 @@ public class DepositController extends Controller {
   @FXML
   private void handleDeposit() {
     if (isFieldEmpty(depositTargetField)) {
-      showError("Deposit field is empty");
+      showError("Deposit field is empty.");
       return;
     }
 
@@ -106,10 +106,12 @@ public class DepositController extends Controller {
     try {
       amount = Double.parseDouble(depositAmountField.getText());
       Optional<Account> targetAccount =
-          userAccounts.stream().filter(account -> targetAccName.equals(account.getName())).findFirst();
+          userAccounts.stream().filter(account -> targetAccName
+              .equals(account.getName())).findFirst();
       if (targetAccount.isPresent()) {
         try {
-          userAccess.depositOrWithdrawRequest("deposit", targetAccount.get().getAccountNumber(), amount);
+          userAccess.depositOrWithdrawRequest("deposit", targetAccount
+              .get().getAccountNumber(), amount);
         } catch (Exception e) {
           showError(e.getMessage());
           return;
@@ -122,7 +124,7 @@ public class DepositController extends Controller {
       }
 
     } catch (NumberFormatException e) {
-      showError("Amount is not in the right format");
+      showError("Amount is not in the right format.");
     }
 
   }
@@ -133,12 +135,13 @@ public class DepositController extends Controller {
    */
   public void update() {
     List<Account> accounts = userAccess.getUser().getAccounts();
-    List<String> accountNames = accounts.stream().map(Account::getName).collect(Collectors.toList());
+    List<String> accountNames = accounts.stream()
+        .map(Account::getName).collect(Collectors.toList());
     depositTargetField.getItems().addAll(accountNames);
   }
 
   /**
-   * Checks if choicebox field is chosen
+   * Checks if choicebox field is chosen.
    */
   private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
     return choiceBox.getValue() == null;

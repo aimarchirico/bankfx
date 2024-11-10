@@ -51,8 +51,16 @@ Eventuelle fremtidige versjoner kan inneholde blant annet:
   - feat(ui): implementer betaling til ekstern konto i ui
   - feat(ui): implementer overføring mellom egne kontoer i ui
   - feat(ui): lage Transfer og Deposit UI
+  - feat(ui): oppdater overview og newaccount for å ta imot ny funksjonalitet
   - feat(ui): Lag ny superklasse Controller
   - feat(ui): implementer sletting av bruker i ui
+  - fix(ui): transfer,withdrawal,deposit krasjer dersom konto ikke er valgt
+  - fix(ui): feilmelding må vises ved ugyldig transfer/deposit
+  - fix(core): sett maks beløpsgrense for inntak
+  - fix(ui): vis kontonummer i overview
+  - fix(core): sett krav om bruker-unikt navn for bankkonto
+  - fix(ui): funksjonell navigeringsmeny for alle skjermer
+  - fix(ui): forbedre format på feilmelding når kontonummer er ugyldig
 - *Milepæl 3: Release 3 dokumentasjon*
   - docs(templates): mindre endringer i merge request templates
   - docs(templates): maler til issues og merge requests
