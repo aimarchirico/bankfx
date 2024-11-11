@@ -75,3 +75,4 @@ Eventuelle fremtidige versjoner kan inneholde blant annet:
   - docs(contribution): dokumenter bidrag
   - docs(challenges): dokumenter utfordringer
   - docs(release3): skriv release 3 dokumentasjon
+  - docs(us): oversett navn på brukerhistorier.md til engelsk
