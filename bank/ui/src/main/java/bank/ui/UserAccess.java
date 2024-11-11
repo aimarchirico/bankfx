@@ -243,6 +243,9 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
+      if (e.getMessage() == null) {
+        throw new RuntimeException("Bank server is not running.");
+      }
       throw new RuntimeException("Failed to process POST request: " + e.getMessage());
     }
   }
@@ -260,6 +263,9 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
+      if (e.getMessage() == null) {
+        throw new RuntimeException("Bank server is not running.");
+      }
       throw new RuntimeException("Failed to process GET request: " + e.getMessage());
     }
   }
@@ -278,6 +284,9 @@ public class UserAccess {
       handleResponse(httpClient
           .send(request, HttpResponse.BodyHandlers.ofString()));
     } catch (IOException | InterruptedException e) {
+      if (e.getMessage() == null) {
+        throw new RuntimeException("Bank server is not running.");
+      }
       throw new RuntimeException("Failed to process DELETE request: " + e.getMessage());
     }
   }

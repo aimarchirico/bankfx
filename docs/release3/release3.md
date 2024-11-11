@@ -77,3 +77,4 @@ Eventuelle fremtidige versjoner kan inneholde blant annet:
   - docs(release3): skriv release 3 dokumentasjon
   - docs(us): oversett navn på brukerhistorier.md til engelsk
   - style(ui): øk fontstørrelsen
+  - fix(ui): createUserControllerTest feiler

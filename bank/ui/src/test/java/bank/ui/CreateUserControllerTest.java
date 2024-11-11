@@ -51,7 +51,7 @@ public class CreateUserControllerTest extends ApplicationTest {
         user.getSsn().equals("01010000000")
     ));
 
-    doThrow(new IllegalArgumentException("User already exists")).when(userAccess)
+    doThrow(new IllegalArgumentException("User already exists.")).when(userAccess)
         .createUserRequest(Mockito.argThat(user -> 
             user.getSsn().equals("01010100000")
         ));
@@ -108,7 +108,7 @@ public class CreateUserControllerTest extends ApplicationTest {
 
     Button errorButton = lookup("#errorButton").query();
     assertNotNull(errorButton, "Error button should be present.");
-    assertEquals("Failed to create user: User already exists", errorButton.getText());
+    assertEquals("User already exists.", errorButton.getText());
 
   }
 
