@@ -117,6 +117,10 @@ public class Bank {
     if (getAccountByNumber(account.getAccountNumber()) != null) {
       throw new IllegalStateException("Account with specified account number already exists");
     }
+    if (user.getAccounts().stream()
+      .anyMatch(acc -> acc.getName().equals(account.getName()))){
+        throw new IllegalArgumentException("This name is already in use");
+      }
     user.addAccount(account);
   }
 
