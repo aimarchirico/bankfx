@@ -1,7 +1,9 @@
 image: maven:3.8.3-openjdk-17
 
 variables:
-  MAVEN_OPTS: "--batch-mode -DheadlessTests=true"
+  MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "-DheadlessTests=true"
+
 
 stages:
   - test
@@ -15,10 +17,10 @@ cache:
 test:
   stage: test
   script:
-    - "cd bank; mvn clean test $MAVEN_OPTS"
+    - "cd bank; mvn clean test $MAVEN_CLI_OPTS"
 
 build:
   stage: build
   when: manual
   script:
-    - "cd bank; mvn clean install $MAVEN_OPTS"
+    - "cd bank; mvn clean install $MAVEN_CLI_OPTS"
