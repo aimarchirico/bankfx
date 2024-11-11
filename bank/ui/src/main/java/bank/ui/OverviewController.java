@@ -169,39 +169,44 @@ public class OverviewController extends Controller {
 
       AnchorPane anchorPane = new AnchorPane();
       anchorPane.setStyle("-fx-background-color: #1f1f1f; -fx-background-radius: 10;");
-      anchorPane.setPrefHeight(46.0); 
+      anchorPane.setPrefHeight(60.0); 
       anchorPane.setPrefWidth(249.0);
   
       // Account name text
       Text accountName = new Text(account.getName() + ":");
-      accountName.setFont(new Font("Verdana Bold", 8.0));
+      accountName.setFont(new Font("Verdana Bold", 10.0));
       accountName.setFill(Color.web("#e2e2e2"));
   
-      // Account number text 
-      TextField accountNumberField = new TextField(Long.toString(account.getAccountNumber()));
-      accountNumberField.setFont(new Font("Verdana", 7.0));
-      accountNumberField.setStyle("-fx-text-fill: #a2a2a2; -fx-background-color: transparent;");
-      accountNumberField.setEditable(false); // Make it read-only
-  
+      // Account number text
+      Text accountNumberTitle = new Text("Account number:");
+      accountNumberTitle.setFont(new Font("Verdana", 9.0));
+      accountNumberTitle.setFill(Color.web("#a2a2a2"));;
+      TextField accountNumberNr = new TextField(Long.toString(account.getAccountNumber()));
+      accountNumberNr.setFont(new Font("Verdana", 9.0));
+      accountNumberNr.setStyle("-fx-text-fill: #a2a2a2; -fx-background-color: transparent;");
+      accountNumberNr.setEditable(false); 
+      
       // Balance text
       Text balance = new Text(String.valueOf(account.getBalance()) + " kr");
-      balance.setFont(new Font("Verdana", 8.0));
+      balance.setFont(new Font("Verdana", 10.0));
       balance.setFill(Color.web("#e2e2e2"));
   
       // Add the texts to the AnchorPane
-      anchorPane.getChildren().addAll(accountName, accountNumberField, balance);
+      anchorPane.getChildren().addAll(accountName, accountNumberTitle, accountNumberNr, balance);
   
       AnchorPane.setLeftAnchor(accountName, 14.0);
-      AnchorPane.setTopAnchor(accountName, 10.0);
+      AnchorPane.setTopAnchor(accountName, 8.0);
   
-      AnchorPane.setLeftAnchor(accountNumberField, 8.0);
-      AnchorPane.setTopAnchor(accountNumberField, 24.0);
+      AnchorPane.setLeftAnchor(accountNumberTitle, 14.0);
+      AnchorPane.setTopAnchor(accountNumberTitle, 23.0);
+      AnchorPane.setLeftAnchor(accountNumberNr, 8.0);
+      AnchorPane.setTopAnchor(accountNumberNr, 33.0);
   
       AnchorPane.setLeftAnchor(balance, 135.0);
       AnchorPane.setTopAnchor(balance, 18.0);
   
       listRoot.getChildren().add(anchorPane);
-      AnchorPane.setTopAnchor(anchorPane, 24.0 + i * 53);
+      AnchorPane.setTopAnchor(anchorPane, 24.0 + i * 70);
       AnchorPane.setLeftAnchor(anchorPane, 8.0);
       i++;
     }
