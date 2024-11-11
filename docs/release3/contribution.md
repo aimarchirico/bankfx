@@ -1,5 +1,7 @@
 # Bidrag
 
+Nedenfor har vi kort beskrevet bidragene hver av medlemmene har hatt på prosjektet. 
+
 ## Aimár
 
 I starten jobbet jeg litt med initielle kontrollere og scener i ui-modulen, og lagde også en grundig plan på hvordan designet av appen skulle se ut videre. Jeg jobbet også med å koble ui til persistence-modulen etter at den var laget.
