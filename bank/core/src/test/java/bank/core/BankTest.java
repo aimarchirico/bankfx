@@ -28,9 +28,9 @@ public class BankTest {
 
     user1 = new User("01010044556", "Test", "Hei123");
     user2 = new User("01010044557", "Test", "Hei123");
-    account1 = new Account(500.0, "Test", "Savings Account");
-    account2 = new Account(100.0, "Test", "Checking Account");
-    account3 = new Account(100.0, "Test", "Savings Account");
+    account1 = new Account(500.0, "TestOne", "Savings Account");
+    account2 = new Account(100.0, "TestTwo", "Checking Account");
+    account3 = new Account(100.0, "TestThree", "Savings Account");
 
     user1.addAccount(account1);
     user1.addAccount(account2);
@@ -175,7 +175,7 @@ public class BankTest {
     @Test
     @DisplayName("Test add account")
     void testAddAccount() {
-        Account newAccount = new Account(0.0, "Test", "Checking Account"); 
+        Account newAccount = new Account(0.0, "newTest", "Checking Account"); 
         bank.addAccount(user2, newAccount);
         assertEquals(newAccount, bank.getAccountByNumber(newAccount.getAccountNumber()));
 
