@@ -55,12 +55,12 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Social security number:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="ssnField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
+                  <TextField fx:id="ssnField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;" text="Enter SSN">
                      <font>
-                        <Font name="Verdana" size="8.0" />
+                        <Font name="Verdana" size="10.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -72,12 +72,12 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <PasswordField fx:id="passwordField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
+                  <PasswordField fx:id="passwordField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" promptText="Enter password" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
                      <font>
-                        <Font name="Verdana" size="8.0" />
+                        <Font name="Verdana" size="10.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -95,7 +95,7 @@
             </Button>
             <Button fx:id="registerButton" layoutX="157.0" layoutY="189.0" mnemonicParsing="false" onAction="#createUser" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Register">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -105,12 +105,12 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="nameField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
+                  <TextField fx:id="nameField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;" text="Enter name">
                      <font>
-                        <Font name="Verdana" size="8.0" />
+                        <Font name="Verdana" size="10.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

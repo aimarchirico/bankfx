@@ -34,7 +34,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -62,7 +62,7 @@
          <children>
             <Text fx:id="paymentText" fill="#e2e2e2" layoutY="47.0" onMouseClicked="#openPayment" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -78,7 +78,7 @@
             </ImageView>
             <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -95,7 +95,7 @@
             </ImageView>
             <Text fx:id="withdrawalText" fill="#e2e2e2" layoutX="150.0" layoutY="47.0" onMouseClicked="#openWithdrawal" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -111,7 +111,7 @@
             </ImageView>
             <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" onMouseClicked="#openDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -133,38 +133,38 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="transferSourceField" layoutX="89.0" layoutY="7.0" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: #808080;">
+                  <ComboBox fx:id="transferSourceField" layoutX="89.0" layoutY="7.0" prefHeight="30.0" prefWidth="151.0" promptText="Select account" style="-fx-background-color: #808080;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
-                     </cursor></ChoiceBox>
+                     </cursor></ComboBox>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="8.0" layoutY="78.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="transferTargetField" layoutX="89.0" layoutY="8.0" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: #808080;">
+                  <ComboBox fx:id="transferTargetField" layoutX="89.0" layoutY="8.0" prefHeight="30.0" prefWidth="151.0" promptText="Select account" style="-fx-background-color: #808080;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
-                     </cursor></ChoiceBox>
+                     </cursor></ComboBox>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="8.0" layoutY="132.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="transferAmountField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
+                  <TextField fx:id="transferAmountField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" promptText="Enter amount" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
                      <font>
-                        <Font name="Verdana" size="8.0" />
+                        <Font name="Verdana" size="10.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -182,7 +182,7 @@
             </Button>
             <Button fx:id="confirmTransferButton" layoutX="157.0" layoutY="189.0" mnemonicParsing="false" onMouseClicked="#handleTransfer" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

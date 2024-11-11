@@ -59,7 +59,7 @@
          <children>
             <Text fx:id="paymentText" fill="#e2e2e2" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -75,7 +75,7 @@
             </ImageView>
             <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -91,7 +91,7 @@
             </ImageView>
             <Text fx:id="withdrawalText" fill="#e2e2e2" layoutX="150.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -107,7 +107,7 @@
             </ImageView>
             <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -123,33 +123,33 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="310.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="354.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
       <children>
-            <Button fx:id="deleteAccountButton" layoutX="157.0" layoutY="245.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete account">
+            <Button fx:id="deleteAccountButton" layoutX="158.0" layoutY="295.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete account">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="createAccountButton" layoutX="157.0" layoutY="189.0" mnemonicParsing="false" onAction="#openNewAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="New account">
+            <Button fx:id="createAccountButton" layoutX="158.0" layoutY="239.0" mnemonicParsing="false" onAction="#openNewAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="New account">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="deleteUserButton" layoutX="8.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete user">
+            <Button fx:id="deleteUserButton" layoutX="8.0" layoutY="239.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Delete user">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="errorButton" layoutX="8.0" layoutY="245.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
+            <Button fx:id="errorButton" layoutX="8.0" layoutY="295.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
                <font>
                   <Font name="Verdana" size="8.0" />
                </font>
