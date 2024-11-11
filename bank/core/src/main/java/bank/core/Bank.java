@@ -112,15 +112,15 @@ public class Bank {
   public void addAccount(User user, Account account) {
     userCheck(user);
     if (account == null) {
-      throw new IllegalArgumentException("Account cannot be null");
+      throw new IllegalArgumentException("Account cannot be null.");
     }
     if (getAccountByNumber(account.getAccountNumber()) != null) {
-      throw new IllegalStateException("Account with specified account number already exists");
+      throw new IllegalStateException("Account with specified account number already exists.");
     }
     if (user.getAccounts().stream()
-      .anyMatch(acc -> acc.getName().equals(account.getName()))){
-        throw new IllegalArgumentException("This name is already in use");
-      }
+        .anyMatch(acc -> acc.getName().equals(account.getName()))) {
+      throw new IllegalArgumentException("This name is already in use.");
+    }
     user.addAccount(account);
   }
 
@@ -166,10 +166,10 @@ public class Bank {
   public void removeUser(User user) {
     userCheck(user);
     if (user.getSsn().equals(ADMIN_TEMPLATE.getSsn())) {
-      throw new IllegalArgumentException("Cannot remove admin");
+      throw new IllegalArgumentException("Cannot remove admin.");
     }
     if (user.getAccounts().stream().anyMatch(account -> account.getBalance() != 0)) {
-      throw new IllegalStateException("Balance must be zero");
+      throw new IllegalStateException("Balance must be zero.");
     }
     users.remove(user);
   }
@@ -204,7 +204,9 @@ public class Bank {
       throws IllegalAccessException {
     userCheck(user);
     isOwnerOfAccountCheck(user, sourceAccount);
-
+    if (targetAccount == null) {
+      throw new IllegalArgumentException("Target account is invalid.");
+    }
     sourceAccount.withdraw(amount);
     targetAccount.deposit(amount);
   }
@@ -270,7 +272,7 @@ public class Bank {
    */
   public void isOwnerOfAccountCheck(User user, Account account) throws IllegalAccessException {
     if (account == null) {
-      throw new IllegalArgumentException("Account can not be null");
+      throw new IllegalArgumentException("Account cannot be null.");
     }
     if (!user.getAccounts().contains(account)) {
       throw new 
@@ -288,10 +290,10 @@ public class Bank {
    */
   public void userCheck(User user) {
     if (user == null) {
-      throw new IllegalArgumentException("user can not be null");
+      throw new IllegalArgumentException("user can not be null.");
     }
     if (!users.contains(user)) {
-      throw new IllegalStateException("user is not registered");
+      throw new IllegalStateException("user is not registered.");
     }
   }
 }
