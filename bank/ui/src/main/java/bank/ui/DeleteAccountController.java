@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 
 /**
@@ -33,7 +33,7 @@ public class DeleteAccountController extends Controller {
   @FXML
   private Button errorButton;
   @FXML
-  private ChoiceBox<String> deleteChoiceBox;
+  private ComboBox<String> deleteChoiceBox;
 
   /**
    * Open overview scene.

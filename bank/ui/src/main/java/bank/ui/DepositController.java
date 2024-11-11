@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -20,7 +20,7 @@ public class DepositController extends Controller {
   @FXML
   private ImageView homeIcon;
   @FXML
-  private ChoiceBox<String> depositTargetField;
+  private ComboBox<String> depositTargetField;
   @FXML
   private TextField depositAmountField;
   @FXML
@@ -95,7 +95,7 @@ public class DepositController extends Controller {
   @FXML
   private void handleDeposit() {
     if (isFieldEmpty(depositTargetField)) {
-      showError("Deposit field is empty.");
+      showError("Target account is not selected.");
       return;
     }
 
@@ -143,7 +143,7 @@ public class DepositController extends Controller {
   /**
    * Checks if choicebox field is chosen.
    */
-  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+  private boolean isFieldEmpty(ComboBox<String> choiceBox) {
     return choiceBox.getValue() == null;
   }
 }

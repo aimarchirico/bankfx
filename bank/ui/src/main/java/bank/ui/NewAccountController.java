@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -30,7 +30,7 @@ public class NewAccountController extends Controller {
   @FXML
   private TextField nameField;
   @FXML
-  private ChoiceBox<String> accountTypes;
+  private ComboBox<String> accountTypes;
   @FXML
   private Button errorButton;
 
