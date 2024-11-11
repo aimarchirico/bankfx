@@ -1,6 +1,6 @@
 ## BankFX
 
-Dette er en app som skal gjøre det lett for brukere å få oversikt over bankkontoer og håndtere banktjenester hos Bank™. Nedenfor er en oversikt over appens funksjonalitet. Se også [`brukerhistorier.md`](../brukerhistorier.md).
+Dette er en app som skal gjøre det lett for brukere å få oversikt over bankkontoer og håndtere banktjenester hos Bank™. Nedenfor er en oversikt over appens funksjonalitet. Se også [`user_stories.md`](../user_stories.md).
 
 ## Innlogging og registrering
 <img src="../resources/login.png" width="150"/>
