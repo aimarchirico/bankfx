@@ -153,6 +153,8 @@ public class User {
     if (password.length() < 6) {
       throw new IllegalArgumentException("Password needs at least 6 charachters");
     }
+
+    // Start of AI-generated code from ChatGPT
     final String password_regex = "^(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*\\d).+$";
     Pattern pattern = Pattern.compile(password_regex);
     if (!pattern.matcher(password).matches()) {
@@ -160,6 +162,7 @@ public class User {
           IllegalArgumentException(
           "Password needs at least 1 small letter, 1 capital letter and 1 number");
     }
+    //End of AI-generated code
   }
 
   /**
@@ -181,6 +184,7 @@ public class User {
 
     year += (year >= 24 ? 1900 : 2000);
 
+    //Start of AI-generated code from ChatGPT
     String dateStr = String.format("%02d%02d%04d", day, month, year);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
@@ -189,7 +193,7 @@ public class User {
     } catch (DateTimeParseException e) {
       throw new IllegalStateException("The first 6 numbers needs to be a date");
     }
-
+    //End of AI-generated code from ChatGPT
   }
 
   /**
