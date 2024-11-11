@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -26,7 +26,7 @@ public class WithdrawalController extends Controller {
   @FXML
   private ImageView depositIcon;
   @FXML
-  private ChoiceBox<String> withdrawalSourceField;
+  private ComboBox<String> withdrawalSourceField;
   @FXML
   private TextField withdrawalAmountField;
   @FXML
@@ -94,7 +94,7 @@ public class WithdrawalController extends Controller {
   @FXML
   private void handleWithdrawal() {
     if (isFieldEmpty(withdrawalSourceField)) {
-      showError("Withdrawal field is empty.");
+      showError("Source account is not selected.");
       return;
     }
     List<Account> userAccounts = userAccess.getUser().getAccounts();
@@ -140,7 +140,7 @@ public class WithdrawalController extends Controller {
   /**
    * Checks if choicebox field is chosen.
    */
-  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+  private boolean isFieldEmpty(ComboBox<String> choiceBox) {
     return choiceBox.getValue() == null;
   }
 }
