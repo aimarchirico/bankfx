@@ -1,0 +1,24 @@
+image: maven:3.8.3-openjdk-17
+
+variables:
+  MAVEN_OPTS: "--batch-mode -DheadlessTests=true"
+
+stages:
+  - test
+  - build
+
+cache:
+  paths:
+    - .m2/repository
+  key: "$CI_BUILD_REF_NAME"
+
+test:
+  stage: test
+  script:
+    - "cd bank; mvn clean test $MAVEN_OPTS"
+
+build:
+  stage: build
+  when: manual
+  script:
+    - "cd bank; mvn clean install $MAVEN_OPTS"
