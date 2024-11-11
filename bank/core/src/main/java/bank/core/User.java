@@ -32,7 +32,7 @@ public class User {
     this.name = name;
     this.password = password;
     this.accounts = new ArrayList<>();
-    this.addAccount("Checking Account", name);
+    this.addAccount("Checking Account", "Checking Account");
   }
 
   /**

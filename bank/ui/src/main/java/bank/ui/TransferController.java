@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -27,9 +27,9 @@ public class TransferController extends Controller {
   @FXML
   private ImageView paymentIcon;
   @FXML
-  private ChoiceBox<String> transferTargetField;
+  private ComboBox<String> transferTargetField;
   @FXML
-  private ChoiceBox<String> transferSourceField;
+  private ComboBox<String> transferSourceField;
   @FXML
   private TextField transferAmountField;
   @FXML
@@ -152,7 +152,7 @@ public class TransferController extends Controller {
   /**
    * Checks if choicebox field is chosen.
    */
-  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+  private boolean isFieldEmpty(ComboBox<String> choiceBox) {
     return choiceBox.getValue() == null;
   }
 }

@@ -36,7 +36,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -57,10 +57,10 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account type:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="accountTypes" layoutX="98.0" layoutY="7.0" prefHeight="30.0" prefWidth="145.0" style="-fx-background-color: #808080;">
+                  <ComboBox fx:id="accountTypes" layoutX="98.0" layoutY="7.0" prefHeight="30.0" prefWidth="145.0" promptText="Select account type" style="-fx-background-color: #808080;">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <java.lang.String fx:value="Checking Account" />
@@ -70,7 +70,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor> 
-                  </ChoiceBox> 
+                  </ComboBox> 
                </children>
             </AnchorPane>
             
@@ -84,7 +84,7 @@
             </Button>
             <Button fx:id="confirmButton" layoutX="157.0" layoutY="132.0" mnemonicParsing="false" onAction="#newAccount" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -94,12 +94,12 @@
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="135.42578125">
                      <font>
-                        <Font name="Verdana Bold" size="8.0" />
+                        <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="nameField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
+                  <TextField fx:id="nameField" layoutX="128.0" layoutY="10.0" prefHeight="25.0" prefWidth="115.0" promptText="Enter name" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
                      <font>
-                        <Font name="Verdana" size="8.0" />
+                        <Font name="Verdana" size="10.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -113,7 +113,7 @@
          <children>
             <Text fx:id="paymentText" fill="#e2e2e2" layoutY="47.0" onMouseClicked="#openPayment" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -129,7 +129,7 @@
             </ImageView>
             <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" onMouseClicked="#openTransfer" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -145,7 +145,7 @@
             </ImageView>
             <Text fx:id="withdrawalText" fill="#e2e2e2" layoutX="150.0" layoutY="47.0" onMouseClicked="#openWithdrawal" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -161,7 +161,7 @@
             </ImageView>
             <Text fx:id="depositText" fill="#e2e2e2" layoutX="225.0" layoutY="47.0" onMouseClicked="#openDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="10.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

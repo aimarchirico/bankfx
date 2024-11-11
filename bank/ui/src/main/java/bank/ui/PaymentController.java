@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -27,7 +27,7 @@ public class PaymentController extends Controller {
   @FXML
   private ImageView depositIcon;
   @FXML
-  private ChoiceBox<String> paymentSourceChoiceBox;
+  private ComboBox<String> paymentSourceChoiceBox;
   @FXML
   private TextField paymentTargetField;
   @FXML
@@ -120,7 +120,7 @@ public class PaymentController extends Controller {
   @FXML
   private void handlePayment() {
     if (isFieldEmpty(paymentSourceChoiceBox)) {
-      showError("Payment source is empty.");
+      showError("Source account is not selected.");
       return;
     }
     Optional<Account> account = Optional.empty();
@@ -163,7 +163,7 @@ public class PaymentController extends Controller {
 
   }
 
-  private boolean isFieldEmpty(ChoiceBox<String> choiceBox) {
+  private boolean isFieldEmpty(ComboBox<String> choiceBox) {
     return choiceBox.getValue() == null;
   }
 }

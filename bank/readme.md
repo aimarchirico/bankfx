@@ -19,20 +19,20 @@ I menyen nederst kan brukeren velge mellom betaling, overføring, uttak og innsk
 
 Øverst i venstre hjørnet er det en knapp for å logge ut. Knappen vil endres til en tilbake-knapp eller hjem-knapp dersom brukeren har navigert seg videre. 
 
-I høyre hjørnet er det en knapp for å refreshe. Denne er nyttig å bruke for eksempel dersom en annen bruker har betalt penger til deg mens du allerede er innlogget. Ved å refreshe vil du da kunne se oppdatert saldo. 
+I høyre hjørnet er det en knapp for å refreshe innholdet i oversikten. Denne er nyttig å bruke for eksempel dersom en annen bruker har betalt penger til deg mens du allerede er innlogget. Ved å refreshe vil du da kunne se oppdatert saldo.
 
 Det er også knapper for sletting av bruker, samt oppretting og sletting av kontoer. 
-
-## Betaling og overføring
-<img src="../resources/transfer.png" width="150"/>
-<img src="../resources/payment.png" width="150"/>
-
-Brukerne kan enkelt overføre penger mellom sine egne kontoer. 
-
-Appen støtter også betaling av regninger og andre utgifter direkte fra brukernes kontoer, slik at betalinger kan gjøres raskt og enkelt.
 
 ## Uttak og innskudd
 <img src="../resources/deposit.png" width="150"/>
 <img src="../resources/withdrawal.png" width="150"/>
 
-Brukeren kan også registrere innskudd til konto eller uttak fra konto i appen. 
+Brukeren kan registrere innskudd til konto eller uttak fra konto i appen. Da velger man hvilke konto det gjelder vha. en nedtrekksmeny, og skriver inn beløpet. 
+
+## Betaling og overføring
+<img src="../resources/transfer.png" width="150"/>
+<img src="../resources/payment.png" width="150"/>
+
+Brukerne kan enkelt overføre penger mellom sine egne kontoer. Da velger man kildekonto og målkonto vha. nedtrekksmeny. 
+
+Appen støtter også betaling til eksterne kontoer (kontoer hos andre brukere) direkte fra brukernes kontoer, slik at betalinger kan gjøres raskt og enkelt. Målkontoen vil da ikke være en nedtrekksmeny, men heller et tekstfelt hvor man skriver inn kontonummer til den eksterne kontoen. 
