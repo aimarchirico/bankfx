@@ -4,32 +4,58 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "run",
-        "detail": "This will install and launch app.",
+        "label": "install",
+        "detail": "This will install project.",
         "type": "shell",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
         "options": {
                 "cwd": "${workspaceFolder}/bank"
             },
-        "command": "mvn clean install -DskipTests -DskipUiTests; cd ui; mvn javafx:run",
+        "command": "mvn clean install",
         "presentation": {
-            "reveal": "always"
+            "reveal": "always",
+            "panel": "new"
+        },
+      },  
+      {
+          "label": "start backend",
+          "detail": "This will start backend server.",
+          "type": "shell",
+          "options": {
+                  "cwd": "${workspaceFolder}/bank/rest"
+              },
+          "command": "mvn spring-boot:run",
+          "presentation": {
+              "reveal": "always",
+              "panel": "new"
         }
       },
       {
-        "label": "install",
-        "detail": "This is set to install app before launching from Run and Debug.",
+        "label": "start frontend",
+        "detail": "This will start frontend client.",
         "type": "shell",
         "options": {
-                "cwd": "${workspaceFolder}/bank"
+                "cwd": "${workspaceFolder}/bank/ui"
             },
-        "command": "mvn clean install -DskipTests -DskipUiTests",
+        "command": "mvn javafx:run",
         "presentation": {
-            "reveal": "always"
+            "reveal": "always",
+            "panel": "new"
         }
+      }, 
+      {
+        "label": "start both",
+        "detail": "This will start backend and frontend.",
+        "dependsOn": ["start frontend", "start backend"],
+      },
+      {
+        "label": "start",
+        "detail": "This will install then start backend and frontend.",
+        "dependsOn": ["install", "start both"],
+        "dependsOrder": "sequence",
+        "group": {
+        "kind": "build",
+        "isDefault": true
+        },
       }
     ]
   }

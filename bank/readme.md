@@ -1,4 +1,4 @@
-## Bank™
+## BankFX
 
 Dette er en app som skal gjøre det lett for brukere å få oversikt over bankkontoer og håndtere banktjenester hos Bank™. 
 
@@ -11,6 +11,7 @@ Eksisterede brukere kan enkelt logge inn med fødselsummer og passord for å få
 ## Oversikt og kontoer
 <img src="../resources/overview.png" width="150"/>
 <img src="../resources/newAccount.png" width="150"/>
+<img src="../resources/deleteAccount.png" width="150"/>
 
 Etter innlogging får brukerne en oversikt over sine kontoer og saldoen på dem, slik at de alltid har kontroll over sin økonomi. 
 
@@ -18,6 +19,9 @@ I menyen nederst kan brukeren velge mellom betaling, overføring, uttak og innsk
 
 Øverst i venstre hjørnet er det en knapp for å logge ut. Knappen vil endres til en tilbake-knapp eller hjem-knapp dersom brukeren har navigert seg videre. 
 
+I høyre hjørnet er det en knapp for å refreshe. Denne er nyttig å bruke for eksempel dersom en annen bruker har betalt penger til deg mens du allerede er innlogget. Ved å refreshe vil du da kunne se oppdatert saldo. 
+
+Det er også knapper for sletting av bruker, samt oppretting og sletting av kontoer. 
 
 ## Betaling og overføring
 <img src="../resources/transfer.png" width="150"/>

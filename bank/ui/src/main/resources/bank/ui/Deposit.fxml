@@ -50,9 +50,9 @@
             <Font name="Verdana Bold" size="20.0" />
          </font>
       </Text>
-      <ImageView fx:id="logoutIcon" fitHeight="46.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#openOverview" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="homeIcon" fitHeight="46.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#openOverview" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/logout.png" />
+            <Image url="@images/home.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -60,7 +60,7 @@
       </ImageView>
       <AnchorPane layoutY="544.0" prefHeight="55.0" prefWidth="300.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10 10 0 0;">
          <children>
-            <Text fx:id="paymentText" fill="#e2e2e2" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="paymentText" fill="#e2e2e2" layoutY="47.0" onMouseClicked="#openPayment" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -68,7 +68,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <ImageView fx:id="paymentIcon" fitHeight="46.0" fitWidth="20.0" layoutX="28.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paymentIcon" fitHeight="46.0" fitWidth="20.0" layoutX="28.0" layoutY="10.0" onMouseClicked="#openPayment" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/payment.png" />
                </image>
@@ -76,7 +76,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="transferText" fill="#e2e2e2" layoutX="75.0" layoutY="47.0" onMouseClicked="#openTransfer" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -92,7 +92,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="withdrawalText" fill="#e2e2e2" layoutX="150.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal" textAlignment="CENTER" wrappingWidth="75.0">
+            <Text fx:id="withdrawalText" fill="#e2e2e2" layoutX="150.0" layoutY="47.0" onMouseClicked="#openWithdrawal" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal" textAlignment="CENTER" wrappingWidth="75.0">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -100,7 +100,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <ImageView fx:id="withdrawalIcon" fitHeight="46.0" fitWidth="20.0" layoutX="178.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="withdrawalIcon" fitHeight="46.0" fitWidth="20.0" layoutX="178.0" layoutY="10.0" onMouseClicked="#openWithdrawal" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/withdrawal.png" />
                </image>
@@ -127,19 +127,30 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="216.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
+      <AnchorPane fx:id="listRoot" layoutX="16.0" layoutY="167.0" prefHeight="196.0" prefWidth="268.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 10;">
          <children>
-            <AnchorPane layoutX="9.0" layoutY="14.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
+            <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
-                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit to:" wrappingWidth="135.42578125">
+                  <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="135.42578125">
                      <font>
                         <Font name="Verdana Bold" size="8.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="depositTargetField" layoutX="125.0" layoutY="7.0" prefHeight="30.0" prefWidth="115.0" />
+                  <ChoiceBox fx:id="depositTargetField" layoutX="95.0" layoutY="7.0" prefHeight="30.0" prefWidth="145.0" style="-fx-background-color: #808080;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="9.0" layoutY="86.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
+            <Button fx:id="errorButton" layoutX="8.0" layoutY="128.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
+               <font>
+                  <Font name="Verdana" size="8.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <AnchorPane layoutX="8.0" layoutY="71.0" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10;">
                <children>
                   <Text fill="#e2e2e2" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:" wrappingWidth="135.42578125">
                      <font>
@@ -156,7 +167,7 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <Button fx:id="confirmDepositButton" layoutX="159.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#handleDeposit" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
+            <Button fx:id="confirmDepositButton" layoutX="158.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#handleDeposit" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: #1f1f1f; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Confirm">
                <font>
                   <Font name="Verdana Bold" size="8.0" />
                </font>
@@ -166,14 +177,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="errorButton" layoutX="24.0" layoutY="325.0" mnemonicParsing="false" onAction="#dismissError" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #6e5050; -fx-background-radius: 10; -fx-text-fill: #e2e2e2;" text="Error message" visible="false" wrapText="true">
-         <font>
-            <Font name="Verdana" size="8.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
 
    </children>
 </AnchorPane>

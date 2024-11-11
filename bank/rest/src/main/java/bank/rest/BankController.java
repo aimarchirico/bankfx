@@ -108,7 +108,7 @@ public class BankController {
     } catch (IllegalStateException e) {
       return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     } catch (NoSuchElementException e) {
-      return ResponseEntity.notFound().build();
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     } catch (IOException e) {
       return ResponseEntity.internalServerError().body(e.getMessage());
     } catch (IllegalAccessException e) {

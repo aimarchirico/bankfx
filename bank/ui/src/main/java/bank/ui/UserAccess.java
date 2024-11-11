@@ -289,6 +289,9 @@ public class UserAccess {
    */
   private void handleResponse(HttpResponse<String> response) {
     if (response.statusCode() != 200 && response.statusCode() != 201) {
+      if (response.statusCode() == 404) {
+        throw new RuntimeException("Not found.");
+      }
       throw new RuntimeException(response.body());
     }
     if (response.statusCode() == 200 || response.statusCode() == 201) {
