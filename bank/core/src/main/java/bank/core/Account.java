@@ -104,13 +104,16 @@ public class Account {
   /**
    * Deposits an amount to the account.
    *
-   * @param amount The amount to deposit. Must be greater than or equal to zero.
-   * @throws IllegalArgumentException if the amount is negative
+   * @param amount The amount to deposit. Must be greater than or equal to zero and not more than 1.000.000.000.
+   * @throws IllegalArgumentException if the amount is negative or over 1.000.000.000
    */
   protected void deposit(Double amount) {
     if (amount < 0) {
       throw new IllegalArgumentException(
           "Can't deposit negative amount, amount : " + amount + " Account: " + this.getName());
+    }
+    if (amount > 1000000000) {
+      throw new IllegalArgumentException("Can't deposit more than 1.000.000.000 at a time");
     }
     this.balance += amount;
   }
@@ -131,6 +134,7 @@ public class Account {
           "Can't withdraw an amount that makes the balance negative: balance after withdrawal: "
               + (getBalance() - amount) + " Account: " + this.getName());
     }
+
     this.balance -= amount;
   }
 
@@ -142,9 +146,7 @@ public class Account {
    */
   private void accountTypeCheck(String accountType) {
     if (!accountTypes.contains(accountType)) {
-      throw new 
-          IllegalArgumentException("Account must be of the valid types: "
-          + accountTypes);
+      throw new IllegalArgumentException("Account must be of the valid types: " + accountTypes);
     }
   }
 

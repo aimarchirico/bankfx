@@ -47,15 +47,13 @@ public class CreateUserControllerTest extends ApplicationTest {
   public void setup() {
     MockitoAnnotations.openMocks(this);
 
-    // Mock oppførselen for vellykket registrering
     doNothing().when(userAccess).createUserRequest(Mockito.argThat(user -> 
-        user.getSsn().equals("01010000000")  // Sjekk kun SSN
+        user.getSsn().equals("01010000000")
     ));
 
-    // Mock oppførselen for en eksisterende bruker
     doThrow(new IllegalArgumentException("User already exists")).when(userAccess)
         .createUserRequest(Mockito.argThat(user -> 
-            user.getSsn().equals("01010100000")  // Sjekk kun SSN
+            user.getSsn().equals("01010100000")
         ));
 }
 
