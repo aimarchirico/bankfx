@@ -87,10 +87,10 @@ public class Bank {
    */
   public void addUser(User user) {
     if (user == null) {
-      throw new IllegalArgumentException("user can not be null");
+      throw new IllegalArgumentException("User cannot be null.");
     }
     if (getUser(user.getSsn()) != null) {
-      throw new IllegalStateException("User with specified ssn already exists");
+      throw new IllegalStateException("User with specified ssn already exists.");
     }
     for (Account account : user.getAccounts()) {
       if (getAccountByNumber(account.getAccountNumber()) != null) {

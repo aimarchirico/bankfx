@@ -33,7 +33,7 @@ public class CreateUserController extends Controller {
     try {
       this.userAccess = new UserAccess();
     } catch (Exception e) {
-      showError("Failed to create user: " + e.getMessage());
+      showError(e.getMessage());
     }
   }
 
@@ -65,7 +65,7 @@ public class CreateUserController extends Controller {
       controller.update();
 
     } catch (Exception e) {
-      showError("Failed to create user: " + e.getMessage());
+      showError(e.getMessage());
     }
   }
 }
