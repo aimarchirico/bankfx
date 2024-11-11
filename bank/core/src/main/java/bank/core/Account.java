@@ -42,7 +42,7 @@ public class Account {
    */
   public Account(Double balance, String name, String accountType, long accountNumber) {
     if (balance < 0) {
-      throw new IllegalArgumentException("Balance can't be less than 0, balance: " + balance);
+      throw new IllegalArgumentException("Balance can't be less than 0.");
     }
     accountTypeCheck(accountType);
     nameCheck(name);
@@ -70,7 +70,6 @@ public class Account {
   public long getAccountNumber() {
     return accountNumber;
   }
-
 
   /**
    * Returns the name.
@@ -104,16 +103,13 @@ public class Account {
   /**
    * Deposits an amount to the account.
    *
-   * @param amount The amount to deposit. Must be greater than or equal to zero and not more than 1.000.000.000.
-   * @throws IllegalArgumentException if the amount is negative or over 1.000.000.000
+   * @param amount The amount to deposit. Must be greater than or equal to zero.
+   * @throws IllegalArgumentException if the amount is negative
    */
   protected void deposit(Double amount) {
     if (amount < 0) {
       throw new IllegalArgumentException(
-          "Can't deposit negative amount, amount : " + amount + " Account: " + this.getName());
-    }
-    if (amount > 1000000000) {
-      throw new IllegalArgumentException("Can't deposit more than 1.000.000.000 at a time");
+          "Can't deposit negative amount.");
     }
     this.balance += amount;
   }
@@ -127,14 +123,12 @@ public class Account {
   protected void withdraw(Double amount) {
     if (amount < 0) {
       throw new IllegalArgumentException(
-          "Can't withdraw negative amount, amount : " + amount + " Account: " + this.getName());
+          "Can't withdraw negative amount.");
     }
     if (getBalance() - amount < 0) {
       throw new IllegalArgumentException(
-          "Can't withdraw an amount that makes the balance negative: balance after withdrawal: "
-              + (getBalance() - amount) + " Account: " + this.getName());
+          "Can't withdraw an amount that makes the balance negative.");
     }
-
     this.balance -= amount;
   }
 
@@ -146,7 +140,9 @@ public class Account {
    */
   private void accountTypeCheck(String accountType) {
     if (!accountTypes.contains(accountType)) {
-      throw new IllegalArgumentException("Account must be of the valid types: " + accountTypes);
+      throw new 
+          IllegalArgumentException("Account must be of the valid types: "
+          + accountTypes + ".");
     }
   }
 
@@ -163,16 +159,15 @@ public class Account {
    */
   private void nameCheck(String name) {
     if (name == null) {
-      throw new IllegalArgumentException("Name cannot be null");
+      throw new IllegalArgumentException("Name cannot be null.");
     }
     if (name.length() < 2) {
-      throw new IllegalArgumentException("Name needs at least 2 characters");
+      throw new IllegalArgumentException("Name needs at least 2 characters.");
     }
     final String name_regex = "^[a-zæøåÅA-ZÆØÅ\\s-]+$";
     if (!name.matches(name_regex)) {
-      throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens");
+      throw new IllegalArgumentException("Name can only contain letters, spaces, or hyphens.");
     }
   }
 
 }
-
