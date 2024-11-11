@@ -58,7 +58,7 @@
                         <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="ssnField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;" text="Enter SSN">
+                  <TextField fx:id="ssnField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" promptText="Enter SSN" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
                      <font>
                         <Font name="Verdana" size="10.0" />
                      </font>
@@ -108,7 +108,7 @@
                         <Font name="Verdana Bold" size="10.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="nameField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;" text="Enter name">
+                  <TextField fx:id="nameField" layoutX="153.0" layoutY="10.0" prefHeight="25.0" prefWidth="90.0" promptText="Enter name" style="-fx-background-color: #00000000; -fx-text-fill: #e2e2e2;">
                      <font>
                         <Font name="Verdana" size="10.0" />
                      </font>
