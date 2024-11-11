@@ -21,8 +21,13 @@ Bank applikasjonen vil kunne gi gode miljø-virkninger. Ved at økonomiske trans
 | ID | Virkning                         | Bærekraftsdimensjon | Nivå          | Påvirker | Påvirkes av |
 |----|----------------------------------|---------------------|-------------- |----------|-------------|
 | 1  | Kontroll over egen økonomi       | Individuell         | Umiddelbar    | 3        |             |
-| 2  | God flyt av midler               | Økonomisk           | Systematisk   |          |             |
-| 3  | Trygghet i daglige transaksjoner | Sosial              | Muliggjørende |          | 1            |
+| 2  | God flyt av midler               | Økonomisk           | Systematisk   |          |2            |
+| 3  | Trygghet i daglige transaksjoner | Sosial              | Muliggjørende |   2      | 1           |
 | 4  | Forenkle lønningsprosess         | Økonomisk           | Muliggjørende |          |             |
 | 5  | Mindre bruk av kontanter         | Miljø               | Umiddelbar    |          |             |
+| 6  | Javadoc til metoder og klasser   | Teknisk             | Muliggjørende |          |             |
+
+
+## SUSAD Diagram
+![SUSAD](../../resources/SUSAD.png)
  

@@ -13,6 +13,8 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **User-klasse**: Den representerer en bruker av banken. Hver bruker har blant annet en tilhørende liste av bankkontoer og er unik basert på fødselsnummer (SSN). 
   - **Account-klasse**: Den representerer en bankkonto i banken. Hver konto i banken er unik basert på et kontonummer og har nødvendige metoder for uttak og inntak av penger. 
 
+<img src="diagrams/svg/coreclassdiagram.svg" alt="coreclassdiagram" width="600"/>
+
 - [`ui`](bank/ui): Inneholder kode og ressurser for brukergrensesnittet til applikasjonen, som fxml-filer og kontrollerklasser. Dette er da applikasjonens front-end og inneholder da kontrollere og fxml-filer som støtter innlogging, registrering, sletting av bruker, oppretting og sletting av konto, betaling, overføring, uttak og inntak av penger. Ui-modulen får tilgang til banken via klassen UserAccess. UserAccess fungerer som bindeleddet mellom klienten og tjeneren og sender og behandler svar på HTTP-forespørsler til REST-serveren som ligger i rest-modulen.   
 - [`persistence`](bank/persistence): Inneholder kode og ressurser for lagring og lesing av data til fil. Listen over User-objekter i Bank-instansen serialiseres og lagres som json. Data lagres under home directory på datamaskinen som REST-serveren startes på.  
 - [`rest`](bank/rest): Inneholder kode for applikasjonens REST server og API. Rest-modulen består av følgende: 
