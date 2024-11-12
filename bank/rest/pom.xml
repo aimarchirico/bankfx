@@ -12,6 +12,10 @@
 
     <artifactId>rest</artifactId>
 
+    <properties>
+        <spring.version>3.3.5</spring.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>gr2422.bank</groupId>
@@ -31,7 +35,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.5</version>
+            <version>${spring.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -43,26 +47,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
-            <version>3.3.5</version>
+            <version>${spring.version}</version>
         </dependency>
 
       
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>6.1.14</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>6.1.14</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.3.5</version>
+            <version>${spring.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
