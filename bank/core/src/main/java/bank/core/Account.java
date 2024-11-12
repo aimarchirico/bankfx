@@ -100,16 +100,24 @@ public class Account {
     return this.balance;
   }
 
+
   /**
    * Deposits an amount to the account.
    *
    * @param amount The amount to deposit. Must be greater than or equal to zero.
+   * @param amount The amount to deposit. 
+    Must be greater than or equal to zero and not more than 1.000.000.000.
+   * @throws IllegalArgumentException if the amount is negative or over 1.000.000.000
    * @throws IllegalArgumentException if the amount is negative
    */
   protected void deposit(Double amount) {
     if (amount < 0) {
       throw new IllegalArgumentException(
           "Can't deposit negative amount.");
+    }
+    if (amount > 1000000000) {
+      throw new IllegalArgumentException(
+          "Can't deposit more than 1.000.000.000 at a time.");
     }
     this.balance += amount;
   }

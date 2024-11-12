@@ -276,8 +276,7 @@ public class Bank {
     }
     if (!user.getAccounts().contains(account)) {
       throw new 
-          IllegalAccessException("You don't have access to this " 
-          + account.getAccountType() + " account.");
+          IllegalAccessException("You don't have access to this account.");
     }
   }
 
@@ -290,10 +289,10 @@ public class Bank {
    */
   public void userCheck(User user) {
     if (user == null) {
-      throw new IllegalArgumentException("user can not be null.");
+      throw new IllegalArgumentException("User cannot be null.");
     }
     if (!users.contains(user)) {
-      throw new IllegalStateException("user is not registered.");
+      throw new IllegalStateException("User is not registered.");
     }
   }
 }
