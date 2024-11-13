@@ -23,9 +23,17 @@ Til siste release har jeg også laget klassediagramet som representerer kjernefu
 
 ## Kasper
 
+I starten av prosjektet begynte jeg med å skrive tester i core, der jeg utviklet userTest, som tester grunnleggende funksjonalitet.
+
+Etter hvert begynte jeg med å utvikle UI, der jeg fokuserte på å lage en intuitiv og enkel brukeropplevelse. Jeg utviklet flere av klassene, for eksempel "overview" og "newAccount", samt fortsatte å utvikle userTest til å dekke ny funksjonalitet.
+
+Til release 3 har jeg fortsatt å utvikle UI, der jeg måtte endre flere av de eksisterende kontrollerne for å koble de til REST-apiet, samt endret og opprettet de tilhørende testklassene. Jeg utviklet også UI til å ta imot ny og avgjørende funksjonalitet som "deleteAccount", "payment" og "withdrawal", og opprettet tilhørende testklasser
+
+Til slutt bidro jeg til dokumentasjon ved å skrive om utfordringene i prosjektet, samt har jeg fikset en del småting i UI for å maksimere brukeroplevelsen
+
 ## Sindre
 
-Jeg startet med å jobbe i Core-modulen, der jeg laget User-klassen med tilhørende UserTest for å etablere grunnleggende brukerfunksjonalitet. Deretter jobbet jeg med å utvikle flere tester i persistence-modulen, for å øke testdekningen og sikre stabiliteten i systemet.
+Jeg startet med å jobbe i Core-modulen, der jeg laget User-klassen for å etablere grunnleggende brukerfunksjonalitet. Deretter jobbet jeg med å utvikle flere tester i persistence-modulen, for å øke testdekningen og sikre stabiliteten i systemet.
 
 Jeg introduserte Bank-klassen som en styrende klasse for Core, som også delegerer oppgaver videre; dette krevde også endringer i Core-modulen for å tilpasse den nye strukturen.
 
