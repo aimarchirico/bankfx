@@ -1,0 +1,34 @@
+@startuml payment
+actor User
+boundary accountList
+control OverviewController
+boundary amountField
+boundary sourceBox
+boundary targetField
+boundary confirmButton
+control PaymentController
+control UserAccess
+boundary RestAPI
+entity Bank
+entity source
+entity target
+
+User -> sourceBox : selects source
+User -> targetField : inputs target
+User -> amountField : inputs amount
+User -> confirmButton : clicks
+
+confirmButton -> PaymentController : handlePayment()
+PaymentController -> sourceBox : getValue()
+PaymentController -> targetField : getText()
+PaymentController -> amountField : getText()
+PaymentController -> UserAccess : paymentRequest(\nsource, target, amount)
+UserAccess -> RestAPI : POST bank/users/{user}/accounts\n/{source}/payment?password={password}\n&targetAccount={target}&amount={amount}
+RestAPI -> Bank: payment(user, \nsource, target, amount)
+Bank -> source : withdraw(amount)
+Bank -> target : deposit(amount)
+RestAPI -> UserAccess : HTTP Response
+UserAccess -> PaymentController : updates user
+PaymentController -> OverviewController : update()
+OverviewController -> accountList : update list
+@enduml
