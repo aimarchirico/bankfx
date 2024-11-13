@@ -13,7 +13,10 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **User-klasse**: Den representerer en bruker av banken. Hver bruker har blant annet en tilhørende liste av bankkontoer og er unik basert på fødselsnummer (SSN). 
   - **Account-klasse**: Den representerer en bankkonto i banken. Hver konto i banken er unik basert på et kontonummer og har nødvendige metoder for uttak og inntak av penger. 
 
-<img src="diagrams/svg/coreclassdiagram.svg" alt="coreclassdiagram" width="600"/>
+<a href="diagrams\puml\core.puml">
+<img src="diagrams\svg\core.svg" width="600"></a>
+
+*Klassediagram for core-modulen (trykk på bildet for puml-fil som tillater zooming).*
 
 - [`ui`](bank/ui): Inneholder kode og ressurser for brukergrensesnittet til applikasjonen, som fxml-filer og kontrollerklasser. Dette er da applikasjonens front-end og inneholder da kontrollere og fxml-filer som støtter innlogging, registrering, sletting av bruker, oppretting og sletting av konto, betaling, overføring, uttak og inntak av penger. Ui-modulen får tilgang til banken via klassen UserAccess. UserAccess fungerer som bindeleddet mellom klienten og tjeneren og sender og behandler svar på HTTP-forespørsler til REST-serveren som ligger i rest-modulen.   
 - [`persistence`](bank/persistence): Inneholder kode og ressurser for lagring og lesing av data til fil. Listen over User-objekter i Bank-instansen serialiseres og lagres som json. Data lagres under home directory på datamaskinen som REST-serveren startes på.  
@@ -22,8 +25,15 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **BankService-klasse**: Dette er klassen for å definere nødvendigheter for Bank-serveren. Dette inneholder blant annet å  instansiere UserPersistence for håndtering av datalagring. 
   - **BankController-klasse**: Den har ansvar for å definere alle API-endepunkter og metoder. Dette blir da metodene som kalles når API-et kalles og må derfor inneholde metoder som støtter all funkjonalitet som front-end forventer. Dette er da alt av transaksjoner og endring av brukere og kontoer. 
 
-![Architecture](diagrams/svg/architecture.svg)
-*Pakkediagram av strukturen til Maven-prosjektet*
+<a href="diagrams\puml\architecture.puml">
+<img src="diagrams\svg\architecture.svg" width="1000"></a>
+
+*Pakkediagram av strukturen til Maven-prosjektet (trykk på bildet for puml-fil som tillater zooming).*
+
+<a href="diagrams\puml\payment.puml">
+<img src="diagrams\svg\payment.svg" width="1000"></a>
+
+*Sekvensdiagram som viser kommunikasjon mellom moduler når en bruker utfører en betaling (trykk på bildet for puml-fil som tillater zooming).*
 
 ## Nødvendige versjoner
 - Maven 3.9.9
@@ -70,6 +80,6 @@ Hvis du har gjort det riktig skal serveren nå startes.
 2. Kjør `cd bank/ui` (gitt at du starter helt i rot).
 3. Kjør `mvn javafx:run`.
 
-Hvis du har gjort det riktig skal appen nå startes. 
+Hvis du har gjort det riktig skal appen nå startes. Merk at du kan starte flere klienter, som kan være nyttig for å teste betaling på tvers av brukere. 
 
 Alternativt er det laget en VSCode task ved navn `start` (den er satt som default build task og kan da kjøres med `ctrl+shift+b` hvis du ikke har endret snarveien) som vil installere og starte klient og server for deg. 
