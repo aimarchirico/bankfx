@@ -4,13 +4,13 @@ Nedenfor har vi kort beskrevet bidragene hver av medlemmene har hatt på prosjek
 
 ## Aimár
 
-I starten jobbet jeg litt med initielle kontrollere og scener i ui-modulen, og lagde også en grundig plan på hvordan designet av appen skulle se ut videre. Jeg jobbet også med å koble ui til persistence-modulen etter at den var laget.
+I starten jobbet jeg litt med initielle kontrollere og scener i `ui`-modulen, og lagde en grundig plan, vha. Figma, på hvordan designet av appen skulle se ut videre. Jeg jobbet også med å koble ui til persistence-modulen. 
 
-Senere fikk jeg ansvar for å utvikle og teste REST-serveren og API-et, samt å lage en access-klasse i brukergrensesnittet (ui) som håndterer tilkoblingen til API-et. Målet har vært å sikre en stabil og godt dokumentert kommunikasjon mellom systemets komponenter, noe som legger grunnlaget for en helhetlig og funksjonell løsning.
+Senere tok jeg på meg ansvar for å utvikle og teste REST-serveren og API-et, samt å lage en access-klasse i brukergrensesnittet (`ui`) som håndterer kommunikasjon med API-et. Målet har vært å sikre en stabil, sikker og godt dokumentert kommunikasjon mellom frontend og backend for å gi en best mulig brukeropplevelse. 
 
-Jeg har også jobbet med å etablere og vedlikeholde prosjektets struktur, inkludert å legge til alt av nødvendige avhengigheter og plugins, og å løse eventuelle konflikter i byggingen av prosjektet, som gjør at prosjektet kjører effektivt og kan videreutvikles uten problemer.
+Jeg har også jobbet med å etablere og vedlikeholde prosjektets struktur og arbeidsvaner, som å legge til alt av nødvendige avhengigheter og plugins, oppsett av che og pipelines, oppsett av maler for issues, merge requests og commits, og å løse eventuelle konflikter i byggingen av prosjektet. 
 
-I tillegg har jeg gjort noen justeringer i modulene core, persistence og ui for bedre ytelse og kodekvalitet. Blant annet har jeg lagt til litt diverse tester for å øke testdekningen og fikset alt av stilformat for å samsvare med Google Java Style. Ved å oppdatere diverse README-filer regelmessig har jeg også sørget for at all nødvendig informasjon for prosjektet er tilgjengelig.
+I tillegg har jeg gjort justeringer i øvrige moduler for bedre ytelse og kodekvalitet. Blant annet har jeg lagt til flere tester for å få testdekningen opp til over 80% og fikset alt av stilformat for å samsvare med Google Java Style. Og ved å lage diverse diagrammer og oppdatere samtlige `README`-filer regelmessig har jeg også sørget for at all nødvendig informasjon for prosjektet er tilgjengelig.
 
 ## Felix
 Jeg jobbet i starten av prosjektet med å utvikle kjernefunksjonaliteten(core) til applikasjonen. Jeg fikk da ansvar til å lage Account klassen til første release. I tillegg utviklet jeg første utgave av overføring mellom kontoer, og persistens, hvor jeg laget "UserDeserializer", ved bruk av jackson bibilioteket, for release1, som kun lagret brukerdata.
@@ -29,7 +29,7 @@ Etter hvert begynte jeg med å utvikle UI, der jeg fokuserte på å lage en intu
 
 Til release 3 har jeg fortsatt å utvikle UI, der jeg måtte endre flere av de eksisterende kontrollerne for å koble de til REST-apiet, samt endret og opprettet de tilhørende testklassene. Jeg utviklet også UI til å ta imot ny og avgjørende funksjonalitet som "deleteAccount", "payment" og "withdrawal", og opprettet tilhørende testklasser
 
-Til slutt bidro jeg til dokumentasjon ved å skrive om utfordringene i prosjektet, samt har jeg fikset en del småting i UI for å maksimere brukeroplevelsen
+Til slutt bidro jeg til dokumentasjon ved å skrive om utfordringene i prosjektet, samt har jeg fikset en del småting i UI for å maksimere brukeroplevelsen.
 
 ## Sindre
 

@@ -1,4 +1,4 @@
-@startuml coreclassdiagram
+@startuml core
 package bank.core {
 
 class Bank {
