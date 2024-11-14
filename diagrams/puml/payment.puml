@@ -1,11 +1,12 @@
 @startuml payment
 actor User
+boundary errorButton
 boundary accountList
-control OverviewController
-boundary amountField
 boundary sourceBox
 boundary targetField
+boundary amountField
 boundary confirmButton
+control OverviewController
 control PaymentController
 control UserAccess
 boundary RestAPI
@@ -23,12 +24,22 @@ PaymentController -> sourceBox : getValue()
 PaymentController -> targetField : getText()
 PaymentController -> amountField : getText()
 PaymentController -> UserAccess : paymentRequest(\nsource, target, amount)
-UserAccess -> RestAPI : POST bank/users/{user}/accounts\n/{source}/payment?password={password}\n&targetAccount={target}&amount={amount}
+UserAccess -> RestAPI : POST bank/users/{user}\n/accounts/{source}/payment?\npassword={password}\n&targetAccount={target}\n&amount={amount}
 RestAPI -> Bank: payment(user, \nsource, target, amount)
 Bank -> source : withdraw(amount)
 Bank -> target : deposit(amount)
-RestAPI -> UserAccess : HTTP Response
-UserAccess -> PaymentController : updates user
-PaymentController -> OverviewController : update()
-OverviewController -> accountList : update list
+
+alt Failed payment request
+    RestAPI -> UserAccess : Response not 200 OK\nwhen exception thrown
+    PaymentController -> PaymentController: showError()
+    PaymentController -> errorButton: setText(message)
+    PaymentController -> errorButton: setVisible(true)
+    errorButton -> User : views error message
+else Successful payment request
+    RestAPI -> UserAccess : Response 200 OK\nwhen no exception thrown
+    PaymentController -> OverviewController : update()
+    OverviewController -> accountList : update list
+    accountList -> User : views updated list
+    
+end
 @enduml
