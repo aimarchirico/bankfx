@@ -13,8 +13,8 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **User-klasse**: Den representerer en bruker av banken. Hver bruker har blant annet en tilhørende liste av bankkontoer og er unik basert på fødselsnummer (SSN). 
   - **Account-klasse**: Den representerer en bankkonto i banken. Hver konto i banken er unik basert på et kontonummer og har nødvendige metoder for uttak og inntak av penger. 
 
-<a href="diagrams\puml\core.puml">
-<img src="diagrams\svg\core.svg" width="600"></a>
+<a href="diagrams/puml/core.puml">
+<img src="diagrams/svg/core.svg" width="600"></a>
 
 *Klassediagram for core-modulen (trykk på bildet for puml-fil som tillater zooming).*
 
@@ -25,13 +25,13 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
   - **BankService-klasse**: Dette er klassen for å definere nødvendigheter for Bank-serveren. Dette inneholder blant annet å  instansiere UserPersistence for håndtering av datalagring. 
   - **BankController-klasse**: Den har ansvar for å definere alle API-endepunkter og metoder. Dette blir da metodene som kalles når API-et kalles og må derfor inneholde metoder som støtter all funkjonalitet som front-end forventer. Dette er da alt av transaksjoner og endring av brukere og kontoer. 
 
-<a href="diagrams\puml\architecture.puml">
-<img src="diagrams\svg\architecture.svg" width="1000"></a>
+<a href="diagrams/puml/architecture.puml">
+<img src="diagrams/svg/architecture.svg" width="1000"></a>
 
 *Pakkediagram av strukturen til Maven-prosjektet (trykk på bildet for puml-fil som tillater zooming).*
 
-<a href="diagrams\puml\payment.puml">
-<img src="diagrams\svg\payment.svg" width="1000"></a>
+<a href="diagrams/puml/payment.puml">
+<img src="diagrams/svg/payment.svg" width="1000"></a>
 
 *Sekvensdiagram som viser kommunikasjon mellom moduler når en bruker utfører en betaling (trykk på bildet for puml-fil som tillater zooming).*
 
