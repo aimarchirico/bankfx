@@ -61,6 +61,9 @@ Eventuelle fremtidige versjoner kan inneholde blant annet:
   - fix(core): sett krav om bruker-unikt navn for bankkonto
   - fix(ui): funksjonell navigeringsmeny for alle skjermer
   - fix(ui): forbedre format på feilmelding når kontonummer er ugyldig
+  - fix(ui): createUserControllerTest feiler
+  - style(ui): øk fontstørrelsen
+  - fix(rest): legg til variabel for spring.version
 - *Milepæl 3: Release 3 dokumentasjon*
   - docs(templates): mindre endringer i merge request templates
   - docs(templates): maler til issues og merge requests
@@ -76,5 +79,4 @@ Eventuelle fremtidige versjoner kan inneholde blant annet:
   - docs(challenges): dokumenter utfordringer
   - docs(release3): skriv release 3 dokumentasjon
   - docs(us): oversett navn på brukerhistorier.md til engelsk
-  - style(ui): øk fontstørrelsen
-  - fix(ui): createUserControllerTest feiler
+  - fix(readme): endre img link til å bruke / og ikke \
