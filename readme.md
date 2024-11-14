@@ -33,7 +33,7 @@ Rotmappa til Maven-prosjektet er [`bank`](bank)-mappa og har følgende moduler:
 <a href="diagrams/puml/payment.puml">
 <img src="diagrams/svg/payment.svg" width="1000"></a>
 
-*Sekvensdiagram som viser kommunikasjon mellom moduler når en bruker utfører en betaling (trykk på bildet for puml-fil som tillater zooming).*
+*Sekvensdiagram som viser kommunikasjon mellom klasser når en bruker utfører en betaling (trykk på bildet for puml-fil som tillater zooming).*
 
 ## Nødvendige versjoner
 - Maven 3.9.9
